@@ -20,7 +20,7 @@ namespace DIP_START
         public int[] bins = new int[256];
         int max;
         private Graphics _g;
-        private Transformation _transformation;
+        private readonly Transformation _transformation;
 
 
         public MainInterface()
@@ -59,12 +59,8 @@ namespace DIP_START
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                
                 _originalImage = new Bitmap(openFileDialog1.FileName);
-                
             }
-            
-
             
 
             Size destSize;
@@ -91,53 +87,26 @@ namespace DIP_START
         {
             InverseImage();
         }
-
-        private void InverseImage()
-        {
-            _g = CreateGraphics();
-
-            int width = _originalImage.Width;
-            int height = _originalImage.Height;
-
-            var r = new Rectangle(535, 50, _originalImage.Width, _originalImage.Height);
-            var r2 = new Rectangle(0, 0, _originalImage.Width, _originalImage.Height);
-
-            _procImage = _originalImage.Clone(r2, PixelFormat.Format8bppIndexed);
-
-
-            BitmapData bmData = _procImage.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite,
-                PixelFormat.Format8bppIndexed);
-
-            int stride = bmData.Stride;
-            System.IntPtr Scan0 = bmData.Scan0;
-
-            unsafe
-            {
-                byte* p = (byte*) (void*) Scan0;
-
-                for (int y = 0; y < height; ++y)
-                {
-                    for (int x = 0; x < width; ++x)
-                    {
-                        p[0] = (byte) (255 - p[0]);
-                        ++p;
-                    }
-                }
-            }
-
-            _procImage.UnlockBits(bmData);
-
-            //_g.DrawImage(_procImage, r);
-
-
-            Size destSize;
-            var o = _transformation.ScaleWithMaintainedRatio(_procImage, new Size(450, 450), out destSize);
-            _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
-        }
+       
 
         private void DarkenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DarkenImage();
+        } 
+        
+        private void InverseImage()
+        {
+            _g = CreateGraphics();
+
+            var inverseVideo = new InverseVideo();
+            var _procImage = inverseVideo.inverse(_originalImage);
+
+            //_g.DrawImage(_procImage, r); // Full size
+            
+            // Scale to Fit hack
+            Size destSize;
+            var o = _transformation.ScaleWithMaintainedRatio(_procImage, new Size(450, 450), out destSize);
+            _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
         }
 
         private void DarkenImage()
@@ -241,60 +210,21 @@ namespace DIP_START
 
         private void binarizeToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            //Binarize();
-            // Open Dialog here
-            BininarizationSettingsDialog dialog = new BininarizationSettingsDialog();
+            var dialog = new BininarizationSettingsDialog();
+            dialog.Load += Binarization_Modal_Trackbar_Change;
+            dialog.OnTrackBarChange += Binarization_Modal_Trackbar_Change;
             dialog.ShowDialog();
-            dialog.ShowIcon = false;
-            dialog.ShowInTaskbar = false;
+        }
 
-
+        private void Binarization_Modal_Trackbar_Change(object sender, System.EventArgs e)
+        {
             var b = new Binarization();
-            var bin_img = b.Binarize(127, _originalImage);
+            var bin_img = b.Binarize(((MyEventArgs)e).Value, _originalImage);
 
             Size destSize;
             var o = _transformation.ScaleWithMaintainedRatio(bin_img, new Size(450, 450), out destSize);
             _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
-
         }
-
-        private void trackBar1_Scroll(object sender, System.EventArgs e)
-        {
-            //var val = trackBar1.Value;
-
-            //binarize();
-            output.Text = trackBar1.Value.ToString();
-
-            Binarization b = new Binarization();
-            var bin_img = b.Binarize(Convert.ToInt32(output.Text), _originalImage);
-
-            Size destSize;
-            var o = _transformation.ScaleWithMaintainedRatio(bin_img, new Size(450, 450), out destSize);
-            _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
-            
-            //Binarize(trackBar1.Value);
-        }
-
-        private void label1_Click(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, System.EventArgs e)
-        {
-            var value = trackBar1.Value;
-            output.Text = value.ToString();
-        }
-
-
-
-
-
-
-
-
-
-        /*****************************************************************************************/  
         
     }
 

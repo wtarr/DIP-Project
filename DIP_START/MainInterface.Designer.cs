@@ -38,14 +38,9 @@ namespace DIP_START
             this.brightenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.binarizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.output = new System.Windows.Forms.TextBox();
-            this.Settings = new System.Windows.Forms.GroupBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            this.Settings.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -113,36 +108,6 @@ namespace DIP_START
             this.binarizeToolStripMenuItem.Text = "Binarize";
             this.binarizeToolStripMenuItem.Click += new System.EventHandler(this.binarizeToolStripMenuItem_Click);
             // 
-            // trackBar1
-            // 
-            this.trackBar1.Location = new System.Drawing.Point(6, 19);
-            this.trackBar1.Maximum = 255;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(159, 45);
-            this.trackBar1.TabIndex = 1;
-            this.trackBar1.Value = 127;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
-            // 
-            // output
-            // 
-            this.output.Enabled = false;
-            this.output.Location = new System.Drawing.Point(171, 19);
-            this.output.Name = "output";
-            this.output.Size = new System.Drawing.Size(73, 20);
-            this.output.TabIndex = 3;
-            this.output.Text = "127";
-            // 
-            // Settings
-            // 
-            this.Settings.Controls.Add(this.trackBar1);
-            this.Settings.Controls.Add(this.output);
-            this.Settings.Location = new System.Drawing.Point(595, 448);
-            this.Settings.Name = "Settings";
-            this.Settings.Size = new System.Drawing.Size(255, 81);
-            this.Settings.TabIndex = 4;
-            this.Settings.TabStop = false;
-            this.Settings.Text = "Settings";
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
@@ -163,7 +128,6 @@ namespace DIP_START
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1218, 541);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.Settings);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainInterface";
@@ -171,9 +135,6 @@ namespace DIP_START
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            this.Settings.ResumeLayout(false);
-            this.Settings.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,9 +151,6 @@ namespace DIP_START
         private System.Windows.Forms.ToolStripMenuItem darkenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem brightenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem binarizeToolStripMenuItem;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.TextBox output;
-        private System.Windows.Forms.GroupBox Settings;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.GroupBox groupBox1;
     }
