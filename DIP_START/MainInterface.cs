@@ -28,7 +28,7 @@ namespace DIP_START
             InitializeComponent();
             _originalImage = null;
             _procImage = null;
-            _g = this.CreateGraphics();
+            _g = CreateGraphics();
             _transformation = new Transformation();
             
 
@@ -94,13 +94,13 @@ namespace DIP_START
 
         private void InverseImage()
         {
-            _g = this.CreateGraphics();
+            _g = CreateGraphics();
 
             int width = _originalImage.Width;
             int height = _originalImage.Height;
 
-            Rectangle r = new Rectangle(535, 50, _originalImage.Width, _originalImage.Height);
-            Rectangle r2 = new Rectangle(0, 0, _originalImage.Width, _originalImage.Height);
+            var r = new Rectangle(535, 50, _originalImage.Width, _originalImage.Height);
+            var r2 = new Rectangle(0, 0, _originalImage.Width, _originalImage.Height);
 
             _procImage = _originalImage.Clone(r2, PixelFormat.Format8bppIndexed);
 
@@ -243,6 +243,11 @@ namespace DIP_START
         {
             //Binarize();
             // Open Dialog here
+            BininarizationSettingsDialog dialog = new BininarizationSettingsDialog();
+            dialog.ShowDialog();
+            dialog.ShowIcon = false;
+            dialog.ShowInTaskbar = false;
+
 
             var b = new Binarization();
             var bin_img = b.Binarize(127, _originalImage);

@@ -28,83 +28,85 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.Trackbar_Threshold = new System.Windows.Forms.TrackBar();
+            this.btn_Apply = new System.Windows.Forms.Button();
+            this.btn_Cancel = new System.Windows.Forms.Button();
+            this.groupBox_Threshold = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.Trackbar_Threshold)).BeginInit();
+            this.groupBox_Threshold.SuspendLayout();
             this.SuspendLayout();
             // 
-            // trackBar1
+            // Trackbar_Threshold
             // 
-            this.trackBar1.Location = new System.Drawing.Point(6, 48);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(257, 45);
-            this.trackBar1.TabIndex = 0;
+            this.Trackbar_Threshold.Location = new System.Drawing.Point(6, 48);
+            this.Trackbar_Threshold.Maximum = 255;
+            this.Trackbar_Threshold.Name = "Trackbar_Threshold";
+            this.Trackbar_Threshold.Size = new System.Drawing.Size(209, 45);
+            this.Trackbar_Threshold.TabIndex = 0;
+            this.Trackbar_Threshold.Value = 127;
             // 
-            // button1
+            // btn_Apply
             // 
-            this.button1.Location = new System.Drawing.Point(12, 150);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Apply";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_Apply.Location = new System.Drawing.Point(6, 99);
+            this.btn_Apply.Name = "btn_Apply";
+            this.btn_Apply.Size = new System.Drawing.Size(75, 23);
+            this.btn_Apply.TabIndex = 1;
+            this.btn_Apply.Text = "Apply";
+            this.btn_Apply.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btn_Cancel
             // 
-            this.button2.Location = new System.Drawing.Point(219, 150);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_Cancel.Location = new System.Drawing.Point(140, 99);
+            this.btn_Cancel.Name = "btn_Cancel";
+            this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
+            this.btn_Cancel.TabIndex = 2;
+            this.btn_Cancel.Text = "Cancel";
+            this.btn_Cancel.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // groupBox_Threshold
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(269, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(13, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "0";
+            this.groupBox_Threshold.Controls.Add(this.label2);
+            this.groupBox_Threshold.Controls.Add(this.Trackbar_Threshold);
+            this.groupBox_Threshold.Controls.Add(this.btn_Cancel);
+            this.groupBox_Threshold.Controls.Add(this.btn_Apply);
+            this.groupBox_Threshold.Location = new System.Drawing.Point(491, 12);
+            this.groupBox_Threshold.Name = "groupBox_Threshold";
+            this.groupBox_Threshold.Size = new System.Drawing.Size(253, 132);
+            this.groupBox_Threshold.TabIndex = 4;
+            this.groupBox_Threshold.TabStop = false;
+            this.groupBox_Threshold.Text = "Threshold";
             // 
-            // groupBox1
+            // label2
             // 
-            this.groupBox1.Controls.Add(this.trackBar1);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(289, 132);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Threshold";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(221, 48);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(25, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "127";
             // 
             // BininarizationSettingsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 192);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(756, 474);
+            this.Controls.Add(this.groupBox_Threshold);
             this.Name = "BininarizationSettingsDialog";
             this.Text = "Bininarization Settings";
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Trackbar_Threshold)).EndInit();
+            this.groupBox_Threshold.ResumeLayout(false);
+            this.groupBox_Threshold.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TrackBar Trackbar_Threshold;
+        private System.Windows.Forms.Button btn_Apply;
+        private System.Windows.Forms.Button btn_Cancel;
+        private System.Windows.Forms.GroupBox groupBox_Threshold;
+        private System.Windows.Forms.Label label2;
     }
 }

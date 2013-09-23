@@ -11,7 +11,7 @@ namespace DIP_START
 {
     public partial class BininarizationSettingsDialog : Form
     {
-        public BininarizationSettingsDialog()
+        public BininarizationSettingsDialog(Form parent, Bitmap orig)
         {
             InitializeComponent();
         }
