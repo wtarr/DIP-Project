@@ -30,7 +30,6 @@ namespace DIP_START
             _procImage = null;
             _g = CreateGraphics();
             _transformation = new Transformation();
-            
 
         }
 
@@ -211,9 +210,10 @@ namespace DIP_START
         private void binarizeToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             var dialog = new BininarizationSettingsDialog();
-            dialog.Load += Binarization_Modal_Trackbar_Change;
             dialog.OnTrackBarChange += Binarization_Modal_Trackbar_Change;
+            Binarization_Modal_Trackbar_Change(this, new MyEventArgs() { Value = dialog.ThresholdValue });
             dialog.ShowDialog();
+            
         }
 
         private void Binarization_Modal_Trackbar_Change(object sender, System.EventArgs e)

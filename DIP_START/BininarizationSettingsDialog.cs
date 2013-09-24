@@ -20,7 +20,7 @@ namespace DIP_START
             InitializeComponent();
             ThresholdValue = 127;
             lbl_Value.Text = ThresholdValue.ToString();
-            Trackbar_Threshold.Value = ThresholdValue;
+            //Trackbar_Threshold.Value = ThresholdValue;
         }
 
         private void Trackbar_Threshold_Scroll(object sender, EventArgs e)
@@ -36,10 +36,10 @@ namespace DIP_START
 
         public void BininarizationSettingsDialog_Load(object sender, EventArgs e)
         {
-            var ev = new MyEventArgs { Value = Trackbar_Threshold.Value };
+            //var ev = new MyEventArgs { Value = Trackbar_Threshold.Value };
 
-            if (OnTrackBarChange != null)
-                OnTrackBarChange(this, ev);
+            //if (OnTrackBarChange != null)
+            //    OnTrackBarChange(this, ev);
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)
