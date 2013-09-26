@@ -225,6 +225,32 @@ namespace DIP_START
             var o = _transformation.ScaleWithMaintainedRatio(bin_img, new Size(450, 450), out destSize);
             _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
         }
+
+       
+
+        private void neighbourhoodAveragingToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            
+
+            ////g.DrawImage(_procImage, r);
+
+            //Size destSize;
+            //var o = _transformation.ScaleWithMaintainedRatio(_procImage, new Size(450, 450), out destSize);
+            //_g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
+        }
+
+        private void withoutThresholdingToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            Filters filters = new Filters();
+            var proc = filters.NeighbourhoodAveraging(_originalImage);
+
+
+            //0[y * stride + 1]
+
+            Size destSize;
+            var o = _transformation.ScaleWithMaintainedRatio(proc, new Size(450, 450), out destSize);
+            _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
+        }
         
     }
 

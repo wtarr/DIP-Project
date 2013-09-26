@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DIP_ClassLib
 {
-    public class Exposure
+    public class Levels
     {
 
         // Brighten

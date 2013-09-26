@@ -40,6 +40,15 @@ namespace DIP_START
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.filitersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.smoothingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.neighbourhoodAveragingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.medToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.levelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.darkenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.brightenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.withThresholdingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.withoutThresholdingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +59,9 @@ namespace DIP_START
             this.inverseToolStripMenuItem,
             this.darkenToolStripMenuItem,
             this.brightenToolStripMenuItem,
-            this.binarizeToolStripMenuItem});
+            this.binarizeToolStripMenuItem,
+            this.filitersToolStripMenuItem,
+            this.levelsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1218, 24);
@@ -122,6 +133,73 @@ namespace DIP_START
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "History";
             // 
+            // filitersToolStripMenuItem
+            // 
+            this.filitersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.smoothingToolStripMenuItem});
+            this.filitersToolStripMenuItem.Name = "filitersToolStripMenuItem";
+            this.filitersToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.filitersToolStripMenuItem.Text = "Filters";
+            // 
+            // smoothingToolStripMenuItem
+            // 
+            this.smoothingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.neighbourhoodAveragingToolStripMenuItem,
+            this.medToolStripMenuItem1});
+            this.smoothingToolStripMenuItem.Name = "smoothingToolStripMenuItem";
+            this.smoothingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.smoothingToolStripMenuItem.Text = "Smoothing";
+            // 
+            // neighbourhoodAveragingToolStripMenuItem
+            // 
+            this.neighbourhoodAveragingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.withThresholdingToolStripMenuItem,
+            this.withoutThresholdingToolStripMenuItem});
+            this.neighbourhoodAveragingToolStripMenuItem.Name = "neighbourhoodAveragingToolStripMenuItem";
+            this.neighbourhoodAveragingToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.neighbourhoodAveragingToolStripMenuItem.Text = "Neighbourhood Averaging";
+            this.neighbourhoodAveragingToolStripMenuItem.Click += new System.EventHandler(this.neighbourhoodAveragingToolStripMenuItem_Click);
+            // 
+            // medToolStripMenuItem1
+            // 
+            this.medToolStripMenuItem1.Name = "medToolStripMenuItem1";
+            this.medToolStripMenuItem1.Size = new System.Drawing.Size(291, 22);
+            this.medToolStripMenuItem1.Text = "Median";
+            // 
+            // levelsToolStripMenuItem
+            // 
+            this.levelsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.darkenToolStripMenuItem1,
+            this.brightenToolStripMenuItem1});
+            this.levelsToolStripMenuItem.Name = "levelsToolStripMenuItem";
+            this.levelsToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.levelsToolStripMenuItem.Text = "Levels";
+            // 
+            // darkenToolStripMenuItem1
+            // 
+            this.darkenToolStripMenuItem1.Name = "darkenToolStripMenuItem1";
+            this.darkenToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.darkenToolStripMenuItem1.Text = "Darken";
+            // 
+            // brightenToolStripMenuItem1
+            // 
+            this.brightenToolStripMenuItem1.Name = "brightenToolStripMenuItem1";
+            this.brightenToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.brightenToolStripMenuItem1.Text = "Brighten";
+            // 
+            // withThresholdingToolStripMenuItem
+            // 
+            this.withThresholdingToolStripMenuItem.Name = "withThresholdingToolStripMenuItem";
+            this.withThresholdingToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.withThresholdingToolStripMenuItem.Text = "With Thresholding";
+            // 
+            // withoutThresholdingToolStripMenuItem
+            // 
+            this.withoutThresholdingToolStripMenuItem.Name = "withoutThresholdingToolStripMenuItem";
+            this.withoutThresholdingToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.withoutThresholdingToolStripMenuItem.Text = "Without Thresholding";
+            this.withoutThresholdingToolStripMenuItem.Click += new System.EventHandler(this.withoutThresholdingToolStripMenuItem_Click);
+            // 
             // MainInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -153,6 +231,15 @@ namespace DIP_START
         private System.Windows.Forms.ToolStripMenuItem binarizeToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ToolStripMenuItem filitersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem smoothingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem neighbourhoodAveragingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem medToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem levelsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem darkenToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem brightenToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem withThresholdingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem withoutThresholdingToolStripMenuItem;
     }
 }
 
