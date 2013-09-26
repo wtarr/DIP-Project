@@ -63,11 +63,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BininarizationSettingsDialog.cs">
+    <Compile Include="ThresholdTrackbarDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BininarizationSettingsDialog.Designer.cs">
-      <DependentUpon>BininarizationSettingsDialog.cs</DependentUpon>
+    <Compile Include="ThresholdTrackbarDialog.Designer.cs">
+      <DependentUpon>ThresholdTrackbarDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="MainInterface.cs">
       <SubType>Form</SubType>
@@ -77,8 +77,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="BininarizationSettingsDialog.resx">
-      <DependentUpon>BininarizationSettingsDialog.cs</DependentUpon>
+    <EmbeddedResource Include="ThresholdTrackbarDialog.resx">
+      <DependentUpon>ThresholdTrackbarDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainInterface.resx">
       <SubType>Designer</SubType>

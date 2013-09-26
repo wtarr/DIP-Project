@@ -34,21 +34,19 @@ namespace DIP_START
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inverseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.darkenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.brightenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.binarizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.filitersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smoothingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.neighbourhoodAveragingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.withThresholdingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.withoutThresholdingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.medToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.levelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.darkenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.brightenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.withThresholdingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.withoutThresholdingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,12 +54,10 @@ namespace DIP_START
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.inverseToolStripMenuItem,
-            this.darkenToolStripMenuItem,
-            this.brightenToolStripMenuItem,
-            this.binarizeToolStripMenuItem,
             this.filitersToolStripMenuItem,
-            this.levelsToolStripMenuItem});
+            this.levelsToolStripMenuItem,
+            this.inverseToolStripMenuItem,
+            this.binarizeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1218, 24);
@@ -98,40 +94,12 @@ namespace DIP_START
             this.inverseToolStripMenuItem.Text = "Inverse";
             this.inverseToolStripMenuItem.Click += new System.EventHandler(this.inverseToolStripMenuItem_Click);
             // 
-            // darkenToolStripMenuItem
-            // 
-            this.darkenToolStripMenuItem.Name = "darkenToolStripMenuItem";
-            this.darkenToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.darkenToolStripMenuItem.Text = "Darken";
-            this.darkenToolStripMenuItem.Click += new System.EventHandler(this.DarkenToolStripMenuItem_Click);
-            // 
-            // brightenToolStripMenuItem
-            // 
-            this.brightenToolStripMenuItem.Name = "brightenToolStripMenuItem";
-            this.brightenToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
-            this.brightenToolStripMenuItem.Text = "Brighten";
-            this.brightenToolStripMenuItem.Click += new System.EventHandler(this.brightenToolStripMenuItem_Click);
-            // 
             // binarizeToolStripMenuItem
             // 
             this.binarizeToolStripMenuItem.Name = "binarizeToolStripMenuItem";
             this.binarizeToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.binarizeToolStripMenuItem.Text = "Binarize";
             this.binarizeToolStripMenuItem.Click += new System.EventHandler(this.binarizeToolStripMenuItem_Click);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Location = new System.Drawing.Point(1006, 28);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 501);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "History";
             // 
             // filitersToolStripMenuItem
             // 
@@ -158,12 +126,24 @@ namespace DIP_START
             this.neighbourhoodAveragingToolStripMenuItem.Name = "neighbourhoodAveragingToolStripMenuItem";
             this.neighbourhoodAveragingToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.neighbourhoodAveragingToolStripMenuItem.Text = "Neighbourhood Averaging";
-            this.neighbourhoodAveragingToolStripMenuItem.Click += new System.EventHandler(this.neighbourhoodAveragingToolStripMenuItem_Click);
+            // 
+            // withThresholdingToolStripMenuItem
+            // 
+            this.withThresholdingToolStripMenuItem.Name = "withThresholdingToolStripMenuItem";
+            this.withThresholdingToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.withThresholdingToolStripMenuItem.Text = "With Thresholding";
+            // 
+            // withoutThresholdingToolStripMenuItem
+            // 
+            this.withoutThresholdingToolStripMenuItem.Name = "withoutThresholdingToolStripMenuItem";
+            this.withoutThresholdingToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.withoutThresholdingToolStripMenuItem.Text = "Without Thresholding";
+            this.withoutThresholdingToolStripMenuItem.Click += new System.EventHandler(this.withoutThresholdingToolStripMenuItem_Click);
             // 
             // medToolStripMenuItem1
             // 
             this.medToolStripMenuItem1.Name = "medToolStripMenuItem1";
-            this.medToolStripMenuItem1.Size = new System.Drawing.Size(291, 22);
+            this.medToolStripMenuItem1.Size = new System.Drawing.Size(216, 22);
             this.medToolStripMenuItem1.Text = "Median";
             // 
             // levelsToolStripMenuItem
@@ -178,27 +158,30 @@ namespace DIP_START
             // darkenToolStripMenuItem1
             // 
             this.darkenToolStripMenuItem1.Name = "darkenToolStripMenuItem1";
-            this.darkenToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.darkenToolStripMenuItem1.Size = new System.Drawing.Size(119, 22);
             this.darkenToolStripMenuItem1.Text = "Darken";
+            this.darkenToolStripMenuItem1.Click += new System.EventHandler(this.darkenToolStripMenuItem1_Click);
             // 
             // brightenToolStripMenuItem1
             // 
             this.brightenToolStripMenuItem1.Name = "brightenToolStripMenuItem1";
             this.brightenToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.brightenToolStripMenuItem1.Text = "Brighten";
+            this.brightenToolStripMenuItem1.Click += new System.EventHandler(this.brightenToolStripMenuItem1_Click);
             // 
-            // withThresholdingToolStripMenuItem
+            // contextMenuStrip1
             // 
-            this.withThresholdingToolStripMenuItem.Name = "withThresholdingToolStripMenuItem";
-            this.withThresholdingToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.withThresholdingToolStripMenuItem.Text = "With Thresholding";
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // withoutThresholdingToolStripMenuItem
+            // groupBox1
             // 
-            this.withoutThresholdingToolStripMenuItem.Name = "withoutThresholdingToolStripMenuItem";
-            this.withoutThresholdingToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.withoutThresholdingToolStripMenuItem.Text = "Without Thresholding";
-            this.withoutThresholdingToolStripMenuItem.Click += new System.EventHandler(this.withoutThresholdingToolStripMenuItem_Click);
+            this.groupBox1.Location = new System.Drawing.Point(1006, 28);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 501);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "History";
             // 
             // MainInterface
             // 
@@ -226,8 +209,6 @@ namespace DIP_START
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inverseToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.ToolStripMenuItem darkenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem brightenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem binarizeToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.GroupBox groupBox1;

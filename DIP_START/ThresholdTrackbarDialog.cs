@@ -9,13 +9,13 @@ using System.Windows.Forms;
 
 namespace DIP_START
 {
-    public partial class BininarizationSettingsDialog : Form
+    public partial class ThresholdTrackbarDialog : Form
     {
         public event EventHandler OnTrackBarChange;
         
         public int ThresholdValue { get; private set; } 
 
-        public BininarizationSettingsDialog()
+        public ThresholdTrackbarDialog()
         {
             InitializeComponent();
             ThresholdValue = 127;

@@ -86,13 +86,8 @@ namespace DIP_START
         {
             InverseImage();
         }
-       
 
-        private void DarkenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DarkenImage();
-        } 
-        
+
         private void InverseImage()
         {
             _g = CreateGraphics();
@@ -108,52 +103,6 @@ namespace DIP_START
             _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
         }
 
-        private void DarkenImage()
-        {
-            _g = this.CreateGraphics();
-
-            int width = _originalImage.Width;
-            int height = _originalImage.Height;
-
-            Rectangle r = new Rectangle(535, 50, _originalImage.Width, _originalImage.Height);
-            Rectangle r2 = new Rectangle(0, 0, _originalImage.Width, _originalImage.Height);
-
-            _procImage = _originalImage.Clone(r2, PixelFormat.Format8bppIndexed);
-
-
-            BitmapData bmData = _procImage.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite,
-                PixelFormat.Format8bppIndexed);
-
-            int stride = bmData.Stride;
-            System.IntPtr Scan0 = bmData.Scan0;
-
-            unsafe
-            {
-                byte* p = (byte*) (void*) Scan0;
-
-                for (int y = 0; y < height; ++y)
-                {
-                    for (int x = 0; x < width; ++x)
-                    {
-                        if (p[0] > 120)
-                        {
-                            if (p[0] < 195)
-                                p[0] = 0;
-                        }
-                        ++p;
-                    }
-                }
-            }
-
-            _procImage.UnlockBits(bmData);
-
-            //_g.DrawImage(_procImage, r);
-
-            Size destSize;
-            var o = _transformation.ScaleWithMaintainedRatio(_procImage, new Size(450, 450), out destSize);
-            _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
-        }
-
         private void brightenToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             BrightenImage();
@@ -162,43 +111,7 @@ namespace DIP_START
         private void BrightenImage()
         {            
 
-            Graphics g = this.CreateGraphics();
-
-            int width = _originalImage.Width;
-            int height = _originalImage.Height;
-
-            Rectangle r = new Rectangle(535, 50, _originalImage.Width, _originalImage.Height);
-            Rectangle r2 = new Rectangle(0, 0, _originalImage.Width, _originalImage.Height);
-
-            _procImage = _originalImage.Clone(r2, PixelFormat.Format8bppIndexed);
-
-
-            BitmapData bmData = _procImage.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
-
-            int stride = bmData.Stride;
-            System.IntPtr Scan0 = bmData.Scan0;
-
-            unsafe
-            {
-                byte* p = (byte*)(void*)Scan0;
-
-                for (int y = 0; y < height; ++y)
-                {
-                    for (int x = 0; x < width; ++x)
-                    {
-
-                        if (p[0] > 10 && p[0] < 100)
-                        {
-                            p[0] = 255;
-                        }
-
-                        ++p;
-                    }
-
-                }
-            }
-
-            _procImage.UnlockBits(bmData);
+            
 
             //g.DrawImage(_procImage, r);
 
@@ -209,7 +122,8 @@ namespace DIP_START
 
         private void binarizeToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            var dialog = new BininarizationSettingsDialog();
+            var dialog = new ThresholdTrackbarDialog();
+            dialog.Text = "Binarization Threshold";
             dialog.OnTrackBarChange += Binarization_Modal_Trackbar_Change;
             Binarization_Modal_Trackbar_Change(this, new MyEventArgs() { Value = dialog.ThresholdValue });
             dialog.ShowDialog();
@@ -226,29 +140,34 @@ namespace DIP_START
             _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
         }
 
-       
-
-        private void neighbourhoodAveragingToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            
-
-            ////g.DrawImage(_procImage, r);
-
-            //Size destSize;
-            //var o = _transformation.ScaleWithMaintainedRatio(_procImage, new Size(450, 450), out destSize);
-            //_g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
-        }
 
         private void withoutThresholdingToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             Filters filters = new Filters();
             var proc = filters.NeighbourhoodAveraging(_originalImage);
-
-
-            //0[y * stride + 1]
-
+            
             Size destSize;
             var o = _transformation.ScaleWithMaintainedRatio(proc, new Size(450, 450), out destSize);
+            _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
+        }
+
+        private void darkenToolStripMenuItem1_Click(object sender, System.EventArgs e)
+        {
+            var lvls = new Levels();
+            var processed = lvls.Darken(_originalImage);
+            
+            Size destSize;
+            var o = _transformation.ScaleWithMaintainedRatio(processed, new Size(450, 450), out destSize);
+            _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
+        }
+
+        private void brightenToolStripMenuItem1_Click(object sender, System.EventArgs e)
+        {
+            var lvls = new Levels();
+            var processed = lvls.Brighten(_originalImage);
+
+            Size destSize;
+            var o = _transformation.ScaleWithMaintainedRatio(processed, new Size(450, 450), out destSize);
             _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
         }
         

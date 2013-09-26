@@ -1,6 +1,6 @@
 ﻿namespace DIP_START
 {
-    partial class BininarizationSettingsDialog
+    partial class ThresholdTrackbarDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -89,14 +89,14 @@
             this.lbl_Value.TabIndex = 4;
             this.lbl_Value.Text = "127";
             // 
-            // BininarizationSettingsDialog
+            // ThresholdTrackbarDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(282, 155);
             this.Controls.Add(this.groupBox_Threshold);
-            this.Name = "BininarizationSettingsDialog";
-            this.Text = "Bininarization Settings";
+            this.Name = "ThresholdTrackbarDialog";
+            this.Text = "Title set at runtime";
             this.Load += new System.EventHandler(this.BininarizationSettingsDialog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Trackbar_Threshold)).EndInit();
             this.groupBox_Threshold.ResumeLayout(false);
