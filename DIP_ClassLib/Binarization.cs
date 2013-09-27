@@ -8,16 +8,24 @@ using System.Threading.Tasks;
 
 namespace DIP_ClassLib
 {
-    public class Binarization
+    public class Binarization : IUseTrackbarThresholding
     {
-        public Bitmap Binarize(int threshold, Bitmap orig)
+
+        private Bitmap _original;
+        
+        public Binarization(Bitmap orig)
         {
-            int width = orig.Width;
-            int height = orig.Height;
+            _original = orig;
+        }
+
+        public Bitmap Binarize(int threshold)
+        {
+            int width = _original.Width;
+            int height = _original.Height;
 
             Rectangle r2 = new Rectangle(0, 0, width, height);
 
-            Bitmap procImage = orig.Clone(r2, PixelFormat.Format8bppIndexed);
+            Bitmap procImage = _original.Clone(r2, PixelFormat.Format8bppIndexed);
 
             BitmapData bmData = procImage.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite,
                 PixelFormat.Format8bppIndexed);
@@ -29,9 +37,9 @@ namespace DIP_ClassLib
             {
                 byte* p = (byte*)(void*)Scan0;
 
-                for (var y = 0; y < height; ++y)
+                for (var y = 0; y < height; y++)
                 {
-                    for (var x = 0; x < width; ++x)
+                    for (var x = 0; x < width; x++)
                     {
                         if (p[0] >= threshold)
                         {
@@ -42,7 +50,7 @@ namespace DIP_ClassLib
                             p[0] = 0;
                         }
 
-                        ++p;
+                        p++;
                     }
 
                 }
@@ -53,8 +61,12 @@ namespace DIP_ClassLib
             return procImage;
             
         }
-        
 
+
+        public Bitmap Execute(int threshold)
+        {
+            return Binarize(threshold);
+        }
     }
 
 

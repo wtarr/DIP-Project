@@ -33,8 +33,6 @@ namespace DIP_START
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.inverseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.binarizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filitersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smoothingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.neighbourhoodAveragingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,6 +42,8 @@ namespace DIP_START
             this.levelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.darkenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.brightenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.inverseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.binarizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -87,20 +87,6 @@ namespace DIP_START
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click_1);
             // 
-            // inverseToolStripMenuItem
-            // 
-            this.inverseToolStripMenuItem.Name = "inverseToolStripMenuItem";
-            this.inverseToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.inverseToolStripMenuItem.Text = "Inverse";
-            this.inverseToolStripMenuItem.Click += new System.EventHandler(this.inverseToolStripMenuItem_Click);
-            // 
-            // binarizeToolStripMenuItem
-            // 
-            this.binarizeToolStripMenuItem.Name = "binarizeToolStripMenuItem";
-            this.binarizeToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.binarizeToolStripMenuItem.Text = "Binarize";
-            this.binarizeToolStripMenuItem.Click += new System.EventHandler(this.binarizeToolStripMenuItem_Click);
-            // 
             // filitersToolStripMenuItem
             // 
             this.filitersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -115,7 +101,7 @@ namespace DIP_START
             this.neighbourhoodAveragingToolStripMenuItem,
             this.medToolStripMenuItem1});
             this.smoothingToolStripMenuItem.Name = "smoothingToolStripMenuItem";
-            this.smoothingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.smoothingToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.smoothingToolStripMenuItem.Text = "Smoothing";
             // 
             // neighbourhoodAveragingToolStripMenuItem
@@ -165,9 +151,23 @@ namespace DIP_START
             // brightenToolStripMenuItem1
             // 
             this.brightenToolStripMenuItem1.Name = "brightenToolStripMenuItem1";
-            this.brightenToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.brightenToolStripMenuItem1.Size = new System.Drawing.Size(119, 22);
             this.brightenToolStripMenuItem1.Text = "Brighten";
             this.brightenToolStripMenuItem1.Click += new System.EventHandler(this.brightenToolStripMenuItem1_Click);
+            // 
+            // inverseToolStripMenuItem
+            // 
+            this.inverseToolStripMenuItem.Name = "inverseToolStripMenuItem";
+            this.inverseToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.inverseToolStripMenuItem.Text = "Inverse";
+            this.inverseToolStripMenuItem.Click += new System.EventHandler(this.inverseToolStripMenuItem_Click);
+            // 
+            // binarizeToolStripMenuItem
+            // 
+            this.binarizeToolStripMenuItem.Name = "binarizeToolStripMenuItem";
+            this.binarizeToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.binarizeToolStripMenuItem.Text = "Binarize";
+            this.binarizeToolStripMenuItem.Click += new System.EventHandler(this.binarizeToolStripMenuItem_Click);
             // 
             // contextMenuStrip1
             // 
@@ -192,8 +192,7 @@ namespace DIP_START
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainInterface";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Text = "Photochop";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

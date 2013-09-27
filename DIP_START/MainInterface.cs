@@ -33,12 +33,6 @@ namespace DIP_START
 
         }
 
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         public void Form1_Paint(object sender, PaintEventArgs e)
         {
             if (_originalImage != null)
@@ -54,7 +48,6 @@ namespace DIP_START
         private void openToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             // show the openFile dialog box            
-            _g = this.CreateGraphics();
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -68,8 +61,6 @@ namespace DIP_START
             //Rectangle r = new Rectangle(10, 50, original_image.Width, original_image.Height);
             //g.DrawImage(original_image, r);
             _g.DrawImage(o, new Rectangle(10, 50, destSize.Width, destSize.Height));
-
-
         }
 
         private void exitToolStripMenuItem_Click_1(object sender, EventArgs e)
@@ -78,87 +69,52 @@ namespace DIP_START
             Application.Exit();
         }
 
-        
-        /***********************************************************************************/
-        //           INVERSE VIDEO
-        /***********************************************************************************/
         private void inverseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            InverseImage();
-        }
-
-
-        private void InverseImage()
-        {
-            _g = CreateGraphics();
-
             var inverseVideo = new InverseVideo();
             var _procImage = inverseVideo.inverse(_originalImage);
 
-            //_g.DrawImage(_procImage, r); // Full size
+            using (var dialog = new ThresholdTrackbarDialog(_procImage))
+            {
+                dialog.Text = "Inverse";
+                dialog.ShowDialog();
+            }
             
-            // Scale to Fit hack
-            Size destSize;
-            var o = _transformation.ScaleWithMaintainedRatio(_procImage, new Size(450, 450), out destSize);
-            _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
-        }
-
-        private void brightenToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            BrightenImage();
-        }
-
-        private void BrightenImage()
-        {            
-
-            
-
-            //g.DrawImage(_procImage, r);
-
-            Size destSize;
-            var o = _transformation.ScaleWithMaintainedRatio(_procImage, new Size(450, 450), out destSize);
-            _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
         }
 
         private void binarizeToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            var dialog = new ThresholdTrackbarDialog();
-            dialog.Text = "Binarization Threshold";
-            dialog.OnTrackBarChange += Binarization_Modal_Trackbar_Change;
-            Binarization_Modal_Trackbar_Change(this, new MyEventArgs() { Value = dialog.ThresholdValue });
-            dialog.ShowDialog();
-            
+            IUseTrackbarThresholding binarization = new Binarization(_originalImage);
+
+            using (var dialog = new ThresholdTrackbarDialog(binarization))
+            {
+                dialog.Text = "Binarization Threshold";
+                dialog.ShowDialog();
+            }
         }
-
-        private void Binarization_Modal_Trackbar_Change(object sender, System.EventArgs e)
-        {
-            var b = new Binarization();
-            var bin_img = b.Binarize(((MyEventArgs)e).Value, _originalImage);
-
-            Size destSize;
-            var o = _transformation.ScaleWithMaintainedRatio(bin_img, new Size(450, 450), out destSize);
-            _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
-        }
-
-
+        
         private void withoutThresholdingToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            Filters filters = new Filters();
-            var proc = filters.NeighbourhoodAveraging(_originalImage);
-            
-            Size destSize;
-            var o = _transformation.ScaleWithMaintainedRatio(proc, new Size(450, 450), out destSize);
-            _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
+            Filters filters = new Filters(_originalImage);
+            var processed = filters.NeighbourhoodAveraging();
+
+            using (var dialog = new ThresholdTrackbarDialog(processed))
+            {
+                dialog.Text = "Neighbourhood Averaging";
+                dialog.ShowDialog();
+            }
         }
 
         private void darkenToolStripMenuItem1_Click(object sender, System.EventArgs e)
         {
             var lvls = new Levels();
             var processed = lvls.Darken(_originalImage);
-            
-            Size destSize;
-            var o = _transformation.ScaleWithMaintainedRatio(processed, new Size(450, 450), out destSize);
-            _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
+
+            using (var dialog = new ThresholdTrackbarDialog(processed))
+            {
+                dialog.Text = "Darken";
+                dialog.ShowDialog();
+            }
         }
 
         private void brightenToolStripMenuItem1_Click(object sender, System.EventArgs e)
@@ -166,9 +122,12 @@ namespace DIP_START
             var lvls = new Levels();
             var processed = lvls.Brighten(_originalImage);
 
-            Size destSize;
-            var o = _transformation.ScaleWithMaintainedRatio(processed, new Size(450, 450), out destSize);
-            _g.DrawImage(o, new Rectangle(500, 50, destSize.Width, destSize.Height));
+            using (var dialog = new ThresholdTrackbarDialog(processed))
+            {
+                dialog.Text = "Brighten";
+                dialog.ShowDialog();
+            }
+           
         }
         
     }

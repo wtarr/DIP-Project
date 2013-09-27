@@ -7,22 +7,30 @@ using System.Text;
 
 namespace DIP_ClassLib
 {
-    public class Filters
+    public class Filters : IUseTrackbarThresholding
     {
-        public Bitmap NeighbourhoodAveraging(Bitmap original)
+        private readonly Bitmap _original;
+
+        public Filters(Bitmap orig)
+        {
+            _original = orig;
+        }
+
+
+        public Bitmap NeighbourhoodAveraging()
         {
             //Graphics g = this.CreateGraphics();
 
-            int width = original.Width;
-            int height = original.Height;
+            int width = _original.Width;
+            int height = _original.Height;
 
-            Rectangle r = new Rectangle(535, 50, original.Width, original.Height);
-            Rectangle r2 = new Rectangle(0, 0, original.Width, original.Height);
+            Rectangle r = new Rectangle(535, 50, _original.Width, _original.Height);
+            Rectangle r2 = new Rectangle(0, 0, _original.Width, _original.Height);
 
-            Bitmap procImage = original.Clone(r2, PixelFormat.Format8bppIndexed);
+            Bitmap procImage = _original.Clone(r2, PixelFormat.Format8bppIndexed);
 
 
-            BitmapData origData = original.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
+            BitmapData origData = _original.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
             BitmapData procData = procImage.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
 
             int strideOrig = origData.Stride;
@@ -37,9 +45,9 @@ namespace DIP_ClassLib
                 byte* p = (byte*)(void*)procScan0;
 
                
-                for (int y = 1; y < height-2; ++y)
+                for (int y = 1; y < height; ++y)
                 {
-                    for (int x = 1; x < width-2; ++x)
+                    for (int x = 1; x < width; ++x)
                     {
 
                         var p1 = o[0];
@@ -66,10 +74,25 @@ namespace DIP_ClassLib
 
             }
 
-            original.UnlockBits(origData);
+            _original.UnlockBits(origData);
             procImage.UnlockBits(procData);
 
             return procImage;
+        }
+        
+        public Bitmap NeighbourhoodAveragingWithThresholding(int thresholding)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Bitmap MedianFiltering()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Bitmap Execute(int threshold)
+        {
+            return this.NeighbourhoodAveragingWithThresholding(threshold);
         }
     }
 }
