@@ -11,6 +11,8 @@ namespace DIP_ClassLib
     public class Binarization : IUseTrackbarThresholding
     {
 
+        private int toW, toB, total, exp;
+
         private Bitmap _original;
         
         public Binarization(Bitmap orig)
@@ -23,6 +25,10 @@ namespace DIP_ClassLib
             int width = _original.Width;
             int height = _original.Height;
 
+            exp = width*height; 
+            toB = 0;
+            toW = 0;
+            
             Rectangle r2 = new Rectangle(0, 0, width, height);
 
             Bitmap procImage = _original.Clone(r2, PixelFormat.Format8bppIndexed);
@@ -44,10 +50,17 @@ namespace DIP_ClassLib
                         if (p[0] >= threshold)
                         {
                             p[0] = 255;
+                            toW++;
+
+                            if (threshold == 255 && p[0] == 255)
+                                p[0] = 0;
                         }
                         else
                         {
                             p[0] = 0;
+                            toB++;
+
+                            
                         }
 
                         p++;
@@ -57,7 +70,13 @@ namespace DIP_ClassLib
             }
 
             procImage.UnlockBits(bmData);
-            
+
+            Console.WriteLine("Img size " + exp);
+            Console.WriteLine("To white " + toW);
+            Console.WriteLine("To black " + toB);
+            Console.WriteLine("Yes/No " + (toW + toB));
+
+          
             return procImage;
             
         }

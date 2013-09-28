@@ -129,6 +129,29 @@ namespace DIP_START
             }
            
         }
+
+        private void withThresholdingToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            IUseTrackbarThresholding filters = new Filters(_originalImage);
+            
+            using (var dialog = new ThresholdTrackbarDialog(filters))
+            {
+                dialog.Text = "Neighbourhood Averaging";
+                dialog.ShowDialog();
+            }
+        }
+
+        private void medToolStripMenuItem1_Click(object sender, System.EventArgs e)
+        {
+            var lvls = new Filters(_originalImage);
+            var processed = lvls.MedianFiltering();
+
+            using (var dialog = new ThresholdTrackbarDialog(processed))
+            {
+                dialog.Text = "Median Filtering";
+                dialog.ShowDialog();
+            }
+        }
         
     }
 
