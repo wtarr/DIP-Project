@@ -82,7 +82,7 @@ namespace DIP_ClassLib
         }
 
 
-        public Bitmap Execute(int threshold)
+        public Bitmap Execute(int threshold, Process process)
         {
             return Binarize(threshold);
         }

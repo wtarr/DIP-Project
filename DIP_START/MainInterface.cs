@@ -86,7 +86,7 @@ namespace DIP_START
         {
             IUseTrackbarThresholding binarization = new Binarization(_originalImage);
 
-            using (var dialog = new ThresholdTrackbarDialog(binarization))
+            using (var dialog = new ThresholdTrackbarDialog(binarization, Process.Binarize))
             {
                 dialog.Text = "Binarization Threshold";
                 dialog.ShowDialog();
@@ -134,7 +134,7 @@ namespace DIP_START
         {
             IUseTrackbarThresholding filters = new Filters(_originalImage);
             
-            using (var dialog = new ThresholdTrackbarDialog(filters))
+            using (var dialog = new ThresholdTrackbarDialog(filters, Process.NeibhourhoodAverage))
             {
                 dialog.Text = "Neighbourhood Averaging";
                 dialog.ShowDialog();
@@ -149,6 +149,16 @@ namespace DIP_START
             using (var dialog = new ThresholdTrackbarDialog(processed))
             {
                 dialog.Text = "Median Filtering";
+                dialog.ShowDialog();
+            }
+        }
+
+        private void directToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            RobertsGradient rg = new RobertsGradient(_originalImage);
+            using (var dialog = new ThresholdTrackbarDialog(rg.Direct()))
+            {
+                dialog.Text = "Roberts Gradient (Direct)";
                 dialog.ShowDialog();
             }
         }

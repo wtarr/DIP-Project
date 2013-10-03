@@ -82,8 +82,8 @@ namespace DIP_ClassLib
         
         public Bitmap NeighbourhoodAveragingWithThresholding(int thresholding)
         {
-            int width = _original.Width;
-            int height = _original.Height;
+            int width = _original.Width -2;
+            int height = _original.Height -2;
             
             Rectangle r2 = new Rectangle(0, 0, _original.Width, _original.Height);
 
@@ -104,9 +104,9 @@ namespace DIP_ClassLib
                 byte* p = (byte*)(void*)procScan0;
 
 
-                for (int y = 1; y < height; ++y)
+                for (int y = 0; y < height; y++)
                 {
-                    for (int x = 1; x < width; ++x)
+                    for (int x = 0; x < width; x++)
                     {
 
                         var p1 = o[0];
@@ -125,8 +125,8 @@ namespace DIP_ClassLib
                         if ((p + strideOrig + 1)[0] <= thresholding)
                             (p + strideOrig + 1)[0] = avg;
 
-                        ++p;
-                        ++o;
+                        p++;
+                        o++;
 
                     }
 
@@ -167,9 +167,9 @@ namespace DIP_ClassLib
                 byte* p = (byte*)(void*)procScan0;
 
 
-                for (int y = 1; y < height; ++y)
+                for (int y = 0; y < height; y++)
                 {
-                    for (int x = 1; x < width; ++x)
+                    for (int x = 0; x < width; x++)
                     {
 
                         var p1 = o[0];
@@ -188,8 +188,8 @@ namespace DIP_ClassLib
 
                         (p + strideOrig + 1)[0] = byteMe[5];
                        
-                        ++p;
-                        ++o;
+                        p++;
+                        o++;
 
                     }
 
@@ -204,9 +204,9 @@ namespace DIP_ClassLib
             return procImage;
         }
 
-        public Bitmap Execute(int threshold)
+        public Bitmap Execute(int threshold, Process proc)
         {
-            return this.NeighbourhoodAveragingWithThresholding(threshold);
+            return NeighbourhoodAveragingWithThresholding(threshold);
         }
     }
 }

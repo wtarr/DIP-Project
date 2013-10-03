@@ -44,6 +44,15 @@ namespace DIP_START
             this.withThresholdingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.withoutThresholdingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.medToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.sharpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.robertsGradientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pseudoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.directToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.withThresholdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sobelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gxGyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -60,7 +69,7 @@ namespace DIP_START
             this.filitersToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1218, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(841, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -127,7 +136,8 @@ namespace DIP_START
             // filitersToolStripMenuItem
             // 
             this.filitersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.smoothingToolStripMenuItem});
+            this.smoothingToolStripMenuItem,
+            this.sharpenToolStripMenuItem});
             this.filitersToolStripMenuItem.Name = "filitersToolStripMenuItem";
             this.filitersToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.filitersToolStripMenuItem.Text = "Filters";
@@ -171,6 +181,72 @@ namespace DIP_START
             this.medToolStripMenuItem1.Text = "Median";
             this.medToolStripMenuItem1.Click += new System.EventHandler(this.medToolStripMenuItem1_Click);
             // 
+            // sharpenToolStripMenuItem
+            // 
+            this.sharpenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.robertsGradientToolStripMenuItem,
+            this.sobelToolStripMenuItem});
+            this.sharpenToolStripMenuItem.Name = "sharpenToolStripMenuItem";
+            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sharpenToolStripMenuItem.Text = "Sharpen";
+            // 
+            // robertsGradientToolStripMenuItem
+            // 
+            this.robertsGradientToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pseudoToolStripMenuItem,
+            this.directToolStripMenuItem,
+            this.withThresholdToolStripMenuItem});
+            this.robertsGradientToolStripMenuItem.Name = "robertsGradientToolStripMenuItem";
+            this.robertsGradientToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.robertsGradientToolStripMenuItem.Text = "Roberts Gradient";
+            // 
+            // pseudoToolStripMenuItem
+            // 
+            this.pseudoToolStripMenuItem.Name = "pseudoToolStripMenuItem";
+            this.pseudoToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.pseudoToolStripMenuItem.Text = "Pseudo";
+            // 
+            // directToolStripMenuItem
+            // 
+            this.directToolStripMenuItem.Name = "directToolStripMenuItem";
+            this.directToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.directToolStripMenuItem.Text = "Direct";
+            this.directToolStripMenuItem.Click += new System.EventHandler(this.directToolStripMenuItem_Click);
+            // 
+            // withThresholdToolStripMenuItem
+            // 
+            this.withThresholdToolStripMenuItem.Name = "withThresholdToolStripMenuItem";
+            this.withThresholdToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.withThresholdToolStripMenuItem.Text = "With Threshold";
+            // 
+            // sobelToolStripMenuItem
+            // 
+            this.sobelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gxToolStripMenuItem,
+            this.gyToolStripMenuItem,
+            this.gxGyToolStripMenuItem});
+            this.sobelToolStripMenuItem.Name = "sobelToolStripMenuItem";
+            this.sobelToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.sobelToolStripMenuItem.Text = "Sobel";
+            // 
+            // gxToolStripMenuItem
+            // 
+            this.gxToolStripMenuItem.Name = "gxToolStripMenuItem";
+            this.gxToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.gxToolStripMenuItem.Text = "Gx";
+            // 
+            // gyToolStripMenuItem
+            // 
+            this.gyToolStripMenuItem.Name = "gyToolStripMenuItem";
+            this.gyToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.gyToolStripMenuItem.Text = "Gy";
+            // 
+            // gxGyToolStripMenuItem
+            // 
+            this.gxGyToolStripMenuItem.Name = "gxGyToolStripMenuItem";
+            this.gxGyToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.gxGyToolStripMenuItem.Text = "Gx + Gy";
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
@@ -178,7 +254,7 @@ namespace DIP_START
             // 
             // groupBox1
             // 
-            this.groupBox1.Location = new System.Drawing.Point(1006, 28);
+            this.groupBox1.Location = new System.Drawing.Point(625, 28);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 501);
             this.groupBox1.TabIndex = 5;
@@ -189,7 +265,7 @@ namespace DIP_START
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1218, 541);
+            this.ClientSize = new System.Drawing.Size(841, 541);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -222,6 +298,15 @@ namespace DIP_START
         private System.Windows.Forms.ToolStripMenuItem brightenToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem withThresholdingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem withoutThresholdingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sharpenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem robertsGradientToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sobelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pseudoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem directToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gxToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gxGyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem withThresholdToolStripMenuItem;
     }
 }
 
