@@ -205,7 +205,7 @@ namespace DIP_START
             this.pseudoToolStripMenuItem.Name = "pseudoToolStripMenuItem";
             this.pseudoToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.pseudoToolStripMenuItem.Text = "Pseudo";
-            this.pseudoToolStripMenuItem.Click += new System.EventHandler(this.pseudoToolStripMenuItem_Click);
+            this.pseudoToolStripMenuItem.Click += new System.EventHandler(this.PseudoToolStripMenuItem_Click);
             // 
             // directToolStripMenuItem
             // 
@@ -234,20 +234,23 @@ namespace DIP_START
             // gxToolStripMenuItem
             // 
             this.gxToolStripMenuItem.Name = "gxToolStripMenuItem";
-            this.gxToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.gxToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.gxToolStripMenuItem.Text = "Gx";
+            this.gxToolStripMenuItem.Click += new System.EventHandler(this.Sobel_GxToolStripMenuItem_Click);
             // 
             // gyToolStripMenuItem
             // 
             this.gyToolStripMenuItem.Name = "gyToolStripMenuItem";
-            this.gyToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.gyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.gyToolStripMenuItem.Text = "Gy";
+            this.gyToolStripMenuItem.Click += new System.EventHandler(this.Soblel_GyToolStripMenuItem_Click);
             // 
             // gxGyToolStripMenuItem
             // 
             this.gxGyToolStripMenuItem.Name = "gxGyToolStripMenuItem";
-            this.gxGyToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.gxGyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.gxGyToolStripMenuItem.Text = "Gx + Gy";
+            this.gxGyToolStripMenuItem.Click += new System.EventHandler(this.Sobel_GxAndGyToolStripMenuItem_Click);
             // 
             // contextMenuStrip1
             // 

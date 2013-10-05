@@ -63,7 +63,7 @@ namespace DIP_ClassLib
                         var result = Math.Abs(a - b) + Math.Abs(c - d);
 
                         if (result >= threshold && threshold != 255) 
-                            *p = (byte)result;
+                                   *p = (byte)result;
 
                         ++p;
                         ++o;
@@ -199,14 +199,14 @@ namespace DIP_ClassLib
             return procImage;
         }
 
-        public Bitmap Execute(int threshold, Process process)
+        public Bitmap Execute(int[] threshold, Process process)
         {
             switch (process)
             {
                 case Process.RobertsGradientWithThresholding:
-                    return WithThreshold(threshold);
+                    return WithThreshold(threshold[0]);
                 case Process.RobertsGradientWithPseudoColor:
-                    return Pseudo(threshold);
+                    return Pseudo(threshold[0]);
                    
             }
 

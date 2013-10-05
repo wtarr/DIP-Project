@@ -174,13 +174,43 @@ namespace DIP_START
             }
         }
 
-        private void pseudoToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void PseudoToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             IUseTrackbarThresholding rgThresholding = new RobertsGradient(_originalImage);
 
             using (var dialog = new ThresholdTrackbarDialog(rgThresholding, Process.RobertsGradientWithPseudoColor))
             {
                 dialog.Text = "Roberts Gradient with Pseudo color (Threshold)";
+                dialog.ShowDialog();
+            }
+        }
+
+        private void Sobel_GxToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            IUseTrackbarThresholding sb = new Sobel(_originalImage);
+            using (var dialog = new ThresholdTrackbarDialog(sb, Process.SobelGx))
+            {
+                dialog.Text = "Sobel Gx";
+                dialog.ShowDialog();
+            }
+        }
+
+        private void Soblel_GyToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            IUseTrackbarThresholding sb = new Sobel(_originalImage);
+            using (var dialog = new ThresholdTrackbarDialog(sb, Process.SobelGy))
+            {
+                dialog.Text = "Sobel Gy";
+                dialog.ShowDialog();
+            }
+        }
+
+        private void Sobel_GxAndGyToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            IUseTrackbarThresholding sb = new Sobel(_originalImage);
+            using (var dialog = new ThresholdTrackbarDialog(sb, Process.SobelGxGy))
+            {
+                dialog.Text = "Sobel Gx + Gy";
                 dialog.ShowDialog();
             }
         }

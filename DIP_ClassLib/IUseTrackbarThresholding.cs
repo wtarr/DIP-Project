@@ -15,10 +15,11 @@ namespace DIP_ClassLib
         RobertsGradientWithPseudoColor,
         SobelGx,
         SobelGy,
+        SobelGxGy
     }
 
     public interface IUseTrackbarThresholding
     {
-        Bitmap Execute(int threshold, Process process);
+        Bitmap Execute(int[] threshold, Process process);
     }
 }

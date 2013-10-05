@@ -212,9 +212,9 @@ namespace DIP_ClassLib
             return procImage;
         }
 
-        public Bitmap Execute(int threshold, Process proc)
+        public Bitmap Execute(int[] threshold, Process proc)
         {
-            return NeighbourhoodAveragingWithThresholding(threshold);
+            return NeighbourhoodAveragingWithThresholding(threshold[0]);
         }
     }
 }
