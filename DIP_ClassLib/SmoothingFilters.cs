@@ -7,11 +7,12 @@ using System.Text;
 
 namespace DIP_ClassLib
 {
-    public class Filters : IUseTrackbarThresholding
+    public class SmoothingFilters : IUseTrackbarThresholding
     {
         private readonly Bitmap _original;
+        private const int BorderAllowance = 2;
 
-        public Filters(Bitmap orig)
+        public SmoothingFilters(Bitmap orig)
         {
             _original = orig;
         }
@@ -21,8 +22,8 @@ namespace DIP_ClassLib
         {
             //Graphics g = this.CreateGraphics();
 
-            int width = _original.Width;
-            int height = _original.Height;
+            int width = _original.Width - BorderAllowance;
+            int height = _original.Height - BorderAllowance;
 
             Rectangle r = new Rectangle(535, 50, _original.Width, _original.Height);
             Rectangle r2 = new Rectangle(0, 0, _original.Width, _original.Height);
@@ -45,33 +46,37 @@ namespace DIP_ClassLib
                 byte* p = (byte*)(void*)procScan0;
 
                
-                for (int y = 1; y < height; ++y)
+                for (int y = 0; y < height; y++)
                 {
-                    for (int x = 1; x < width; ++x)
+                    // Ensure on correct row
+                    p = (byte*)(void*)procScan0 + (y * strideOrig);
+                    o = (byte*)(void*)origScan0 + (y * strideOrig);
+
+                    for (int x = 0; x < width; x++)
                     {
-
-                        var p1 = o[0];
-                        var p2 = (o + 1)[0];
-                        var p3 = (o + 2)[0];
-                        var p4 = (o + strideOrig)[0];
-                        //var p5 = (o + strideOrig + 1)[0];
-                        var p6 = (o + strideOrig + 2)[0];
-                        var p7 = (o + strideOrig * 2 + 1)[0];
-                        var p8 = (o + strideOrig * 2 + 2)[0];
-                        var p9 = (o + strideOrig * 2 + 3)[0];
-                       
-                        var avg = (byte)((p1 + p2 + p3 + p4 + p6 + p7 + p8 + p9) / 8);
-
-                        (p + strideOrig + 1)[0] = avg;
                         
-                        ++p;
-                        ++o;
+                   
+                        var p1 = *o;
+                        var p2 = *(o + 1);
+                        var p3 = *(o + 2);
+
+                        var p4 = *(o + strideOrig);
+                        //var p5 = (o + strideOrig + 1)[0];
+                        var p6 = *(o + strideOrig + 2);
+
+                        var p7 = *(o + strideOrig * 2);
+                        var p8 = *(o + strideOrig * 2 + 1);
+                        var p9 = *(o + strideOrig * 2 + 2);
+
+                        var avg = (byte)((p1 + p2 + p3 + p4 + p6 + p7 + p8 + p9) / 8);
+                        
+                        *(p + strideOrig + 1) = avg;
+                        
+                        p++;
+                        o++;
 
                     }
-
                 }
-
-
             }
 
             _original.UnlockBits(origData);
@@ -104,35 +109,37 @@ namespace DIP_ClassLib
                 byte* p = (byte*)(void*)procScan0;
 
 
-                for (int y = 0; y < height; y++)
+                for (int y = 0; y < height; ++y)
                 {
-                    for (int x = 0; x < width; x++)
-                    {
+                    // Ensure on correct row
+                    p = (byte*)(void*)procScan0 + (y * strideOrig);
+                    o = (byte*)(void*)origScan0 + (y * strideOrig);
 
-                        var p1 = o[0];
-                        var p2 = (o + 1)[0];
-                        var p3 = (o + 2)[0];
-                        var p4 = (o + strideOrig)[0];
+                    for (int x = 0; x < width; ++x)
+                    {
+                        var p1 = *o;
+                        var p2 = *(o + 1);
+                        var p3 = *(o + 2);
+
+                        var p4 = *(o + strideOrig);
                         //var p5 = (o + strideOrig + 1)[0];
-                        var p6 = (o + strideOrig + 2)[0];
-                        var p7 = (o + strideOrig * 2 + 1)[0];
-                        var p8 = (o + strideOrig * 2 + 2)[0];
-                        var p9 = (o + strideOrig * 2 + 3)[0];
+                        var p6 = *(o + strideOrig + 2);
+
+                        var p7 = *(o + strideOrig * 2);
+                        var p8 = *(o + strideOrig * 2 + 1);
+                        var p9 = *(o + strideOrig * 2 + 2);
 
                         var avg = (byte)((p1 + p2 + p3 + p4 + p6 + p7 + p8 + p9) / 8);
 
                         // if below threshold change else leave alone
-                        if ((p + strideOrig + 1)[0] <= thresholding)
-                            (p + strideOrig + 1)[0] = avg;
-
-                        p++;
-                        o++;
-
+                        if (*(p + strideOrig + 1) <= thresholding)
+                            *(p + strideOrig + 1) = avg;
+                       
+                        ++p;
+                        ++o;
                     }
 
                 }
-
-
             }
 
             _original.UnlockBits(origData);
@@ -143,8 +150,8 @@ namespace DIP_ClassLib
 
         public Bitmap MedianFiltering()
         {
-            int width = _original.Width;
-            int height = _original.Height;
+            int width = _original.Width - 2;
+            int height = _original.Height - 2;
 
             Rectangle r2 = new Rectangle(0, 0, _original.Width, _original.Height);
 
@@ -165,37 +172,38 @@ namespace DIP_ClassLib
             {
                 byte* o = (byte*)(void*)origScan0;
                 byte* p = (byte*)(void*)procScan0;
-
-
-                for (int y = 0; y < height; y++)
+                
+                for (int y = 0; y < height; ++y)
                 {
-                    for (int x = 0; x < width; x++)
-                    {
+                    // Ensure on correct row
+                    p = (byte*)(void*)procScan0 + (y * strideOrig);
+                    o = (byte*)(void*)origScan0 + (y * strideOrig);
 
-                        var p1 = o[0];
-                        var p2 = (o + 1)[0];
-                        var p3 = (o + 2)[0];
-                        var p4 = (o + strideOrig)[0];
-                        var p5 = (o + strideOrig + 1)[0];
-                        var p6 = (o + strideOrig + 2)[0];
-                        var p7 = (o + strideOrig * 2 + 1)[0];
-                        var p8 = (o + strideOrig * 2 + 2)[0];
-                        var p9 = (o + strideOrig * 2 + 3)[0];
+                    for (int x = 0; x < width; ++x)
+                    {
+                        var p1 = *o;
+                        var p2 = *(o + 1);
+                        var p3 = *(o + 2);
+
+                        var p4 = *(o + strideOrig);
+                        var p5 = *(o + strideOrig + 1);
+                        var p6 = *(o + strideOrig + 2);
+
+                        var p7 = *(o + strideOrig * 2);
+                        var p8 = *(o + strideOrig * 2 + 1);
+                        var p9 = *(o + strideOrig * 2 + 2);
 
                         byteMe = new List<byte>() { p1, p2, p3, p4, p5, p6, p7, p8, p9 };
 
                         byteMe.Sort();
 
-                        (p + strideOrig + 1)[0] = byteMe[5];
+                        *(p + strideOrig + 1) = byteMe[4];
                        
-                        p++;
-                        o++;
-
+                        ++p;
+                        ++o;
                     }
-
+                    
                 }
-
-
             }
 
             _original.UnlockBits(origData);

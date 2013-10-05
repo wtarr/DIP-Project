@@ -205,6 +205,7 @@ namespace DIP_START
             this.pseudoToolStripMenuItem.Name = "pseudoToolStripMenuItem";
             this.pseudoToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.pseudoToolStripMenuItem.Text = "Pseudo";
+            this.pseudoToolStripMenuItem.Click += new System.EventHandler(this.pseudoToolStripMenuItem_Click);
             // 
             // directToolStripMenuItem
             // 
@@ -218,6 +219,7 @@ namespace DIP_START
             this.withThresholdToolStripMenuItem.Name = "withThresholdToolStripMenuItem";
             this.withThresholdToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.withThresholdToolStripMenuItem.Text = "With Threshold";
+            this.withThresholdToolStripMenuItem.Click += new System.EventHandler(this.RobertsGradientwithThresholdToolStripMenuItem_Click);
             // 
             // sobelToolStripMenuItem
             // 

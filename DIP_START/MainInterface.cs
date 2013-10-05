@@ -95,8 +95,8 @@ namespace DIP_START
         
         private void withoutThresholdingToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            Filters filters = new Filters(_originalImage);
-            var processed = filters.NeighbourhoodAveraging();
+            SmoothingFilters smoothingFilters = new SmoothingFilters(_originalImage);
+            var processed = smoothingFilters.NeighbourhoodAveraging();
 
             using (var dialog = new ThresholdTrackbarDialog(processed))
             {
@@ -132,7 +132,7 @@ namespace DIP_START
 
         private void withThresholdingToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            IUseTrackbarThresholding filters = new Filters(_originalImage);
+            IUseTrackbarThresholding filters = new SmoothingFilters(_originalImage);
             
             using (var dialog = new ThresholdTrackbarDialog(filters, Process.NeibhourhoodAverage))
             {
@@ -143,7 +143,7 @@ namespace DIP_START
 
         private void medToolStripMenuItem1_Click(object sender, System.EventArgs e)
         {
-            var lvls = new Filters(_originalImage);
+            var lvls = new SmoothingFilters(_originalImage);
             var processed = lvls.MedianFiltering();
 
             using (var dialog = new ThresholdTrackbarDialog(processed))
@@ -159,6 +159,28 @@ namespace DIP_START
             using (var dialog = new ThresholdTrackbarDialog(rg.Direct()))
             {
                 dialog.Text = "Roberts Gradient (Direct)";
+                dialog.ShowDialog();
+            }
+        }
+
+        private void RobertsGradientwithThresholdToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            IUseTrackbarThresholding rgThresholding = new RobertsGradient(_originalImage);
+
+            using (var dialog = new ThresholdTrackbarDialog(rgThresholding, Process.RobertsGradientWithThresholding))
+            {
+                dialog.Text = "Roberts Gradient (Threshold)";
+                dialog.ShowDialog();
+            }
+        }
+
+        private void pseudoToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            IUseTrackbarThresholding rgThresholding = new RobertsGradient(_originalImage);
+
+            using (var dialog = new ThresholdTrackbarDialog(rgThresholding, Process.RobertsGradientWithPseudoColor))
+            {
+                dialog.Text = "Roberts Gradient with Pseudo color (Threshold)";
                 dialog.ShowDialog();
             }
         }

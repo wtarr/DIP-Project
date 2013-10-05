@@ -45,7 +45,7 @@ namespace UnitTesting
             testcase.UnlockBits(data);
 
 
-            var filters = new Filters(testcase);
+            var filters = new SmoothingFilters(testcase);
 
             var result = filters.NeighbourhoodAveraging();
 

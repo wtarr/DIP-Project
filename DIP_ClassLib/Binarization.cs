@@ -47,17 +47,17 @@ namespace DIP_ClassLib
                 {
                     for (var x = 0; x < width; x++)
                     {
-                        if (p[0] >= threshold)
+                        if (*p >= threshold)
                         {
-                            p[0] = 255;
+                            *p = 255;
                             toW++;
 
-                            if (threshold == 255 && p[0] == 255)
-                                p[0] = 0;
+                            if (threshold == 255 && *p == 255)
+                                *p = 0;
                         }
                         else
                         {
-                            p[0] = 0;
+                            *p = 0;
                             toB++;
 
                             
@@ -71,10 +71,10 @@ namespace DIP_ClassLib
 
             procImage.UnlockBits(bmData);
 
-            Console.WriteLine("Img size " + exp);
-            Console.WriteLine("To white " + toW);
-            Console.WriteLine("To black " + toB);
-            Console.WriteLine("Yes/No " + (toW + toB));
+            //Console.WriteLine("Img size " + exp);
+            //Console.WriteLine("To white " + toW);
+            //Console.WriteLine("To black " + toB);
+            //Console.WriteLine("Yes/No " + (toW + toB));
 
           
             return procImage;

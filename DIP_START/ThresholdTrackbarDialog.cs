@@ -24,14 +24,14 @@ namespace DIP_START
 
         private Bitmap _procImg;
 
-        private Process _proc;
+        private Process _operation;
 
-        public ThresholdTrackbarDialog(IUseTrackbarThresholding process, Process proc)
+        public ThresholdTrackbarDialog(IUseTrackbarThresholding process, Process operation)
         {
             InitializeComponent();
             _g = CreateGraphics();
             _process = process;
-            _proc = proc;
+            _operation = operation;
             ThresholdValue = 127;
             lbl_Value.Text = ThresholdValue.ToString();
             _transformation = new Transformation();
@@ -54,7 +54,7 @@ namespace DIP_START
             ThresholdValue = Trackbar_Threshold.Value;
             lbl_Value.Text = ThresholdValue.ToString();
             
-            _procImg = _process.Execute(ThresholdValue, _proc);
+            _procImg = _process.Execute(ThresholdValue, _operation);
 
 
             Size destSize;
@@ -72,7 +72,7 @@ namespace DIP_START
 
             if (_process != null)
             {
-                _procImg = _process.Execute(ThresholdValue, _proc);
+                _procImg = _process.Execute(ThresholdValue, _operation);
 
                 
             }
@@ -99,6 +99,8 @@ namespace DIP_START
                 Size destSize;
                 var o = _transformation.ScaleWithMaintainedRatio(_procImg, new Size(450, 450), out destSize);
                 _g.DrawImage(o, new Rectangle(10, 10, destSize.Width, destSize.Height));
+
+                
             }
 
         }
