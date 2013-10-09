@@ -36,7 +36,8 @@ namespace DIP_START
             ThresholdValue[0] = 127;
             ThresholdValue[1] = 127;
 
-            lbl_Value.Text = ThresholdValue.ToString();
+            lbl_Value.Text = ThresholdValue[0].ToString();
+
             _transformation = new Transformation();
 
             if (operation.Equals(Process.SobelGxGy))
@@ -62,7 +63,7 @@ namespace DIP_START
         {
             ThresholdValue[0] = Trackbar_1.Value;
 
-            lbl_Value.Text = ThresholdValue.ToString();
+            lbl_Value.Text = ThresholdValue[0].ToString();
 
             _procImg = _process.Execute(ThresholdValue, _operation);
 

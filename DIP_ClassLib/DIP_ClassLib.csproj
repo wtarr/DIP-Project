@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Binarization.cs" />
+    <Compile Include="Process.cs" />
     <Compile Include="SmoothingFilters.cs" />
     <Compile Include="IUseTrackbarThresholding.cs" />
     <Compile Include="Levels.cs" />
@@ -51,7 +52,7 @@
     <Compile Include="InverseVideo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Roberts_Gradient.cs" />
-    <Compile Include="Sobel.cs" />
+    <Compile Include="SharpenFilters.cs" />
     <Compile Include="Transformation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

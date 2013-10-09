@@ -53,6 +53,14 @@ namespace DIP_START
             this.gxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gxGyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.laplacianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pointDetectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lineDetectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.horizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inclinedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -185,7 +193,10 @@ namespace DIP_START
             // 
             this.sharpenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.robertsGradientToolStripMenuItem,
-            this.sobelToolStripMenuItem});
+            this.sobelToolStripMenuItem,
+            this.laplacianToolStripMenuItem,
+            this.pointDetectionToolStripMenuItem,
+            this.lineDetectionToolStripMenuItem});
             this.sharpenToolStripMenuItem.Name = "sharpenToolStripMenuItem";
             this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sharpenToolStripMenuItem.Text = "Sharpen";
@@ -229,28 +240,89 @@ namespace DIP_START
             this.gxGyToolStripMenuItem});
             this.sobelToolStripMenuItem.Name = "sobelToolStripMenuItem";
             this.sobelToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.sobelToolStripMenuItem.Text = "Sobel";
+            this.sobelToolStripMenuItem.Text = "SharpenFilters";
             // 
             // gxToolStripMenuItem
             // 
             this.gxToolStripMenuItem.Name = "gxToolStripMenuItem";
-            this.gxToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.gxToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.gxToolStripMenuItem.Text = "Gx";
             this.gxToolStripMenuItem.Click += new System.EventHandler(this.Sobel_GxToolStripMenuItem_Click);
             // 
             // gyToolStripMenuItem
             // 
             this.gyToolStripMenuItem.Name = "gyToolStripMenuItem";
-            this.gyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.gyToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.gyToolStripMenuItem.Text = "Gy";
             this.gyToolStripMenuItem.Click += new System.EventHandler(this.Soblel_GyToolStripMenuItem_Click);
             // 
             // gxGyToolStripMenuItem
             // 
             this.gxGyToolStripMenuItem.Name = "gxGyToolStripMenuItem";
-            this.gxGyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.gxGyToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.gxGyToolStripMenuItem.Text = "Gx + Gy";
             this.gxGyToolStripMenuItem.Click += new System.EventHandler(this.Sobel_GxAndGyToolStripMenuItem_Click);
+            // 
+            // laplacianToolStripMenuItem
+            // 
+            this.laplacianToolStripMenuItem.Name = "laplacianToolStripMenuItem";
+            this.laplacianToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.laplacianToolStripMenuItem.Text = "Laplacian";
+            this.laplacianToolStripMenuItem.Click += new System.EventHandler(this.laplacianToolStripMenuItem_Click);
+            // 
+            // pointDetectionToolStripMenuItem
+            // 
+            this.pointDetectionToolStripMenuItem.Name = "pointDetectionToolStripMenuItem";
+            this.pointDetectionToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.pointDetectionToolStripMenuItem.Text = "Point Detection";
+            this.pointDetectionToolStripMenuItem.Click += new System.EventHandler(this.pointDetectionToolStripMenuItem_Click);
+            // 
+            // lineDetectionToolStripMenuItem
+            // 
+            this.lineDetectionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.horizontalToolStripMenuItem,
+            this.verticalToolStripMenuItem,
+            this.inclinedToolStripMenuItem});
+            this.lineDetectionToolStripMenuItem.Name = "lineDetectionToolStripMenuItem";
+            this.lineDetectionToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.lineDetectionToolStripMenuItem.Text = "Line Detection";
+            // 
+            // horizontalToolStripMenuItem
+            // 
+            this.horizontalToolStripMenuItem.Name = "horizontalToolStripMenuItem";
+            this.horizontalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.horizontalToolStripMenuItem.Text = "Horizontal";
+            this.horizontalToolStripMenuItem.Click += new System.EventHandler(this.horizontalToolStripMenuItem_Click);
+            // 
+            // verticalToolStripMenuItem
+            // 
+            this.verticalToolStripMenuItem.Name = "verticalToolStripMenuItem";
+            this.verticalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.verticalToolStripMenuItem.Text = "Vertical";
+            this.verticalToolStripMenuItem.Click += new System.EventHandler(this.verticalToolStripMenuItem_Click);
+            // 
+            // inclinedToolStripMenuItem
+            // 
+            this.inclinedToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem3});
+            this.inclinedToolStripMenuItem.Name = "inclinedToolStripMenuItem";
+            this.inclinedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.inclinedToolStripMenuItem.Text = "Inclined";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Text = "+ 45";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.Positive45_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem3.Text = "- 45";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.Negative45_Click);
             // 
             // contextMenuStrip1
             // 
@@ -312,6 +384,14 @@ namespace DIP_START
         private System.Windows.Forms.ToolStripMenuItem gyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gxGyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem withThresholdToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem laplacianToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pointDetectionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lineDetectionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem horizontalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verticalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inclinedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
     }
 }
 

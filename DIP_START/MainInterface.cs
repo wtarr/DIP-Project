@@ -187,30 +187,90 @@ namespace DIP_START
 
         private void Sobel_GxToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            IUseTrackbarThresholding sb = new Sobel(_originalImage);
+            IUseTrackbarThresholding sb = new SharpenFilters(_originalImage);
             using (var dialog = new ThresholdTrackbarDialog(sb, Process.SobelGx))
             {
-                dialog.Text = "Sobel Gx";
+                dialog.Text = "SharpenFilters Gx";
                 dialog.ShowDialog();
             }
         }
 
         private void Soblel_GyToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            IUseTrackbarThresholding sb = new Sobel(_originalImage);
+            IUseTrackbarThresholding sb = new SharpenFilters(_originalImage);
             using (var dialog = new ThresholdTrackbarDialog(sb, Process.SobelGy))
             {
-                dialog.Text = "Sobel Gy";
+                dialog.Text = "SharpenFilters Gy";
                 dialog.ShowDialog();
             }
         }
 
         private void Sobel_GxAndGyToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            IUseTrackbarThresholding sb = new Sobel(_originalImage);
+            IUseTrackbarThresholding sb = new SharpenFilters(_originalImage);
             using (var dialog = new ThresholdTrackbarDialog(sb, Process.SobelGxGy))
             {
-                dialog.Text = "Sobel Gx + Gy";
+                dialog.Text = "SharpenFilters Gx + Gy";
+                dialog.ShowDialog();
+            }
+        }
+
+        private void laplacianToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            IUseTrackbarThresholding lp = new SharpenFilters(_originalImage);
+            using ( var dialog = new ThresholdTrackbarDialog(lp, Process.Laplacian))
+            {
+                dialog.Text = "Laplacian Operator";
+                dialog.ShowDialog();
+            }
+        }
+
+        private void pointDetectionToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            IUseTrackbarThresholding pd = new SharpenFilters(_originalImage);
+            using (var dialog = new ThresholdTrackbarDialog(pd, Process.PointDetection))
+            {
+                dialog.Text = "Point Detection";
+                dialog.ShowDialog();
+            }
+        }
+
+        private void horizontalToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            IUseTrackbarThresholding hd = new SharpenFilters(_originalImage);
+            using (var dialog = new ThresholdTrackbarDialog(hd, Process.HorizontalLine))
+            {
+                dialog.Text = "Horizontal Line Detection";
+                dialog.ShowDialog();
+            }
+        }
+
+        private void verticalToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            IUseTrackbarThresholding vd = new SharpenFilters(_originalImage);
+            using (var dialog = new ThresholdTrackbarDialog(vd, Process.VerticalLine))
+            {
+                dialog.Text = "Vertical Line Detection";
+                dialog.ShowDialog();
+            }
+        }
+
+        private void Positive45_Click(object sender, System.EventArgs e)
+        {
+            IUseTrackbarThresholding p45 = new SharpenFilters(_originalImage);
+            using (var dialog = new ThresholdTrackbarDialog(p45, Process.Positive45DegreeLine))
+            {
+                dialog.Text = "Positive 45 Line Detection";
+                dialog.ShowDialog();
+            }
+        }
+
+        private void Negative45_Click(object sender, System.EventArgs e)
+        {
+            IUseTrackbarThresholding n45 = new SharpenFilters(_originalImage);
+            using (var dialog = new ThresholdTrackbarDialog(n45, Process.Negative45DegreeLine))
+            {
+                dialog.Text = "Negative 45 Line Detection";
                 dialog.ShowDialog();
             }
         }
