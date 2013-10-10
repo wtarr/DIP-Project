@@ -64,7 +64,7 @@ namespace DIP_ClassLib
 
                         if (result >= threshold && threshold != 255) 
                                    *p = (byte)result;
-
+                        // White or Black
                         ++p;
                         ++o;
 
