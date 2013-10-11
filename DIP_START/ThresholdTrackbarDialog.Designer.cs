@@ -49,6 +49,7 @@
             // 
             // btn_Apply
             // 
+            this.btn_Apply.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btn_Apply.Location = new System.Drawing.Point(465, 597);
             this.btn_Apply.Name = "btn_Apply";
             this.btn_Apply.Size = new System.Drawing.Size(75, 23);
@@ -59,6 +60,7 @@
             // 
             // btn_Cancel
             // 
+            this.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_Cancel.Location = new System.Drawing.Point(465, 629);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
@@ -95,6 +97,8 @@
             this.Controls.Add(this.groupBox_Threshold);
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.btn_Apply);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ThresholdTrackbarDialog";
             this.Text = "Title set at runtime";
             this.Load += new System.EventHandler(this.BininarizationSettingsDialog_Load);

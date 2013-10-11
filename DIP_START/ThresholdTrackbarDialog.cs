@@ -22,7 +22,7 @@ namespace DIP_START
 
         private Transformation _transformation;
 
-        private Bitmap _procImg;
+        public Bitmap ProcImg { get; private set; }
 
         private Process _operation;
 
@@ -46,7 +46,7 @@ namespace DIP_START
             InitializeComponent();
             Trackbar_1.Enabled = false;
             _g = CreateGraphics();
-            _procImg = processed;
+            ProcImg = processed;
             _transformation = new Transformation();
 
             groupBox_Threshold.Visible = false;
@@ -58,10 +58,10 @@ namespace DIP_START
 
             lbl_Value.Text = ThresholdValue[0].ToString();
 
-            _procImg = _process.Execute(ThresholdValue, _operation);
+            ProcImg = _process.Execute(ThresholdValue, _operation);
 
             Size destSize;
-            var o = _transformation.ScaleWithMaintainedRatio(_procImg, new Size(450, 450), out destSize);
+            var o = _transformation.ScaleWithMaintainedRatio(ProcImg, new Size(450, 450), out destSize);
             _g.DrawImage(o, new Rectangle(10, 10, destSize.Width, destSize.Height));
 
         }
@@ -70,11 +70,11 @@ namespace DIP_START
         {
             if (_process != null)
             {
-                _procImg = _process.Execute(ThresholdValue, _operation);
+                ProcImg = _process.Execute(ThresholdValue, _operation);
             }
 
             Size destSize;
-            var o = _transformation.ScaleWithMaintainedRatio(_procImg, new Size(450, 450), out destSize);
+            var o = _transformation.ScaleWithMaintainedRatio(ProcImg, new Size(450, 450), out destSize);
             _g.DrawImage(o, new Rectangle(10, 10, destSize.Width, destSize.Height));
         }
 
@@ -85,15 +85,15 @@ namespace DIP_START
 
         private void btn_Apply_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Apply image and update history");
+           
         }
 
         private void ThresholdTrackbarDialog_Paint(object sender, PaintEventArgs e)
         {
-            if (_procImg != null)
+            if (ProcImg != null)
             {
                 Size destSize;
-                var o = _transformation.ScaleWithMaintainedRatio(_procImg, new Size(450, 450), out destSize);
+                var o = _transformation.ScaleWithMaintainedRatio(ProcImg, new Size(450, 450), out destSize);
                 _g.DrawImage(o, new Rectangle(10, 10, destSize.Width, destSize.Height));
 
                 

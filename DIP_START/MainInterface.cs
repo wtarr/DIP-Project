@@ -11,6 +11,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using DIP_ClassLib;
 
 namespace DIP_START
@@ -18,19 +19,21 @@ namespace DIP_START
 
     public partial class MainInterface : Form
     {
-        private Bitmap _originalImage, _procImage;
+        private Bitmap _originalImage;
         public int[] bins = new int[256];
         int max;
         private Graphics _g;
         private readonly Transformation _transformation;
-        private Histogram _histogram;
+        private const int StartX = 10;
+        private const int StartY = 50;
+        private const int PrefWidth = 450;
+        private const int PrefHeight = 450;
 
 
         public MainInterface()
         {
             InitializeComponent();
             _originalImage = null;
-            _procImage = null;
             _g = CreateGraphics();
             _transformation = new Transformation();
             
@@ -41,20 +44,19 @@ namespace DIP_START
         {
             if (_originalImage != null)
             {
-                _g = e.Graphics;
-                Rectangle r = new Rectangle(10, 50, _originalImage.Width, _originalImage.Height);
-                _g.DrawImage(_originalImage, r);
-
+                UpdateOriginal(_originalImage);
             }
 
         }
 
         
 
-        private void DrawHistogram()
+        private void DrawHistogram(Bitmap img)
         {
             //int startX = -350;
-            int[] res = _histogram.CalculateBins();
+            var histogram = new Histogram();
+
+            int[] res = histogram.CalculateBins(img);
             
             var l = res.Max();
 
@@ -62,12 +64,20 @@ namespace DIP_START
 
             float scaleFactor = 110.0f/l;
 
-            Pen mPen = new Pen(Color.Black);
+            Pen mPen = new Pen(Color.Gray);
 
             var gf = this.CreateGraphics();
             
-            gf.TranslateTransform(320, 650);
+            gf.TranslateTransform(270, 650);
             gf.RotateTransform(180);
+
+            Label lbl = new Label();
+            lbl.Text = "Histogram";
+            lbl.Width = 60;
+            lbl.Location = new Point(25, 525);
+            this.Controls.Add(lbl);
+            lbl.Show();
+
 
             gf.DrawRectangle(mPen, new Rectangle(0, 0, 255, 120));
             
@@ -94,17 +104,14 @@ namespace DIP_START
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 _originalImage = new Bitmap(openFileDialog1.FileName);
-                _histogram = new Histogram(_originalImage);
-                DrawHistogram();
+                this.Text = "PhotoChop - " + openFileDialog1.SafeFileName;
+                UpdateOriginal(_originalImage);
+                HistoryList.Items.Clear();
+                HistoryList.Items.Add("Open - " + openFileDialog1.SafeFileName);
             }
             
 
-            Size destSize;
-            var o = _transformation.ScaleWithMaintainedRatio(_originalImage, new Size(450, 450), out destSize);
-
-            //Rectangle r = new Rectangle(10, 50, original_image.Width, original_image.Height);
-            //g.DrawImage(original_image, r);
-            _g.DrawImage(o, new Rectangle(10, 50, destSize.Width, destSize.Height));
+            
         }
 
         private void exitToolStripMenuItem_Click_1(object sender, EventArgs e)
@@ -121,9 +128,24 @@ namespace DIP_START
             using (var dialog = new ThresholdTrackbarDialog(_procImage))
             {
                 dialog.Text = "Inverse";
-                dialog.ShowDialog();
+                var result = dialog.ShowDialog();
+                if (result == DialogResult.OK && _procImage != null)
+                {
+                    UpdateOriginal(_procImage);
+                    HistoryList.Items.Add(dialog.Text);
+                }
             }
-            
+
+        }
+
+        private void UpdateOriginal(Bitmap img)
+        {
+            Refresh();
+            _originalImage = img;
+            Size destSize;
+            var o = _transformation.ScaleWithMaintainedRatio(_originalImage, new Size(PrefWidth, PrefHeight), out destSize);
+            _g.DrawImage(o, new Rectangle(StartX, StartY, destSize.Width, destSize.Height));
+            DrawHistogram(img);
         }
 
         private void binarizeToolStripMenuItem_Click(object sender, System.EventArgs e)
@@ -133,7 +155,11 @@ namespace DIP_START
             using (var dialog = new ThresholdTrackbarDialog(binarization, Process.Binarize))
             {
                 dialog.Text = "Binarization Threshold";
-                dialog.ShowDialog();
+                if (dialog.ShowDialog() == DialogResult.OK && dialog.ProcImg != null)
+                {
+                    UpdateOriginal(dialog.ProcImg);
+                    HistoryList.Items.Add(dialog.Text);
+                }
             }
         }
         
@@ -157,8 +183,16 @@ namespace DIP_START
             using (var dialog = new ThresholdTrackbarDialog(processed))
             {
                 dialog.Text = "Darken";
-                dialog.ShowDialog();
+                var result = dialog.ShowDialog();
+                if (result == DialogResult.OK && processed != null)
+                {
+                    UpdateOriginal(processed);
+                    HistoryList.Items.Add(dialog.Text);
+                }
+
             }
+
+            
         }
 
         private void brightenToolStripMenuItem1_Click(object sender, System.EventArgs e)
@@ -169,19 +203,29 @@ namespace DIP_START
             using (var dialog = new ThresholdTrackbarDialog(processed))
             {
                 dialog.Text = "Brighten";
-                dialog.ShowDialog();
+                var result = dialog.ShowDialog();
+                if (result == DialogResult.OK && processed != null)
+                {
+                    UpdateOriginal(processed);
+                    HistoryList.Items.Add(dialog.Text);
+                }
             }
            
         }
 
-        private void withThresholdingToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void NeibhourhoodAvgwithThresholdingToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             IUseTrackbarThresholding filters = new SmoothingFilters(_originalImage);
             
             using (var dialog = new ThresholdTrackbarDialog(filters, Process.NeibhourhoodAverage))
             {
                 dialog.Text = "Neighbourhood Averaging";
-                dialog.ShowDialog();
+                var result = dialog.ShowDialog();
+                if (result == DialogResult.OK && dialog.ProcImg != null)
+                {
+                    UpdateOriginal(dialog.ProcImg);
+                    HistoryList.Items.Add(dialog.Text);
+                }
             }
         }
 
@@ -317,6 +361,12 @@ namespace DIP_START
                 dialog.Text = "Negative 45 Line Detection";
                 dialog.ShowDialog();
             }
+        }
+
+        private void equaliseToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            Histogram h = new Histogram();
+            UpdateOriginal(h.EqualisedHistogram(_originalImage));
         }
 
         

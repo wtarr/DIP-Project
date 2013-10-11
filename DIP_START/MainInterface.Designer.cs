@@ -64,7 +64,11 @@ namespace DIP_START
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.HistoryList = new System.Windows.Forms.ListBox();
+            this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.equaliseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -74,7 +78,8 @@ namespace DIP_START
             this.levelsToolStripMenuItem,
             this.inverseToolStripMenuItem,
             this.binarizeToolStripMenuItem,
-            this.filitersToolStripMenuItem});
+            this.filitersToolStripMenuItem,
+            this.histogramToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(841, 24);
@@ -173,7 +178,7 @@ namespace DIP_START
             this.withThresholdingToolStripMenuItem.Name = "withThresholdingToolStripMenuItem";
             this.withThresholdingToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.withThresholdingToolStripMenuItem.Text = "With Thresholding";
-            this.withThresholdingToolStripMenuItem.Click += new System.EventHandler(this.withThresholdingToolStripMenuItem_Click);
+            this.withThresholdingToolStripMenuItem.Click += new System.EventHandler(this.NeibhourhoodAvgwithThresholdingToolStripMenuItem_Click);
             // 
             // withoutThresholdingToolStripMenuItem
             // 
@@ -331,12 +336,38 @@ namespace DIP_START
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.HistoryList);
             this.groupBox1.Location = new System.Drawing.Point(625, 28);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 501);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "History";
+            // 
+            // HistoryList
+            // 
+            this.HistoryList.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.HistoryList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.HistoryList.FormattingEnabled = true;
+            this.HistoryList.Location = new System.Drawing.Point(6, 20);
+            this.HistoryList.Name = "HistoryList";
+            this.HistoryList.Size = new System.Drawing.Size(188, 468);
+            this.HistoryList.TabIndex = 0;
+            // 
+            // histogramToolStripMenuItem
+            // 
+            this.histogramToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.equaliseToolStripMenuItem});
+            this.histogramToolStripMenuItem.Name = "histogramToolStripMenuItem";
+            this.histogramToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
+            this.histogramToolStripMenuItem.Text = "Histogram";
+            // 
+            // equaliseToolStripMenuItem
+            // 
+            this.equaliseToolStripMenuItem.Name = "equaliseToolStripMenuItem";
+            this.equaliseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.equaliseToolStripMenuItem.Text = "Equalise";
+            this.equaliseToolStripMenuItem.Click += new System.EventHandler(this.equaliseToolStripMenuItem_Click);
             // 
             // MainInterface
             // 
@@ -350,6 +381,7 @@ namespace DIP_START
             this.Text = "Photochop";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -392,6 +424,9 @@ namespace DIP_START
         private System.Windows.Forms.ToolStripMenuItem inclinedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ListBox HistoryList;
+        private System.Windows.Forms.ToolStripMenuItem histogramToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem equaliseToolStripMenuItem;
     }
 }
 
