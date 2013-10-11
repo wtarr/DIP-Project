@@ -7,6 +7,8 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using DIP_ClassLib;
@@ -21,6 +23,7 @@ namespace DIP_START
         int max;
         private Graphics _g;
         private readonly Transformation _transformation;
+        private Histogram _histogram;
 
 
         public MainInterface()
@@ -30,6 +33,7 @@ namespace DIP_START
             _procImage = null;
             _g = CreateGraphics();
             _transformation = new Transformation();
+            
 
         }
 
@@ -44,6 +48,44 @@ namespace DIP_START
             }
 
         }
+
+        
+
+        private void DrawHistogram()
+        {
+            //int startX = -350;
+            int[] res = _histogram.CalculateBins();
+            
+            var l = res.Max();
+
+            Array.Reverse(res);
+
+            float scaleFactor = 110.0f/l;
+
+            Pen mPen = new Pen(Color.Black);
+
+            var gf = this.CreateGraphics();
+            
+            gf.TranslateTransform(320, 650);
+            gf.RotateTransform(180);
+
+            gf.DrawRectangle(mPen, new Rectangle(0, 0, 255, 120));
+            
+            int x = 1;
+
+            mPen.Color = Color.Blue;
+
+            for (int i = 0 ; i < res.Length; i++)
+            {
+                gf.DrawLine(mPen,  i , 0, i , res[i] * scaleFactor);
+            }
+            
+            mPen.Dispose();
+
+            gf.Dispose();
+
+
+        }
         
         private void openToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
@@ -52,6 +94,8 @@ namespace DIP_START
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 _originalImage = new Bitmap(openFileDialog1.FileName);
+                _histogram = new Histogram(_originalImage);
+                DrawHistogram();
             }
             
 
@@ -274,6 +318,7 @@ namespace DIP_START
                 dialog.ShowDialog();
             }
         }
+
         
     }
 

@@ -32,20 +32,13 @@ namespace DIP_START
             _g = CreateGraphics();
             _process = process;
             _operation = operation;
-            ThresholdValue = new int[2];
+            ThresholdValue = new int[3];
             ThresholdValue[0] = 127;
-            ThresholdValue[1] = 127;
 
             lbl_Value.Text = ThresholdValue[0].ToString();
 
             _transformation = new Transformation();
-
-            if (operation.Equals(Process.SobelGxGy))
-            {
-                Trackbar_2.Visible = true;
-            }
-
-            //Trackbar_1.Value = ThresholdValue;
+            
         }
 
         public ThresholdTrackbarDialog(Bitmap processed)
@@ -73,33 +66,13 @@ namespace DIP_START
 
         }
 
-        private void Trackbar_2_Scroll(object sender, EventArgs e)
-        {
-            ThresholdValue[1] = Trackbar_2.Value;
-
-            //lbl_Value.Text = ThresholdValue.ToString();
-
-            _procImg = _process.Execute(ThresholdValue, _operation);
-
-            Size destSize;
-            var o = _transformation.ScaleWithMaintainedRatio(_procImg, new Size(450, 450), out destSize);
-            _g.DrawImage(o, new Rectangle(10, 10, destSize.Width, destSize.Height));
-        }
-
         public void BininarizationSettingsDialog_Load(object sender, EventArgs e)
         {
-            //var ev = new MyEventArgs { Value = Trackbar_1.Value };
-
-            //if (OnTrackBarChange != null)
-            //    OnTrackBarChange(this, ev);
-
             if (_process != null)
             {
                 _procImg = _process.Execute(ThresholdValue, _operation);
-
-                
             }
-            
+
             Size destSize;
             var o = _transformation.ScaleWithMaintainedRatio(_procImg, new Size(450, 450), out destSize);
             _g.DrawImage(o, new Rectangle(10, 10, destSize.Width, destSize.Height));
@@ -127,5 +100,7 @@ namespace DIP_START
             }
 
         }
+
+        
     }
 }

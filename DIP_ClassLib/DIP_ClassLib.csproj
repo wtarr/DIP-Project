@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Binarization.cs" />
+    <Compile Include="Histogram.cs" />
     <Compile Include="Process.cs" />
     <Compile Include="SmoothingFilters.cs" />
     <Compile Include="IUseTrackbarThresholding.cs" />

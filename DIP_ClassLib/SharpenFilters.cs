@@ -79,7 +79,7 @@ namespace DIP_ClassLib
                             gx += filter[i]*_3X3Selection[i];
                         }
                         
-                        if (gx >= threshold)
+                        if (Math.Abs(gx) >= threshold)
                         {
                             p[(y + 1) * strideOrig + x + 1] = 255;
                         }
@@ -110,7 +110,7 @@ namespace DIP_ClassLib
                 case Process.SobelGy:
                     return Execute_Filter(threshold[0], _sobelGy);
                 case Process.SobelGxGy:
-                    return Calculate_GxGy(threshold);
+                    return Calculate_GxGy(threshold[0]);
                 case Process.Laplacian:
                     return Execute_Filter(threshold[0], _laplacian);
                 case Process.PointDetection:
@@ -130,13 +130,79 @@ namespace DIP_ClassLib
 
         
 
-        private Bitmap Calculate_GxGy(int[] threshold)
+        private Bitmap Calculate_GxGy(int threshold)
         {
 
             // compare gx and gy and if either is greater than the threshold then 255
             // else 0
+            
+            var width = _original.Width - BorderAllowance;
+            var height = _original.Height - BorderAllowance;
 
-            throw new NotImplementedException();
+            Bitmap newBitmap = new Bitmap(
+                width, height, PixelFormat.Format8bppIndexed);
+
+            int[] _3X3Selection = new int[9];
+            
+            BitmapData origData = _original.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadOnly, PixelFormat.Format8bppIndexed);
+            BitmapData procData = newBitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
+
+            int strideOrig = origData.Stride;
+
+            System.IntPtr origScan0 = origData.Scan0;
+            System.IntPtr newScan0 = procData.Scan0;
+
+            unsafe
+            {
+                byte* o = (byte*)(void*)origScan0;
+                byte* c = (byte*)(void*)newScan0;
+
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+
+                        _3X3Selection[0] = o[y * strideOrig + x];
+                        _3X3Selection[1] = o[y * strideOrig + x + 1];
+                        _3X3Selection[2] = o[y * strideOrig + x + 2];
+
+                        _3X3Selection[3] = o[(y + 1) * strideOrig + x];
+                        _3X3Selection[4] = o[(y + 1) * strideOrig + x + 1];
+                        _3X3Selection[5] = o[(y + 1) * strideOrig + x + 2];
+
+                        _3X3Selection[6] = o[(y + 2) * strideOrig + x];
+                        _3X3Selection[7] = o[(y + 2) * strideOrig + x + 1];
+                        _3X3Selection[8] = o[(y + 2) * strideOrig + x + 2];
+
+                        int gx = 0;
+                        int gy = 0;
+
+                        for (int i = 0; i < _3X3Selection.Length; i++)
+                        {
+                            gx += _sobelGx[i] * _3X3Selection[i];
+                        }
+
+                        for (int i = 0; i < _3X3Selection.Length; i++)
+                        {
+                            gy += _sobelGy[i] * _3X3Selection[i];
+                        }
+
+                        if (Math.Abs(gx) + Math.Abs(gy) >= threshold)
+                        {
+                            c[(y + 1) * strideOrig + x + 1] = 255;
+                        }
+                        else
+                        {
+                            c[(y + 1) * strideOrig + x + 1] = 0;
+                        }
+                    }
+                }
+            }
+
+            _original.UnlockBits(origData);
+            newBitmap.UnlockBits(procData);
+            
+            return newBitmap;
 
         }
 

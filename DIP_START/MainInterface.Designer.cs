@@ -156,7 +156,7 @@ namespace DIP_START
             this.neighbourhoodAveragingToolStripMenuItem,
             this.medToolStripMenuItem1});
             this.smoothingToolStripMenuItem.Name = "smoothingToolStripMenuItem";
-            this.smoothingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.smoothingToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.smoothingToolStripMenuItem.Text = "Smoothing";
             // 
             // neighbourhoodAveragingToolStripMenuItem
@@ -198,7 +198,7 @@ namespace DIP_START
             this.pointDetectionToolStripMenuItem,
             this.lineDetectionToolStripMenuItem});
             this.sharpenToolStripMenuItem.Name = "sharpenToolStripMenuItem";
-            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.sharpenToolStripMenuItem.Text = "Sharpen";
             // 
             // robertsGradientToolStripMenuItem
@@ -290,14 +290,14 @@ namespace DIP_START
             // horizontalToolStripMenuItem
             // 
             this.horizontalToolStripMenuItem.Name = "horizontalToolStripMenuItem";
-            this.horizontalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.horizontalToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.horizontalToolStripMenuItem.Text = "Horizontal";
             this.horizontalToolStripMenuItem.Click += new System.EventHandler(this.horizontalToolStripMenuItem_Click);
             // 
             // verticalToolStripMenuItem
             // 
             this.verticalToolStripMenuItem.Name = "verticalToolStripMenuItem";
-            this.verticalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.verticalToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.verticalToolStripMenuItem.Text = "Vertical";
             this.verticalToolStripMenuItem.Click += new System.EventHandler(this.verticalToolStripMenuItem_Click);
             // 
@@ -307,20 +307,20 @@ namespace DIP_START
             this.toolStripMenuItem2,
             this.toolStripMenuItem3});
             this.inclinedToolStripMenuItem.Name = "inclinedToolStripMenuItem";
-            this.inclinedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.inclinedToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.inclinedToolStripMenuItem.Text = "Inclined";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(97, 22);
             this.toolStripMenuItem2.Text = "+ 45";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.Positive45_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(97, 22);
             this.toolStripMenuItem3.Text = "- 45";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.Negative45_Click);
             // 
@@ -342,7 +342,7 @@ namespace DIP_START
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(841, 541);
+            this.ClientSize = new System.Drawing.Size(841, 681);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;

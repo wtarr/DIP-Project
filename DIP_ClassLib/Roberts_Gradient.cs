@@ -10,7 +10,7 @@ namespace DIP_ClassLib
     public class RobertsGradient : IUseTrackbarThresholding
     {
 
-        private Bitmap _original;
+        private readonly Bitmap _original;
         private const int BorderAllowance = 1;
 
         public RobertsGradient(Bitmap orig)
