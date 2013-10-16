@@ -36,7 +36,7 @@ namespace DIP_START
             _originalImage = null;
             _g = CreateGraphics();
             _transformation = new Transformation();
-            
+
 
         }
 
@@ -49,7 +49,7 @@ namespace DIP_START
 
         }
 
-        
+
 
         private void DrawHistogram(Bitmap img)
         {
@@ -57,17 +57,17 @@ namespace DIP_START
             var histogram = new Histogram();
 
             int[] res = histogram.CalculateBins(img);
-            
+
             var l = res.Max();
 
             Array.Reverse(res);
 
-            float scaleFactor = 110.0f/l;
+            float scaleFactor = 110.0f / l;
 
             Pen mPen = new Pen(Color.Gray);
 
             var gf = this.CreateGraphics();
-            
+
             gf.TranslateTransform(270, 650);
             gf.RotateTransform(180);
 
@@ -80,23 +80,23 @@ namespace DIP_START
 
 
             gf.DrawRectangle(mPen, new Rectangle(0, 0, 255, 120));
-            
+
             int x = 1;
 
             mPen.Color = Color.Blue;
 
-            for (int i = 0 ; i < res.Length; i++)
+            for (int i = 0; i < res.Length; i++)
             {
-                gf.DrawLine(mPen,  i , 0, i , res[i] * scaleFactor);
+                gf.DrawLine(mPen, i, 0, i, res[i] * scaleFactor);
             }
-            
+
             mPen.Dispose();
 
             gf.Dispose();
 
 
         }
-        
+
         private void openToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             // show the openFile dialog box            
@@ -109,9 +109,9 @@ namespace DIP_START
                 HistoryList.Items.Clear();
                 HistoryList.Items.Add("Open - " + openFileDialog1.SafeFileName);
             }
-            
 
-            
+
+
         }
 
         private void exitToolStripMenuItem_Click_1(object sender, EventArgs e)
@@ -162,7 +162,43 @@ namespace DIP_START
                 }
             }
         }
-        
+
+        private void MenuItem_Clicked(object sender, System.EventArgs e)
+        {
+            ToolStripMenuItem temp = sender as ToolStripMenuItem;
+
+            if (temp != null)
+            {
+                String[] array = temp.Name.Split(';');
+
+                object obj = Activator.CreateInstance(Type.GetType("DIP_ClassLib." + array[0] + ", DIP_ClassLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"), _originalImage);
+
+
+                if (obj is IUseTrackbarThresholding)
+                {
+                    IUseTrackbarThresholding t = (IUseTrackbarThresholding)obj;
+                    var es = Enum.Parse(typeof (Process), array[1]);
+                    
+                    using (var dialog = new ThresholdTrackbarDialog(t, (Process)es))
+                    {
+                        dialog.Text = array[1];
+                        if (dialog.ShowDialog() == DialogResult.OK && dialog.ProcImg != null)
+                        {
+                            UpdateOriginal(dialog.ProcImg);
+                            HistoryList.Items.Add(dialog.Text);
+                        }
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("I dont use trackbar");
+                }
+
+            }
+
+        }
+
         private void withoutThresholdingToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             SmoothingFilters smoothingFilters = new SmoothingFilters(_originalImage);
@@ -192,7 +228,7 @@ namespace DIP_START
 
             }
 
-            
+
         }
 
         private void brightenToolStripMenuItem1_Click(object sender, System.EventArgs e)
@@ -210,13 +246,13 @@ namespace DIP_START
                     HistoryList.Items.Add(dialog.Text);
                 }
             }
-           
+
         }
 
         private void NeibhourhoodAvgwithThresholdingToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             IUseTrackbarThresholding filters = new SmoothingFilters(_originalImage);
-            
+
             using (var dialog = new ThresholdTrackbarDialog(filters, Process.NeibhourhoodAverage))
             {
                 dialog.Text = "Neighbourhood Averaging";
@@ -306,7 +342,7 @@ namespace DIP_START
         private void laplacianToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             IUseTrackbarThresholding lp = new SharpenFilters(_originalImage);
-            using ( var dialog = new ThresholdTrackbarDialog(lp, Process.Laplacian))
+            using (var dialog = new ThresholdTrackbarDialog(lp, Process.Laplacian))
             {
                 dialog.Text = "Laplacian Operator";
                 dialog.ShowDialog();
@@ -369,7 +405,7 @@ namespace DIP_START
             UpdateOriginal(h.EqualisedHistogram(_originalImage));
         }
 
-        
+
     }
 
 }

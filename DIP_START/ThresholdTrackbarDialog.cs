@@ -66,6 +66,11 @@ namespace DIP_START
 
         }
 
+        public void MenuItemClicked(object sender, EventArgs e)
+        {
+            
+        }
+
         public void BininarizationSettingsDialog_Load(object sender, EventArgs e)
         {
             if (_process != null)

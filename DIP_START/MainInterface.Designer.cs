@@ -1,3 +1,5 @@
+using System;
+
 namespace DIP_START
 {
     partial class MainInterface
@@ -141,10 +143,10 @@ namespace DIP_START
             // 
             // binarizeToolStripMenuItem
             // 
-            this.binarizeToolStripMenuItem.Name = "binarizeToolStripMenuItem";
+            this.binarizeToolStripMenuItem.Name = "Binarization;Binarize";
             this.binarizeToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.binarizeToolStripMenuItem.Text = "Binarize";
-            this.binarizeToolStripMenuItem.Click += new System.EventHandler(this.binarizeToolStripMenuItem_Click);
+            this.binarizeToolStripMenuItem.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
             // filitersToolStripMenuItem
             // 
