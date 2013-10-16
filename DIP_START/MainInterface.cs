@@ -1,18 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using DIP_ClassLib;
 
 namespace DIP_START
@@ -128,11 +118,13 @@ namespace DIP_START
 
         private void MenuItem_Clicked(object sender, System.EventArgs e)
         {
+            // Single event handler for all menu item clicks regarding processes
+
             ToolStripMenuItem temp = sender as ToolStripMenuItem;
 
             if (temp != null)
             {
-                String[] array = temp.Name.Split('_');
+                String[] array = temp.Name.Split('_'); // Class name _ method/process to invoke _ should display trackbar
 
                 object obj = Activator.CreateInstance(Type.GetType("DIP_ClassLib." + array[0] + ", DIP_ClassLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"), _originalImage);
 
