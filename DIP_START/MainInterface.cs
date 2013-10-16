@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -37,7 +38,6 @@ namespace DIP_START
             _g = CreateGraphics();
             _transformation = new Transformation();
 
-
         }
 
         public void Form1_Paint(object sender, PaintEventArgs e)
@@ -48,9 +48,7 @@ namespace DIP_START
             }
 
         }
-
-
-
+        
         private void DrawHistogram(Bitmap img)
         {
             //int startX = -350;
@@ -110,32 +108,12 @@ namespace DIP_START
                 HistoryList.Items.Add("Open - " + openFileDialog1.SafeFileName);
             }
 
-
-
         }
 
         private void exitToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             Dispose();
             Application.Exit();
-        }
-
-        private void inverseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var inverseVideo = new InverseVideo();
-            var _procImage = inverseVideo.inverse(_originalImage);
-
-            using (var dialog = new ThresholdTrackbarDialog(_procImage))
-            {
-                dialog.Text = "Inverse";
-                var result = dialog.ShowDialog();
-                if (result == DialogResult.OK && _procImage != null)
-                {
-                    UpdateOriginal(_procImage);
-                    HistoryList.Items.Add(dialog.Text);
-                }
-            }
-
         }
 
         private void UpdateOriginal(Bitmap img)
@@ -148,38 +126,23 @@ namespace DIP_START
             DrawHistogram(img);
         }
 
-        private void binarizeToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            IUseTrackbarThresholding binarization = new Binarization(_originalImage);
-
-            using (var dialog = new ThresholdTrackbarDialog(binarization, Process.Binarize))
-            {
-                dialog.Text = "Binarization Threshold";
-                if (dialog.ShowDialog() == DialogResult.OK && dialog.ProcImg != null)
-                {
-                    UpdateOriginal(dialog.ProcImg);
-                    HistoryList.Items.Add(dialog.Text);
-                }
-            }
-        }
-
         private void MenuItem_Clicked(object sender, System.EventArgs e)
         {
             ToolStripMenuItem temp = sender as ToolStripMenuItem;
 
             if (temp != null)
             {
-                String[] array = temp.Name.Split(';');
+                String[] array = temp.Name.Split('_');
 
                 object obj = Activator.CreateInstance(Type.GetType("DIP_ClassLib." + array[0] + ", DIP_ClassLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"), _originalImage);
 
-
-                if (obj is IUseTrackbarThresholding)
+                var thresholding = obj as IUseTrackbarThresholding;
+                if (thresholding != null)
                 {
-                    IUseTrackbarThresholding t = (IUseTrackbarThresholding)obj;
+                    var t = thresholding;
                     var es = Enum.Parse(typeof (Process), array[1]);
                     
-                    using (var dialog = new ThresholdTrackbarDialog(t, (Process)es))
+                    using (var dialog = new ThresholdTrackbarDialog(t, (Process)es, array[2]))
                     {
                         dialog.Text = array[1];
                         if (dialog.ShowDialog() == DialogResult.OK && dialog.ProcImg != null)
@@ -192,213 +155,27 @@ namespace DIP_START
                 }
                 else
                 {
-                    Console.WriteLine("I dont use trackbar");
+                    Type t = obj.GetType();
+                    Object ts = t.InvokeMember(array[1], BindingFlags.InvokeMethod, Type.DefaultBinder, obj, null);
+                    
+                    using (var dialog = new ThresholdTrackbarDialog((Bitmap)ts, array[2]))
+                    {
+                        dialog.Text = "Darken";
+                        var result = dialog.ShowDialog();
+                        if (result == DialogResult.OK && ts != null)
+                        {
+                            UpdateOriginal((Bitmap)ts);
+                            HistoryList.Items.Add(dialog.Text);
+                        }
+
+                    }
+
                 }
 
             }
 
         }
-
-        private void withoutThresholdingToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            SmoothingFilters smoothingFilters = new SmoothingFilters(_originalImage);
-            var processed = smoothingFilters.NeighbourhoodAveraging();
-
-            using (var dialog = new ThresholdTrackbarDialog(processed))
-            {
-                dialog.Text = "Neighbourhood Averaging";
-                dialog.ShowDialog();
-            }
-        }
-
-        private void darkenToolStripMenuItem1_Click(object sender, System.EventArgs e)
-        {
-            var lvls = new Levels();
-            var processed = lvls.Darken(_originalImage);
-
-            using (var dialog = new ThresholdTrackbarDialog(processed))
-            {
-                dialog.Text = "Darken";
-                var result = dialog.ShowDialog();
-                if (result == DialogResult.OK && processed != null)
-                {
-                    UpdateOriginal(processed);
-                    HistoryList.Items.Add(dialog.Text);
-                }
-
-            }
-
-
-        }
-
-        private void brightenToolStripMenuItem1_Click(object sender, System.EventArgs e)
-        {
-            var lvls = new Levels();
-            var processed = lvls.Brighten(_originalImage);
-
-            using (var dialog = new ThresholdTrackbarDialog(processed))
-            {
-                dialog.Text = "Brighten";
-                var result = dialog.ShowDialog();
-                if (result == DialogResult.OK && processed != null)
-                {
-                    UpdateOriginal(processed);
-                    HistoryList.Items.Add(dialog.Text);
-                }
-            }
-
-        }
-
-        private void NeibhourhoodAvgwithThresholdingToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            IUseTrackbarThresholding filters = new SmoothingFilters(_originalImage);
-
-            using (var dialog = new ThresholdTrackbarDialog(filters, Process.NeibhourhoodAverage))
-            {
-                dialog.Text = "Neighbourhood Averaging";
-                var result = dialog.ShowDialog();
-                if (result == DialogResult.OK && dialog.ProcImg != null)
-                {
-                    UpdateOriginal(dialog.ProcImg);
-                    HistoryList.Items.Add(dialog.Text);
-                }
-            }
-        }
-
-        private void medToolStripMenuItem1_Click(object sender, System.EventArgs e)
-        {
-            var lvls = new SmoothingFilters(_originalImage);
-            var processed = lvls.MedianFiltering();
-
-            using (var dialog = new ThresholdTrackbarDialog(processed))
-            {
-                dialog.Text = "Median Filtering";
-                dialog.ShowDialog();
-            }
-        }
-
-        private void directToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            RobertsGradient rg = new RobertsGradient(_originalImage);
-            using (var dialog = new ThresholdTrackbarDialog(rg.Direct()))
-            {
-                dialog.Text = "Roberts Gradient (Direct)";
-                dialog.ShowDialog();
-            }
-        }
-
-        private void RobertsGradientwithThresholdToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            IUseTrackbarThresholding rgThresholding = new RobertsGradient(_originalImage);
-
-            using (var dialog = new ThresholdTrackbarDialog(rgThresholding, Process.RobertsGradientWithThresholding))
-            {
-                dialog.Text = "Roberts Gradient (Threshold)";
-                dialog.ShowDialog();
-            }
-        }
-
-        private void PseudoToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            IUseTrackbarThresholding rgThresholding = new RobertsGradient(_originalImage);
-
-            using (var dialog = new ThresholdTrackbarDialog(rgThresholding, Process.RobertsGradientWithPseudoColor))
-            {
-                dialog.Text = "Roberts Gradient with Pseudo color (Threshold)";
-                dialog.ShowDialog();
-            }
-        }
-
-        private void Sobel_GxToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            IUseTrackbarThresholding sb = new SharpenFilters(_originalImage);
-            using (var dialog = new ThresholdTrackbarDialog(sb, Process.SobelGx))
-            {
-                dialog.Text = "SharpenFilters Gx";
-                dialog.ShowDialog();
-            }
-        }
-
-        private void Soblel_GyToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            IUseTrackbarThresholding sb = new SharpenFilters(_originalImage);
-            using (var dialog = new ThresholdTrackbarDialog(sb, Process.SobelGy))
-            {
-                dialog.Text = "SharpenFilters Gy";
-                dialog.ShowDialog();
-            }
-        }
-
-        private void Sobel_GxAndGyToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            IUseTrackbarThresholding sb = new SharpenFilters(_originalImage);
-            using (var dialog = new ThresholdTrackbarDialog(sb, Process.SobelGxGy))
-            {
-                dialog.Text = "SharpenFilters Gx + Gy";
-                dialog.ShowDialog();
-            }
-        }
-
-        private void laplacianToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            IUseTrackbarThresholding lp = new SharpenFilters(_originalImage);
-            using (var dialog = new ThresholdTrackbarDialog(lp, Process.Laplacian))
-            {
-                dialog.Text = "Laplacian Operator";
-                dialog.ShowDialog();
-            }
-        }
-
-        private void pointDetectionToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            IUseTrackbarThresholding pd = new SharpenFilters(_originalImage);
-            using (var dialog = new ThresholdTrackbarDialog(pd, Process.PointDetection))
-            {
-                dialog.Text = "Point Detection";
-                dialog.ShowDialog();
-            }
-        }
-
-        private void horizontalToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            IUseTrackbarThresholding hd = new SharpenFilters(_originalImage);
-            using (var dialog = new ThresholdTrackbarDialog(hd, Process.HorizontalLine))
-            {
-                dialog.Text = "Horizontal Line Detection";
-                dialog.ShowDialog();
-            }
-        }
-
-        private void verticalToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            IUseTrackbarThresholding vd = new SharpenFilters(_originalImage);
-            using (var dialog = new ThresholdTrackbarDialog(vd, Process.VerticalLine))
-            {
-                dialog.Text = "Vertical Line Detection";
-                dialog.ShowDialog();
-            }
-        }
-
-        private void Positive45_Click(object sender, System.EventArgs e)
-        {
-            IUseTrackbarThresholding p45 = new SharpenFilters(_originalImage);
-            using (var dialog = new ThresholdTrackbarDialog(p45, Process.Positive45DegreeLine))
-            {
-                dialog.Text = "Positive 45 Line Detection";
-                dialog.ShowDialog();
-            }
-        }
-
-        private void Negative45_Click(object sender, System.EventArgs e)
-        {
-            IUseTrackbarThresholding n45 = new SharpenFilters(_originalImage);
-            using (var dialog = new ThresholdTrackbarDialog(n45, Process.Negative45DegreeLine))
-            {
-                dialog.Text = "Negative 45 Line Detection";
-                dialog.ShowDialog();
-            }
-        }
-
+        
         private void equaliseToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             Histogram h = new Histogram();

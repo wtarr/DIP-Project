@@ -26,7 +26,9 @@ namespace DIP_START
 
         private Process _operation;
 
-        public ThresholdTrackbarDialog(IUseTrackbarThresholding process, Process operation)
+        private bool _Visible;
+
+        public ThresholdTrackbarDialog(IUseTrackbarThresholding process, Process operation, string visible)
         {
             InitializeComponent();
             _g = CreateGraphics();
@@ -38,18 +40,22 @@ namespace DIP_START
             lbl_Value.Text = ThresholdValue[0].ToString();
 
             _transformation = new Transformation();
+            _Visible = bool.Parse(visible);
+            Trackbar_1.Enabled = _Visible;
+            groupBox_Threshold.Visible = _Visible;
             
         }
 
-        public ThresholdTrackbarDialog(Bitmap processed)
+        public ThresholdTrackbarDialog(Bitmap processed, string visible)
         {
+            _Visible = bool.Parse(visible);
             InitializeComponent();
-            Trackbar_1.Enabled = false;
+            
             _g = CreateGraphics();
             ProcImg = processed;
             _transformation = new Transformation();
-
-            groupBox_Threshold.Visible = false;
+            Trackbar_1.Enabled = _Visible;
+            groupBox_Threshold.Visible = _Visible;
         }
 
         private void Trackbar_1_Scroll(object sender, EventArgs e)
@@ -65,12 +71,7 @@ namespace DIP_START
             _g.DrawImage(o, new Rectangle(10, 10, destSize.Width, destSize.Height));
 
         }
-
-        public void MenuItemClicked(object sender, EventArgs e)
-        {
-            
-        }
-
+        
         public void BininarizationSettingsDialog_Load(object sender, EventArgs e)
         {
             if (_process != null)

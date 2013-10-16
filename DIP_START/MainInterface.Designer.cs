@@ -36,39 +36,39 @@ namespace DIP_START
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.levelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.darkenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.brightenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.inverseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.binarizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Levels_Darken_false = new System.Windows.Forms.ToolStripMenuItem();
+            this.Levels_Brighten_false = new System.Windows.Forms.ToolStripMenuItem();
+            this.InverseVideo_Inverse_false = new System.Windows.Forms.ToolStripMenuItem();
+            this.Binarization_Binarize_true = new System.Windows.Forms.ToolStripMenuItem();
             this.filitersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smoothingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.neighbourhoodAveragingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.withThresholdingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.withoutThresholdingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.medToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.SmoothingFilters_NeibhourhoodAveragingWithThresholding_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.SmoothingFilters_NeibhourhoodAveraging_false = new System.Windows.Forms.ToolStripMenuItem();
+            this.SmoothingFilters_MedianFiltering_false = new System.Windows.Forms.ToolStripMenuItem();
             this.sharpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.robertsGradientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pseudoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.directToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.withThresholdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RobertsGradient_RobertsGradientWithPseudoColor_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.RobertsGradient_RobertsGradientDirect_false = new System.Windows.Forms.ToolStripMenuItem();
+            this.RobertsGradient_RobertsGradientWithThresholding_true = new System.Windows.Forms.ToolStripMenuItem();
             this.sobelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gxGyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.laplacianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pointDetectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SharpenFilters_SobelGx_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.SharpenFilters_SobelGy_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.SharpenFilters_SobelGxGy_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.SharpenFilters_Laplacian_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.SharpenFilters_PointDetection_true = new System.Windows.Forms.ToolStripMenuItem();
             this.lineDetectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.horizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.verticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.inclinedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.SharpenFilters_HorizontalLine_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.SharpenFilters_VerticalLine_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.SharpenFilters_Positive45DegreeLine_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.SharpenFilters_Pos45DegreeLine_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.SharpenFilters_Negative45DegreeLine_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.equaliseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.HistoryList = new System.Windows.Forms.ListBox();
-            this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.equaliseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -78,8 +78,8 @@ namespace DIP_START
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.levelsToolStripMenuItem,
-            this.inverseToolStripMenuItem,
-            this.binarizeToolStripMenuItem,
+            this.InverseVideo_Inverse_false,
+            this.Binarization_Binarize_true,
             this.filitersToolStripMenuItem,
             this.histogramToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -114,39 +114,39 @@ namespace DIP_START
             // levelsToolStripMenuItem
             // 
             this.levelsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.darkenToolStripMenuItem1,
-            this.brightenToolStripMenuItem1});
+            this.Levels_Darken_false,
+            this.Levels_Brighten_false});
             this.levelsToolStripMenuItem.Name = "levelsToolStripMenuItem";
             this.levelsToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
             this.levelsToolStripMenuItem.Text = "Levels";
             // 
-            // darkenToolStripMenuItem1
+            // Levels_Darken_false
             // 
-            this.darkenToolStripMenuItem1.Name = "darkenToolStripMenuItem1";
-            this.darkenToolStripMenuItem1.Size = new System.Drawing.Size(119, 22);
-            this.darkenToolStripMenuItem1.Text = "Darken";
-            this.darkenToolStripMenuItem1.Click += new System.EventHandler(this.darkenToolStripMenuItem1_Click);
+            this.Levels_Darken_false.Name = "Levels_Darken_false";
+            this.Levels_Darken_false.Size = new System.Drawing.Size(119, 22);
+            this.Levels_Darken_false.Text = "Darken";
+            this.Levels_Darken_false.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
-            // brightenToolStripMenuItem1
+            // Levels_Brighten_false
             // 
-            this.brightenToolStripMenuItem1.Name = "brightenToolStripMenuItem1";
-            this.brightenToolStripMenuItem1.Size = new System.Drawing.Size(119, 22);
-            this.brightenToolStripMenuItem1.Text = "Brighten";
-            this.brightenToolStripMenuItem1.Click += new System.EventHandler(this.brightenToolStripMenuItem1_Click);
+            this.Levels_Brighten_false.Name = "Levels_Brighten_false";
+            this.Levels_Brighten_false.Size = new System.Drawing.Size(119, 22);
+            this.Levels_Brighten_false.Text = "Brighten";
+            this.Levels_Brighten_false.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
-            // inverseToolStripMenuItem
+            // InverseVideo_Inverse_false
             // 
-            this.inverseToolStripMenuItem.Name = "inverseToolStripMenuItem";
-            this.inverseToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.inverseToolStripMenuItem.Text = "Inverse";
-            this.inverseToolStripMenuItem.Click += new System.EventHandler(this.inverseToolStripMenuItem_Click);
+            this.InverseVideo_Inverse_false.Name = "InverseVideo_Inverse_false";
+            this.InverseVideo_Inverse_false.Size = new System.Drawing.Size(56, 20);
+            this.InverseVideo_Inverse_false.Text = "Inverse";
+            this.InverseVideo_Inverse_false.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
-            // binarizeToolStripMenuItem
+            // Binarization_Binarize_true
             // 
-            this.binarizeToolStripMenuItem.Name = "Binarization;Binarize";
-            this.binarizeToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.binarizeToolStripMenuItem.Text = "Binarize";
-            this.binarizeToolStripMenuItem.Click += new System.EventHandler(this.MenuItem_Clicked);
+            this.Binarization_Binarize_true.Name = "Binarization_Binarize_true";
+            this.Binarization_Binarize_true.Size = new System.Drawing.Size(60, 20);
+            this.Binarization_Binarize_true.Text = "Binarize";
+            this.Binarization_Binarize_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
             // filitersToolStripMenuItem
             // 
@@ -161,175 +161,190 @@ namespace DIP_START
             // 
             this.smoothingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.neighbourhoodAveragingToolStripMenuItem,
-            this.medToolStripMenuItem1});
+            this.SmoothingFilters_MedianFiltering_false});
             this.smoothingToolStripMenuItem.Name = "smoothingToolStripMenuItem";
-            this.smoothingToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.smoothingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.smoothingToolStripMenuItem.Text = "Smoothing";
             // 
             // neighbourhoodAveragingToolStripMenuItem
             // 
             this.neighbourhoodAveragingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.withThresholdingToolStripMenuItem,
-            this.withoutThresholdingToolStripMenuItem});
+            this.SmoothingFilters_NeibhourhoodAveragingWithThresholding_true,
+            this.SmoothingFilters_NeibhourhoodAveraging_false});
             this.neighbourhoodAveragingToolStripMenuItem.Name = "neighbourhoodAveragingToolStripMenuItem";
             this.neighbourhoodAveragingToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.neighbourhoodAveragingToolStripMenuItem.Text = "Neighbourhood Averaging";
             // 
-            // withThresholdingToolStripMenuItem
+            // SmoothingFilters_NeibhourhoodAveragingWithThresholding_true
             // 
-            this.withThresholdingToolStripMenuItem.Name = "withThresholdingToolStripMenuItem";
-            this.withThresholdingToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.withThresholdingToolStripMenuItem.Text = "With Thresholding";
-            this.withThresholdingToolStripMenuItem.Click += new System.EventHandler(this.NeibhourhoodAvgwithThresholdingToolStripMenuItem_Click);
+            this.SmoothingFilters_NeibhourhoodAveragingWithThresholding_true.Name = "SmoothingFilters_NeibhourhoodAveragingWithThresholding_true";
+            this.SmoothingFilters_NeibhourhoodAveragingWithThresholding_true.Size = new System.Drawing.Size(190, 22);
+            this.SmoothingFilters_NeibhourhoodAveragingWithThresholding_true.Text = "With Thresholding";
+            this.SmoothingFilters_NeibhourhoodAveragingWithThresholding_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
-            // withoutThresholdingToolStripMenuItem
+            // SmoothingFilters_NeibhourhoodAveraging_false
             // 
-            this.withoutThresholdingToolStripMenuItem.Name = "withoutThresholdingToolStripMenuItem";
-            this.withoutThresholdingToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.withoutThresholdingToolStripMenuItem.Text = "Without Thresholding";
-            this.withoutThresholdingToolStripMenuItem.Click += new System.EventHandler(this.withoutThresholdingToolStripMenuItem_Click);
+            this.SmoothingFilters_NeibhourhoodAveraging_false.Name = "SmoothingFilters_NeibhourhoodAveraging_false";
+            this.SmoothingFilters_NeibhourhoodAveraging_false.Size = new System.Drawing.Size(190, 22);
+            this.SmoothingFilters_NeibhourhoodAveraging_false.Text = "Without Thresholding";
+            this.SmoothingFilters_NeibhourhoodAveraging_false.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
-            // medToolStripMenuItem1
+            // SmoothingFilters_MedianFiltering_false
             // 
-            this.medToolStripMenuItem1.Name = "medToolStripMenuItem1";
-            this.medToolStripMenuItem1.Size = new System.Drawing.Size(216, 22);
-            this.medToolStripMenuItem1.Text = "Median";
-            this.medToolStripMenuItem1.Click += new System.EventHandler(this.medToolStripMenuItem1_Click);
+            this.SmoothingFilters_MedianFiltering_false.Name = "SmoothingFilters_MedianFiltering_false";
+            this.SmoothingFilters_MedianFiltering_false.Size = new System.Drawing.Size(216, 22);
+            this.SmoothingFilters_MedianFiltering_false.Text = "Median";
+            this.SmoothingFilters_MedianFiltering_false.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
             // sharpenToolStripMenuItem
             // 
             this.sharpenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.robertsGradientToolStripMenuItem,
             this.sobelToolStripMenuItem,
-            this.laplacianToolStripMenuItem,
-            this.pointDetectionToolStripMenuItem,
+            this.SharpenFilters_Laplacian_true,
+            this.SharpenFilters_PointDetection_true,
             this.lineDetectionToolStripMenuItem});
             this.sharpenToolStripMenuItem.Name = "sharpenToolStripMenuItem";
-            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sharpenToolStripMenuItem.Text = "Sharpen";
             // 
             // robertsGradientToolStripMenuItem
             // 
             this.robertsGradientToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pseudoToolStripMenuItem,
-            this.directToolStripMenuItem,
-            this.withThresholdToolStripMenuItem});
+            this.RobertsGradient_RobertsGradientWithPseudoColor_true,
+            this.RobertsGradient_RobertsGradientDirect_false,
+            this.RobertsGradient_RobertsGradientWithThresholding_true});
             this.robertsGradientToolStripMenuItem.Name = "robertsGradientToolStripMenuItem";
             this.robertsGradientToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.robertsGradientToolStripMenuItem.Text = "Roberts Gradient";
             // 
-            // pseudoToolStripMenuItem
+            // RobertsGradient_RobertsGradientWithPseudoColor_true
             // 
-            this.pseudoToolStripMenuItem.Name = "pseudoToolStripMenuItem";
-            this.pseudoToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.pseudoToolStripMenuItem.Text = "Pseudo";
-            this.pseudoToolStripMenuItem.Click += new System.EventHandler(this.PseudoToolStripMenuItem_Click);
+            this.RobertsGradient_RobertsGradientWithPseudoColor_true.Name = "RobertsGradient_RobertsGradientWithPseudoColor_true";
+            this.RobertsGradient_RobertsGradientWithPseudoColor_true.Size = new System.Drawing.Size(155, 22);
+            this.RobertsGradient_RobertsGradientWithPseudoColor_true.Text = "Pseudo";
+            this.RobertsGradient_RobertsGradientWithPseudoColor_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
-            // directToolStripMenuItem
+            // RobertsGradient_RobertsGradientDirect_false
             // 
-            this.directToolStripMenuItem.Name = "directToolStripMenuItem";
-            this.directToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.directToolStripMenuItem.Text = "Direct";
-            this.directToolStripMenuItem.Click += new System.EventHandler(this.directToolStripMenuItem_Click);
+            this.RobertsGradient_RobertsGradientDirect_false.Name = "RobertsGradient_RobertsGradientDirect_false";
+            this.RobertsGradient_RobertsGradientDirect_false.Size = new System.Drawing.Size(155, 22);
+            this.RobertsGradient_RobertsGradientDirect_false.Text = "Direct";
+            this.RobertsGradient_RobertsGradientDirect_false.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
-            // withThresholdToolStripMenuItem
+            // RobertsGradient_RobertsGradientWithThresholding_true
             // 
-            this.withThresholdToolStripMenuItem.Name = "withThresholdToolStripMenuItem";
-            this.withThresholdToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.withThresholdToolStripMenuItem.Text = "With Threshold";
-            this.withThresholdToolStripMenuItem.Click += new System.EventHandler(this.RobertsGradientwithThresholdToolStripMenuItem_Click);
+            this.RobertsGradient_RobertsGradientWithThresholding_true.Name = "RobertsGradient_RobertsGradientWithThresholding_true";
+            this.RobertsGradient_RobertsGradientWithThresholding_true.Size = new System.Drawing.Size(155, 22);
+            this.RobertsGradient_RobertsGradientWithThresholding_true.Text = "With Threshold";
+            this.RobertsGradient_RobertsGradientWithThresholding_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
             // sobelToolStripMenuItem
             // 
             this.sobelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gxToolStripMenuItem,
-            this.gyToolStripMenuItem,
-            this.gxGyToolStripMenuItem});
+            this.SharpenFilters_SobelGx_true,
+            this.SharpenFilters_SobelGy_true,
+            this.SharpenFilters_SobelGxGy_true});
             this.sobelToolStripMenuItem.Name = "sobelToolStripMenuItem";
             this.sobelToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.sobelToolStripMenuItem.Text = "SharpenFilters";
             // 
-            // gxToolStripMenuItem
+            // SharpenFilters_SobelGx_true
             // 
-            this.gxToolStripMenuItem.Name = "gxToolStripMenuItem";
-            this.gxToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
-            this.gxToolStripMenuItem.Text = "Gx";
-            this.gxToolStripMenuItem.Click += new System.EventHandler(this.Sobel_GxToolStripMenuItem_Click);
+            this.SharpenFilters_SobelGx_true.Name = "SharpenFilters_SobelGx_true";
+            this.SharpenFilters_SobelGx_true.Size = new System.Drawing.Size(152, 22);
+            this.SharpenFilters_SobelGx_true.Text = "Gx";
+            this.SharpenFilters_SobelGx_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
-            // gyToolStripMenuItem
+            // SharpenFilters_SobelGy_true
             // 
-            this.gyToolStripMenuItem.Name = "gyToolStripMenuItem";
-            this.gyToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
-            this.gyToolStripMenuItem.Text = "Gy";
-            this.gyToolStripMenuItem.Click += new System.EventHandler(this.Soblel_GyToolStripMenuItem_Click);
+            this.SharpenFilters_SobelGy_true.Name = "SharpenFilters_SobelGy_true";
+            this.SharpenFilters_SobelGy_true.Size = new System.Drawing.Size(152, 22);
+            this.SharpenFilters_SobelGy_true.Text = "Gy";
+            this.SharpenFilters_SobelGy_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
-            // gxGyToolStripMenuItem
+            // SharpenFilters_SobelGxGy_true
             // 
-            this.gxGyToolStripMenuItem.Name = "gxGyToolStripMenuItem";
-            this.gxGyToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
-            this.gxGyToolStripMenuItem.Text = "Gx + Gy";
-            this.gxGyToolStripMenuItem.Click += new System.EventHandler(this.Sobel_GxAndGyToolStripMenuItem_Click);
+            this.SharpenFilters_SobelGxGy_true.Name = "SharpenFilters_SobelGxGy_true";
+            this.SharpenFilters_SobelGxGy_true.Size = new System.Drawing.Size(152, 22);
+            this.SharpenFilters_SobelGxGy_true.Text = "Gx + Gy";
+            this.SharpenFilters_SobelGxGy_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
-            // laplacianToolStripMenuItem
+            // SharpenFilters_Laplacian_true
             // 
-            this.laplacianToolStripMenuItem.Name = "laplacianToolStripMenuItem";
-            this.laplacianToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.laplacianToolStripMenuItem.Text = "Laplacian";
-            this.laplacianToolStripMenuItem.Click += new System.EventHandler(this.laplacianToolStripMenuItem_Click);
+            this.SharpenFilters_Laplacian_true.Name = "SharpenFilters_Laplacian_true";
+            this.SharpenFilters_Laplacian_true.Size = new System.Drawing.Size(162, 22);
+            this.SharpenFilters_Laplacian_true.Text = "Laplacian";
+            this.SharpenFilters_Laplacian_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
-            // pointDetectionToolStripMenuItem
+            // SharpenFilters_PointDetection_true
             // 
-            this.pointDetectionToolStripMenuItem.Name = "pointDetectionToolStripMenuItem";
-            this.pointDetectionToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.pointDetectionToolStripMenuItem.Text = "Point Detection";
-            this.pointDetectionToolStripMenuItem.Click += new System.EventHandler(this.pointDetectionToolStripMenuItem_Click);
+            this.SharpenFilters_PointDetection_true.Name = "SharpenFilters_PointDetection_true";
+            this.SharpenFilters_PointDetection_true.Size = new System.Drawing.Size(162, 22);
+            this.SharpenFilters_PointDetection_true.Text = "Point Detection";
+            this.SharpenFilters_PointDetection_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
             // lineDetectionToolStripMenuItem
             // 
             this.lineDetectionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.horizontalToolStripMenuItem,
-            this.verticalToolStripMenuItem,
-            this.inclinedToolStripMenuItem});
+            this.SharpenFilters_HorizontalLine_true,
+            this.SharpenFilters_VerticalLine_true,
+            this.SharpenFilters_Positive45DegreeLine_true});
             this.lineDetectionToolStripMenuItem.Name = "lineDetectionToolStripMenuItem";
             this.lineDetectionToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.lineDetectionToolStripMenuItem.Text = "Line Detection";
             // 
-            // horizontalToolStripMenuItem
+            // SharpenFilters_HorizontalLine_true
             // 
-            this.horizontalToolStripMenuItem.Name = "horizontalToolStripMenuItem";
-            this.horizontalToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
-            this.horizontalToolStripMenuItem.Text = "Horizontal";
-            this.horizontalToolStripMenuItem.Click += new System.EventHandler(this.horizontalToolStripMenuItem_Click);
+            this.SharpenFilters_HorizontalLine_true.Name = "SharpenFilters_HorizontalLine_true";
+            this.SharpenFilters_HorizontalLine_true.Size = new System.Drawing.Size(152, 22);
+            this.SharpenFilters_HorizontalLine_true.Text = "Horizontal";
+            this.SharpenFilters_HorizontalLine_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
-            // verticalToolStripMenuItem
+            // SharpenFilters_VerticalLine_true
             // 
-            this.verticalToolStripMenuItem.Name = "verticalToolStripMenuItem";
-            this.verticalToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
-            this.verticalToolStripMenuItem.Text = "Vertical";
-            this.verticalToolStripMenuItem.Click += new System.EventHandler(this.verticalToolStripMenuItem_Click);
+            this.SharpenFilters_VerticalLine_true.Name = "SharpenFilters_VerticalLine_true";
+            this.SharpenFilters_VerticalLine_true.Size = new System.Drawing.Size(152, 22);
+            this.SharpenFilters_VerticalLine_true.Text = "Vertical";
+            this.SharpenFilters_VerticalLine_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
-            // inclinedToolStripMenuItem
+            // SharpenFilters_Positive45DegreeLine_true
             // 
-            this.inclinedToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem3});
-            this.inclinedToolStripMenuItem.Name = "inclinedToolStripMenuItem";
-            this.inclinedToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
-            this.inclinedToolStripMenuItem.Text = "Inclined";
+            this.SharpenFilters_Positive45DegreeLine_true.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SharpenFilters_Pos45DegreeLine_true,
+            this.SharpenFilters_Negative45DegreeLine_true});
+            this.SharpenFilters_Positive45DegreeLine_true.Name = "SharpenFilters_Positive45DegreeLine_true";
+            this.SharpenFilters_Positive45DegreeLine_true.Size = new System.Drawing.Size(152, 22);
+            this.SharpenFilters_Positive45DegreeLine_true.Text = "Inclined";
             // 
-            // toolStripMenuItem2
+            // SharpenFilters_Pos45DegreeLine_true
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(97, 22);
-            this.toolStripMenuItem2.Text = "+ 45";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.Positive45_Click);
+            this.SharpenFilters_Pos45DegreeLine_true.Name = "SharpenFilters_Pos45DegreeLine_true";
+            this.SharpenFilters_Pos45DegreeLine_true.Size = new System.Drawing.Size(152, 22);
+            this.SharpenFilters_Pos45DegreeLine_true.Text = "+ 45";
+            this.SharpenFilters_Pos45DegreeLine_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
-            // toolStripMenuItem3
+            // SharpenFilters_Negative45DegreeLine_true
             // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(97, 22);
-            this.toolStripMenuItem3.Text = "- 45";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.Negative45_Click);
+            this.SharpenFilters_Negative45DegreeLine_true.Name = "SharpenFilters_Negative45DegreeLine_true";
+            this.SharpenFilters_Negative45DegreeLine_true.Size = new System.Drawing.Size(152, 22);
+            this.SharpenFilters_Negative45DegreeLine_true.Text = "- 45";
+            this.SharpenFilters_Negative45DegreeLine_true.Click += new System.EventHandler(this.MenuItem_Clicked);
+            // 
+            // histogramToolStripMenuItem
+            // 
+            this.histogramToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.equaliseToolStripMenuItem});
+            this.histogramToolStripMenuItem.Name = "histogramToolStripMenuItem";
+            this.histogramToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
+            this.histogramToolStripMenuItem.Text = "Histogram";
+            // 
+            // equaliseToolStripMenuItem
+            // 
+            this.equaliseToolStripMenuItem.Name = "equaliseToolStripMenuItem";
+            this.equaliseToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.equaliseToolStripMenuItem.Text = "Equalise";
+            this.equaliseToolStripMenuItem.Click += new System.EventHandler(this.equaliseToolStripMenuItem_Click);
             // 
             // contextMenuStrip1
             // 
@@ -356,21 +371,6 @@ namespace DIP_START
             this.HistoryList.Size = new System.Drawing.Size(188, 468);
             this.HistoryList.TabIndex = 0;
             // 
-            // histogramToolStripMenuItem
-            // 
-            this.histogramToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.equaliseToolStripMenuItem});
-            this.histogramToolStripMenuItem.Name = "histogramToolStripMenuItem";
-            this.histogramToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
-            this.histogramToolStripMenuItem.Text = "Histogram";
-            // 
-            // equaliseToolStripMenuItem
-            // 
-            this.equaliseToolStripMenuItem.Name = "equaliseToolStripMenuItem";
-            this.equaliseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.equaliseToolStripMenuItem.Text = "Equalise";
-            this.equaliseToolStripMenuItem.Click += new System.EventHandler(this.equaliseToolStripMenuItem_Click);
-            // 
             // MainInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -395,37 +395,37 @@ namespace DIP_START
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem inverseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem InverseVideo_Inverse_false;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.ToolStripMenuItem binarizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem Binarization_Binarize_true;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ToolStripMenuItem filitersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem smoothingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem neighbourhoodAveragingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem medToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem SmoothingFilters_MedianFiltering_false;
         private System.Windows.Forms.ToolStripMenuItem levelsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem darkenToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem brightenToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem withThresholdingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem withoutThresholdingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem Levels_Darken_false;
+        private System.Windows.Forms.ToolStripMenuItem Levels_Brighten_false;
+        private System.Windows.Forms.ToolStripMenuItem SmoothingFilters_NeibhourhoodAveragingWithThresholding_true;
+        private System.Windows.Forms.ToolStripMenuItem SmoothingFilters_NeibhourhoodAveraging_false;
         private System.Windows.Forms.ToolStripMenuItem sharpenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem robertsGradientToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sobelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pseudoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem directToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gxToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gxGyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem withThresholdToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem laplacianToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pointDetectionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RobertsGradient_RobertsGradientWithPseudoColor_true;
+        private System.Windows.Forms.ToolStripMenuItem RobertsGradient_RobertsGradientDirect_false;
+        private System.Windows.Forms.ToolStripMenuItem SharpenFilters_SobelGx_true;
+        private System.Windows.Forms.ToolStripMenuItem SharpenFilters_SobelGy_true;
+        private System.Windows.Forms.ToolStripMenuItem SharpenFilters_SobelGxGy_true;
+        private System.Windows.Forms.ToolStripMenuItem RobertsGradient_RobertsGradientWithThresholding_true;
+        private System.Windows.Forms.ToolStripMenuItem SharpenFilters_Laplacian_true;
+        private System.Windows.Forms.ToolStripMenuItem SharpenFilters_PointDetection_true;
         private System.Windows.Forms.ToolStripMenuItem lineDetectionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem horizontalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem verticalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem inclinedToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem SharpenFilters_HorizontalLine_true;
+        private System.Windows.Forms.ToolStripMenuItem SharpenFilters_VerticalLine_true;
+        private System.Windows.Forms.ToolStripMenuItem SharpenFilters_Positive45DegreeLine_true;
+        private System.Windows.Forms.ToolStripMenuItem SharpenFilters_Pos45DegreeLine_true;
+        private System.Windows.Forms.ToolStripMenuItem SharpenFilters_Negative45DegreeLine_true;
         private System.Windows.Forms.ListBox HistoryList;
         private System.Windows.Forms.ToolStripMenuItem histogramToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem equaliseToolStripMenuItem;

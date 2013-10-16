@@ -9,15 +9,23 @@ namespace DIP_ClassLib
 {
     public class InverseVideo
     {
-        public Bitmap inverse(Bitmap originalImage)
+
+        private Bitmap orig;
+
+        public InverseVideo(Bitmap orig)
         {
-            int width = originalImage.Width;
-            int height = originalImage.Height;
+            this.orig = orig;
+        }
 
-            var r = new Rectangle(535, 50, originalImage.Width, originalImage.Height);
-            var r2 = new Rectangle(0, 0, originalImage.Width, originalImage.Height);
+        public Bitmap Inverse()
+        {
+            int width = orig.Width;
+            int height = orig.Height;
 
-            var procImage = originalImage.Clone(r2, PixelFormat.Format8bppIndexed);
+            var r = new Rectangle(535, 50, orig.Width, orig.Height);
+            var r2 = new Rectangle(0, 0, orig.Width, orig.Height);
+
+            var procImage = orig.Clone(r2, PixelFormat.Format8bppIndexed);
 
 
             BitmapData bmData = procImage.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite,

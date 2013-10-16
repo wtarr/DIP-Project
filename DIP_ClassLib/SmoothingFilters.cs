@@ -214,7 +214,13 @@ namespace DIP_ClassLib
 
         public Bitmap Execute(int[] threshold, Process proc)
         {
-            return NeighbourhoodAveragingWithThresholding(threshold[0]);
+            if (proc == Process.NeibhourhoodAveragingWithThresholding)
+                return NeighbourhoodAveragingWithThresholding(threshold[0]);
+            if (proc == Process.NeibhourhoodAveraging)
+                return NeighbourhoodAveraging();
+            if (proc == Process.MedianFiltering)
+                return MedianFiltering();
+            throw new Exception("Failed select correct method");
         }
     }
 }

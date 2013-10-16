@@ -9,9 +9,15 @@ namespace DIP_ClassLib
 {
     public class Levels
     {
+        private Bitmap orig;
+
+        public Levels(Bitmap orig)
+        {
+            this.orig = orig;
+        }
 
         // Brighten
-        public Bitmap Brighten(Bitmap orig)
+        public Bitmap Brighten()
         {
             int width = orig.Width;
             int height = orig.Height;
@@ -53,7 +59,7 @@ namespace DIP_ClassLib
         }
 
         // Darken
-        public Bitmap Darken(Bitmap orig)
+        public Bitmap Darken()
         {
             int width = orig.Width;
             int height = orig.Height;

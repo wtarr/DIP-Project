@@ -207,7 +207,8 @@ namespace DIP_ClassLib
                     return WithThreshold(threshold[0]);
                 case Process.RobertsGradientWithPseudoColor:
                     return Pseudo(threshold[0]);
-                   
+                case Process.RobertsGradientDirect:
+                    return Direct();
             }
 
             throw new ArgumentException();

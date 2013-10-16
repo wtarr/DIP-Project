@@ -3,9 +3,12 @@
     public enum Process
     {
         Binarize,
-        NeibhourhoodAverage,
+        NeibhourhoodAveraging,
+        NeibhourhoodAveragingWithThresholding,
+        MedianFiltering,
         RobertsGradientWithThresholding,
         RobertsGradientWithPseudoColor,
+        RobertsGradientDirect,
         SobelGx,
         SobelGy,
         SobelGxGy,
@@ -15,6 +18,6 @@
         HorizontalLine,
         VerticalLine, 
         Negative45DegreeLine,
-        Positive45DegreeLine
+        Pos45DegreeLine
     }
 }

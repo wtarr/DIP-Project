@@ -119,7 +119,7 @@ namespace DIP_ClassLib
                     return Execute_Filter(threshold[0], _horizontal);
                 case Process.VerticalLine:
                     return Execute_Filter(threshold[0], _vertical);
-                case Process.Positive45DegreeLine:
+                case Process.Pos45DegreeLine:
                     return Execute_Filter(threshold[0], _pos45);
                 case Process.Negative45DegreeLine:
                     return Execute_Filter(threshold[0], _neg45);
