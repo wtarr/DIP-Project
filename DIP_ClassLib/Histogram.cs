@@ -11,7 +11,15 @@ namespace DIP_ClassLib
     public class Histogram
     {
         public int[] Bins;
-        
+
+
+        private Bitmap _orig;
+
+        public Histogram(Bitmap orig)
+        {
+            _orig = orig;
+            Bins = new int[256];
+        }
 
         public Histogram()
         {
@@ -53,12 +61,12 @@ namespace DIP_ClassLib
 
         }
 
-        public Bitmap EqualisedHistogram(Bitmap img)
+        public Bitmap EqualisedHistogram()
         {
 
-            int[] Bins = CalculateBins(img);
+            int[] Bins = CalculateBins(_orig);
 
-            int n = img.Width * img.Height;
+            int n = _orig.Width * _orig.Height;
 
             double[] nkn = new double[256];
             double[] cdf = new double[256];
@@ -79,15 +87,15 @@ namespace DIP_ClassLib
 
 
 
-            int width = img.Width;
-            int height = img.Height;
+            int width = _orig.Width;
+            int height = _orig.Height;
 
-            Bitmap newBitmap = img.Clone(new Rectangle(0, 0, width, height), PixelFormat.Format8bppIndexed);
+            Bitmap newBitmap = _orig.Clone(new Rectangle(0, 0, width, height), PixelFormat.Format8bppIndexed);
 
             BitmapData newData = newBitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite,
                 PixelFormat.Format8bppIndexed);
             
-            BitmapData bmData = img.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadOnly,
+            BitmapData bmData = _orig.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadOnly,
                 PixelFormat.Format8bppIndexed);
 
 
@@ -115,7 +123,7 @@ namespace DIP_ClassLib
             }
 
             newBitmap.UnlockBits(newData);
-            img.UnlockBits(bmData);
+            _orig.UnlockBits(bmData);
 
             return newBitmap;
         }

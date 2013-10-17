@@ -64,7 +64,7 @@ namespace DIP_START
             this.SharpenFilters_Pos45DegreeLine_true = new System.Windows.Forms.ToolStripMenuItem();
             this.SharpenFilters_Negative45DegreeLine_true = new System.Windows.Forms.ToolStripMenuItem();
             this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.equaliseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Histogram_EqualisedHistogram_false = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -163,7 +163,7 @@ namespace DIP_START
             this.neighbourhoodAveragingToolStripMenuItem,
             this.SmoothingFilters_MedianFiltering_false});
             this.smoothingToolStripMenuItem.Name = "smoothingToolStripMenuItem";
-            this.smoothingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.smoothingToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.smoothingToolStripMenuItem.Text = "Smoothing";
             // 
             // neighbourhoodAveragingToolStripMenuItem
@@ -205,7 +205,7 @@ namespace DIP_START
             this.SharpenFilters_PointDetection_true,
             this.lineDetectionToolStripMenuItem});
             this.sharpenToolStripMenuItem.Name = "sharpenToolStripMenuItem";
-            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.sharpenToolStripMenuItem.Text = "Sharpen";
             // 
             // robertsGradientToolStripMenuItem
@@ -252,21 +252,21 @@ namespace DIP_START
             // SharpenFilters_SobelGx_true
             // 
             this.SharpenFilters_SobelGx_true.Name = "SharpenFilters_SobelGx_true";
-            this.SharpenFilters_SobelGx_true.Size = new System.Drawing.Size(152, 22);
+            this.SharpenFilters_SobelGx_true.Size = new System.Drawing.Size(115, 22);
             this.SharpenFilters_SobelGx_true.Text = "Gx";
             this.SharpenFilters_SobelGx_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
             // SharpenFilters_SobelGy_true
             // 
             this.SharpenFilters_SobelGy_true.Name = "SharpenFilters_SobelGy_true";
-            this.SharpenFilters_SobelGy_true.Size = new System.Drawing.Size(152, 22);
+            this.SharpenFilters_SobelGy_true.Size = new System.Drawing.Size(115, 22);
             this.SharpenFilters_SobelGy_true.Text = "Gy";
             this.SharpenFilters_SobelGy_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
             // SharpenFilters_SobelGxGy_true
             // 
             this.SharpenFilters_SobelGxGy_true.Name = "SharpenFilters_SobelGxGy_true";
-            this.SharpenFilters_SobelGxGy_true.Size = new System.Drawing.Size(152, 22);
+            this.SharpenFilters_SobelGxGy_true.Size = new System.Drawing.Size(115, 22);
             this.SharpenFilters_SobelGxGy_true.Text = "Gx + Gy";
             this.SharpenFilters_SobelGxGy_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
@@ -297,14 +297,14 @@ namespace DIP_START
             // SharpenFilters_HorizontalLine_true
             // 
             this.SharpenFilters_HorizontalLine_true.Name = "SharpenFilters_HorizontalLine_true";
-            this.SharpenFilters_HorizontalLine_true.Size = new System.Drawing.Size(152, 22);
+            this.SharpenFilters_HorizontalLine_true.Size = new System.Drawing.Size(129, 22);
             this.SharpenFilters_HorizontalLine_true.Text = "Horizontal";
             this.SharpenFilters_HorizontalLine_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
             // SharpenFilters_VerticalLine_true
             // 
             this.SharpenFilters_VerticalLine_true.Name = "SharpenFilters_VerticalLine_true";
-            this.SharpenFilters_VerticalLine_true.Size = new System.Drawing.Size(152, 22);
+            this.SharpenFilters_VerticalLine_true.Size = new System.Drawing.Size(129, 22);
             this.SharpenFilters_VerticalLine_true.Text = "Vertical";
             this.SharpenFilters_VerticalLine_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
@@ -314,37 +314,37 @@ namespace DIP_START
             this.SharpenFilters_Pos45DegreeLine_true,
             this.SharpenFilters_Negative45DegreeLine_true});
             this.SharpenFilters_Positive45DegreeLine_true.Name = "SharpenFilters_Positive45DegreeLine_true";
-            this.SharpenFilters_Positive45DegreeLine_true.Size = new System.Drawing.Size(152, 22);
+            this.SharpenFilters_Positive45DegreeLine_true.Size = new System.Drawing.Size(129, 22);
             this.SharpenFilters_Positive45DegreeLine_true.Text = "Inclined";
             // 
             // SharpenFilters_Pos45DegreeLine_true
             // 
             this.SharpenFilters_Pos45DegreeLine_true.Name = "SharpenFilters_Pos45DegreeLine_true";
-            this.SharpenFilters_Pos45DegreeLine_true.Size = new System.Drawing.Size(152, 22);
+            this.SharpenFilters_Pos45DegreeLine_true.Size = new System.Drawing.Size(97, 22);
             this.SharpenFilters_Pos45DegreeLine_true.Text = "+ 45";
             this.SharpenFilters_Pos45DegreeLine_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
             // SharpenFilters_Negative45DegreeLine_true
             // 
             this.SharpenFilters_Negative45DegreeLine_true.Name = "SharpenFilters_Negative45DegreeLine_true";
-            this.SharpenFilters_Negative45DegreeLine_true.Size = new System.Drawing.Size(152, 22);
+            this.SharpenFilters_Negative45DegreeLine_true.Size = new System.Drawing.Size(97, 22);
             this.SharpenFilters_Negative45DegreeLine_true.Text = "- 45";
             this.SharpenFilters_Negative45DegreeLine_true.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
             // histogramToolStripMenuItem
             // 
             this.histogramToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.equaliseToolStripMenuItem});
+            this.Histogram_EqualisedHistogram_false});
             this.histogramToolStripMenuItem.Name = "histogramToolStripMenuItem";
             this.histogramToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
             this.histogramToolStripMenuItem.Text = "Histogram";
             // 
-            // equaliseToolStripMenuItem
+            // Histogram_EqualisedHistogram_false
             // 
-            this.equaliseToolStripMenuItem.Name = "equaliseToolStripMenuItem";
-            this.equaliseToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
-            this.equaliseToolStripMenuItem.Text = "Equalise";
-            this.equaliseToolStripMenuItem.Click += new System.EventHandler(this.equaliseToolStripMenuItem_Click);
+            this.Histogram_EqualisedHistogram_false.Name = "Histogram_EqualisedHistogram_false";
+            this.Histogram_EqualisedHistogram_false.Size = new System.Drawing.Size(152, 22);
+            this.Histogram_EqualisedHistogram_false.Text = "Equalise";
+            this.Histogram_EqualisedHistogram_false.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
             // contextMenuStrip1
             // 
@@ -379,8 +379,10 @@ namespace DIP_START
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "MainInterface";
             this.Text = "Photochop";
+            this.SizeChanged += new System.EventHandler(this.MainInterface_SizeChanged);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -428,7 +430,7 @@ namespace DIP_START
         private System.Windows.Forms.ToolStripMenuItem SharpenFilters_Negative45DegreeLine_true;
         private System.Windows.Forms.ListBox HistoryList;
         private System.Windows.Forms.ToolStripMenuItem histogramToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem equaliseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem Histogram_EqualisedHistogram_false;
     }
 }
 

@@ -38,7 +38,7 @@ namespace DIP_START
             }
 
         }
-        
+
         private void DrawHistogram(Bitmap img)
         {
             //int startX = -350;
@@ -81,7 +81,6 @@ namespace DIP_START
             mPen.Dispose();
 
             gf.Dispose();
-
 
         }
 
@@ -132,8 +131,8 @@ namespace DIP_START
                 if (thresholding != null)
                 {
                     var t = thresholding;
-                    var es = Enum.Parse(typeof (Process), array[1]);
-                    
+                    var es = Enum.Parse(typeof(Process), array[1]);
+
                     using (var dialog = new ThresholdTrackbarDialog(t, (Process)es, array[2]))
                     {
                         dialog.Text = array[1];
@@ -149,10 +148,10 @@ namespace DIP_START
                 {
                     Type t = obj.GetType();
                     Object ts = t.InvokeMember(array[1], BindingFlags.InvokeMethod, Type.DefaultBinder, obj, null);
-                    
+
                     using (var dialog = new ThresholdTrackbarDialog((Bitmap)ts, array[2]))
                     {
-                        dialog.Text = "Darken";
+                        dialog.Text = array[1];
                         var result = dialog.ShowDialog();
                         if (result == DialogResult.OK && ts != null)
                         {
@@ -167,11 +166,17 @@ namespace DIP_START
             }
 
         }
-        
-        private void equaliseToolStripMenuItem_Click(object sender, System.EventArgs e)
+
+        private void MainInterface_SizeChanged(object sender, EventArgs e)
         {
-            Histogram h = new Histogram();
-            UpdateOriginal(h.EqualisedHistogram(_originalImage));
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                
+            }
+            else
+            {
+                UpdateOriginal(_originalImage);
+            }
         }
 
 
