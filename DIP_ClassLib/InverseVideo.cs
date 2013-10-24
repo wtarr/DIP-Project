@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DIP_ClassLib
 {
-    public class InverseVideo
+    public class InverseVideo: ImAnImageProcess
     {
 
         private Bitmap orig;
@@ -52,6 +52,11 @@ namespace DIP_ClassLib
 
             return procImage;
 
+        }
+
+        public Bitmap Execute(int[] threshold, Process process)
+        {
+            return Inverse();
         }
     }
 }

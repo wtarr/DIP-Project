@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DIP_ClassLib
 {
-    public class SharpenFilters : IUseTrackbarThresholding
+    public class SharpenFilters : ImAnImageProcess
     {
         private readonly Bitmap _original;
         private const int BorderAllowance = 2;

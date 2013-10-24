@@ -69,6 +69,8 @@ namespace DIP_START
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.HistoryList = new System.Windows.Forms.ListBox();
+            this.panel_Histogram = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -342,7 +344,7 @@ namespace DIP_START
             // Histogram_EqualisedHistogram_false
             // 
             this.Histogram_EqualisedHistogram_false.Name = "Histogram_EqualisedHistogram_false";
-            this.Histogram_EqualisedHistogram_false.Size = new System.Drawing.Size(152, 22);
+            this.Histogram_EqualisedHistogram_false.Size = new System.Drawing.Size(117, 22);
             this.Histogram_EqualisedHistogram_false.Text = "Equalise";
             this.Histogram_EqualisedHistogram_false.Click += new System.EventHandler(this.MenuItem_Clicked);
             // 
@@ -371,11 +373,30 @@ namespace DIP_START
             this.HistoryList.Size = new System.Drawing.Size(188, 468);
             this.HistoryList.TabIndex = 0;
             // 
+            // panel_Histogram
+            // 
+            this.panel_Histogram.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel_Histogram.Location = new System.Drawing.Point(12, 547);
+            this.panel_Histogram.Name = "panel_Histogram";
+            this.panel_Histogram.Size = new System.Drawing.Size(255, 122);
+            this.panel_Histogram.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 531);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Histogram";
+            // 
             // MainInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(841, 681);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.panel_Histogram);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -431,6 +452,8 @@ namespace DIP_START
         private System.Windows.Forms.ListBox HistoryList;
         private System.Windows.Forms.ToolStripMenuItem histogramToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Histogram_EqualisedHistogram_false;
+        private System.Windows.Forms.Panel panel_Histogram;
+        private System.Windows.Forms.Label label1;
     }
 }
 

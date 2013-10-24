@@ -2,6 +2,9 @@
 {
     public enum Process
     {
+        Inverse,
+        Brighten,
+        Darken,
         Binarize,
         NeibhourhoodAveraging,
         NeibhourhoodAveragingWithThresholding,
@@ -18,6 +21,7 @@
         HorizontalLine,
         VerticalLine, 
         Negative45DegreeLine,
-        Pos45DegreeLine
+        Pos45DegreeLine,
+        EqualisedHistogram
     }
 }

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DIP_ClassLib
 {
-    public class SmoothingFilters : IUseTrackbarThresholding
+    public class SmoothingFilters : ImAnImageProcess
     {
         private readonly Bitmap _original;
         private const int BorderAllowance = 2;

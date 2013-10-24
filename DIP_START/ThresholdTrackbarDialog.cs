@@ -16,7 +16,7 @@ namespace DIP_START
         
         public int[] ThresholdValue { get; private set; }
 
-        private IUseTrackbarThresholding _process;
+        private ImAnImageProcess _process;
 
         private Graphics _g;
 
@@ -28,7 +28,7 @@ namespace DIP_START
 
         private bool _Visible;
 
-        public ThresholdTrackbarDialog(IUseTrackbarThresholding process, Process operation, string visible)
+        public ThresholdTrackbarDialog(ImAnImageProcess process, Process operation, string visible)
         {
             InitializeComponent();
             _g = CreateGraphics();
@@ -45,19 +45,7 @@ namespace DIP_START
             groupBox_Threshold.Visible = _Visible;
             
         }
-
-        public ThresholdTrackbarDialog(Bitmap processed, string visible)
-        {
-            _Visible = bool.Parse(visible);
-            InitializeComponent();
-            
-            _g = CreateGraphics();
-            ProcImg = processed;
-            _transformation = new Transformation();
-            Trackbar_1.Enabled = _Visible;
-            groupBox_Threshold.Visible = _Visible;
-        }
-
+       
         private void Trackbar_1_Scroll(object sender, EventArgs e)
         {
             ThresholdValue[0] = Trackbar_1.Value;

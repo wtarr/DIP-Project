@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DIP_ClassLib
 {
-    public class Binarization : IUseTrackbarThresholding
+    public class Binarization : ImAnImageProcess
     {
 
         

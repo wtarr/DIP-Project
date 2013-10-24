@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DIP_ClassLib
 {
-    public interface IUseTrackbarThresholding
+    public interface ImAnImageProcess
     {
         Bitmap Execute(int[] threshold, Process process);
     }

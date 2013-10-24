@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -19,7 +20,6 @@ namespace DIP_START
         private const int StartY = 50;
         private const int PrefWidth = 450;
         private const int PrefHeight = 450;
-
 
         public MainInterface()
         {
@@ -41,47 +41,23 @@ namespace DIP_START
 
         private void DrawHistogram(Bitmap img)
         {
-            //int startX = -350;
             var histogram = new Histogram();
-
             int[] res = histogram.CalculateBins(img);
-
-            var l = res.Max();
-
+            float l = res.Max();
             Array.Reverse(res);
-
-            float scaleFactor = 110.0f / l;
-
+            float scaleFactor = (panel_Histogram.Height-10) / l;
             Pen mPen = new Pen(Color.Gray);
-
-            var gf = this.CreateGraphics();
-
-            gf.TranslateTransform(270, 650);
-            gf.RotateTransform(180);
-
-            Label lbl = new Label();
-            lbl.Text = "Histogram";
-            lbl.Width = 60;
-            lbl.Location = new Point(25, 525);
-            this.Controls.Add(lbl);
-            lbl.Show();
-
-
-            gf.DrawRectangle(mPen, new Rectangle(0, 0, 255, 120));
-
-            int x = 1;
-
+            var gf = panel_Histogram.CreateGraphics();
+            Matrix m = new Matrix();
+            m.RotateAt(180, new PointF(panel_Histogram.Width/2f, panel_Histogram.Height/2f));
+            gf.Transform = m;
             mPen.Color = Color.Blue;
-
             for (int i = 0; i < res.Length; i++)
             {
                 gf.DrawLine(mPen, i, 0, i, res[i] * scaleFactor);
             }
-
             mPen.Dispose();
-
             gf.Dispose();
-
         }
 
         private void openToolStripMenuItem_Click_1(object sender, EventArgs e)
@@ -125,9 +101,24 @@ namespace DIP_START
             {
                 String[] array = temp.Name.Split('_'); // Class name _ method/process to invoke _ should display trackbar
 
-                object obj = Activator.CreateInstance(Type.GetType("DIP_ClassLib." + array[0] + ", DIP_ClassLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"), _originalImage);
+                object obj = null;
+                try
+                {
+                    obj = Activator.CreateInstance(
+                            Type.GetType(string.Format("DIP_ClassLib.{0}," +
+                                                       " DIP_ClassLib," +
+                                                       " Version=1.0.0.0," +
+                                                       " Culture=neutral," +
+                                                       " PublicKeyToken=null",
+                                                       array[0])),
+                            _originalImage);
+                }
+                catch (NullReferenceException ex)
+                {
+                    MessageBox.Show("Class/Method not found");
+                }
 
-                var thresholding = obj as IUseTrackbarThresholding;
+                var thresholding = obj as ImAnImageProcess;
                 if (thresholding != null)
                 {
                     var t = thresholding;
@@ -144,25 +135,6 @@ namespace DIP_START
                     }
 
                 }
-                else
-                {
-                    Type t = obj.GetType();
-                    Object ts = t.InvokeMember(array[1], BindingFlags.InvokeMethod, Type.DefaultBinder, obj, null);
-
-                    using (var dialog = new ThresholdTrackbarDialog((Bitmap)ts, array[2]))
-                    {
-                        dialog.Text = array[1];
-                        var result = dialog.ShowDialog();
-                        if (result == DialogResult.OK && ts != null)
-                        {
-                            UpdateOriginal((Bitmap)ts);
-                            HistoryList.Items.Add(dialog.Text);
-                        }
-
-                    }
-
-                }
-
             }
 
         }

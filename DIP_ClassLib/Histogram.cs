@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DIP_ClassLib
 {
-    public class Histogram
+    public class Histogram : ImAnImageProcess
     {
         public int[] Bins;
 
@@ -31,7 +31,7 @@ namespace DIP_ClassLib
 
             int width = _orig.Width;
             int height = _orig.Height;
-            
+
 
             BitmapData bmData = _orig.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite,
                 PixelFormat.Format8bppIndexed);
@@ -40,7 +40,7 @@ namespace DIP_ClassLib
 
             unsafe
             {
-                byte* p = (byte*)(void*)Scan0;
+                byte* p = (byte*) (void*) Scan0;
 
                 for (var y = 0; y < height; y++)
                 {
@@ -66,7 +66,7 @@ namespace DIP_ClassLib
 
             int[] Bins = CalculateBins(_orig);
 
-            int n = _orig.Width * _orig.Height;
+            int n = _orig.Width*_orig.Height;
 
             double[] nkn = new double[256];
             double[] cdf = new double[256];
@@ -76,7 +76,7 @@ namespace DIP_ClassLib
 
             for (int i = 0; i < Bins.Length; i++)
             {
-                var nV = Bins[i]/(double)n;
+                var nV = Bins[i]/(double) n;
 
                 nkn[i] = nV;
 
@@ -94,7 +94,7 @@ namespace DIP_ClassLib
 
             BitmapData newData = newBitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite,
                 PixelFormat.Format8bppIndexed);
-            
+
             BitmapData bmData = _orig.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadOnly,
                 PixelFormat.Format8bppIndexed);
 
@@ -104,8 +104,8 @@ namespace DIP_ClassLib
 
             unsafe
             {
-                byte* o = (byte*)(void*)oScan0;
-                byte* p = (byte*)(void*)nScan0;
+                byte* o = (byte*) (void*) oScan0;
+                byte* p = (byte*) (void*) nScan0;
 
 
                 for (var y = 0; y < height; y++)
@@ -113,7 +113,7 @@ namespace DIP_ClassLib
                     for (var x = 0; x < width; x++)
                     {
                         double b = Math.Round(cdf[*o]*255);
-                        *p = (byte)b;
+                        *p = (byte) b;
                         //Console.WriteLine(b); 
                         o++;
                         p++;
@@ -126,6 +126,17 @@ namespace DIP_ClassLib
             _orig.UnlockBits(bmData);
 
             return newBitmap;
+        }
+
+        public Bitmap Execute(int[] threshold, Process process)
+        {
+            if (process.Equals(Process.EqualisedHistogram))
+            {
+                return EqualisedHistogram();
+            }
+
+            throw new Exception("No process matches that name");
+
         }
     }
 }

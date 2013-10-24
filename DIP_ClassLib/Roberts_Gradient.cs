@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DIP_ClassLib
 {
-    public class RobertsGradient : IUseTrackbarThresholding
+    public class RobertsGradient : ImAnImageProcess
     {
 
         private readonly Bitmap _original;

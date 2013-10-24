@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace DIP_ClassLib
 {
-    public class Levels
+    public class Levels : ImAnImageProcess
     {
         private Bitmap orig;
 
@@ -97,6 +98,20 @@ namespace DIP_ClassLib
             procImage.UnlockBits(bmData);
             
             return procImage;
+        }
+
+        public Bitmap Execute(int[] threshold, Process process)
+        {
+            switch (process)
+            {
+                case Process.Darken:
+                    return Darken();
+                case Process.Brighten:
+                    return Brighten();
+                default:
+                    throw new Exception("No process found that matches that name");
+            }
+
         }
     }
 }

@@ -47,7 +47,7 @@
     <Compile Include="Histogram.cs" />
     <Compile Include="Process.cs" />
     <Compile Include="SmoothingFilters.cs" />
-    <Compile Include="IUseTrackbarThresholding.cs" />
+    <Compile Include="ImAnImageProcess.cs" />
     <Compile Include="Levels.cs" />
     <Compile Include="HistoryManagement.cs" />
     <Compile Include="InverseVideo.cs" />
