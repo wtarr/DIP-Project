@@ -61,6 +61,7 @@ namespace DIP_START
             this.Pos45DegreeLine_true = new System.Windows.Forms.ToolStripMenuItem();
             this.Negative45DegreeLine_true = new System.Windows.Forms.ToolStripMenuItem();
             this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HistogramEqualisation_false = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pBox_Original = new System.Windows.Forms.PictureBox();
             this.pBox_ProcImg = new System.Windows.Forms.PictureBox();
@@ -73,7 +74,8 @@ namespace DIP_START
             this.button1 = new System.Windows.Forms.Button();
             this.listboxHistory = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.HistogramEqualisation_false = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelHistogramOriginal = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_Original)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_ProcImg)).BeginInit();
@@ -263,20 +265,23 @@ namespace DIP_START
             // SobelGx_true
             // 
             this.SobelGx_true.Name = "SobelGx_true";
-            this.SobelGx_true.Size = new System.Drawing.Size(152, 22);
+            this.SobelGx_true.Size = new System.Drawing.Size(115, 22);
             this.SobelGx_true.Text = "Gx";
+            this.SobelGx_true.Click += new System.EventHandler(this.MenuItemClicked);
             // 
             // SobelGy_true
             // 
             this.SobelGy_true.Name = "SobelGy_true";
-            this.SobelGy_true.Size = new System.Drawing.Size(152, 22);
+            this.SobelGy_true.Size = new System.Drawing.Size(115, 22);
             this.SobelGy_true.Text = "Gy";
+            this.SobelGy_true.Click += new System.EventHandler(this.MenuItemClicked);
             // 
             // SobelGxGy_true
             // 
             this.SobelGxGy_true.Name = "SobelGxGy_true";
-            this.SobelGxGy_true.Size = new System.Drawing.Size(152, 22);
+            this.SobelGxGy_true.Size = new System.Drawing.Size(115, 22);
             this.SobelGxGy_true.Text = "Gx + Gy";
+            this.SobelGxGy_true.Click += new System.EventHandler(this.MenuItemClicked);
             // 
             // Laplacian_true
             // 
@@ -289,6 +294,7 @@ namespace DIP_START
             this.PointDetection_true.Name = "PointDetection_true";
             this.PointDetection_true.Size = new System.Drawing.Size(162, 22);
             this.PointDetection_true.Text = "Point Detection";
+            this.PointDetection_true.Click += new System.EventHandler(this.MenuItemClicked);
             // 
             // lineDetectionToolStripMenuItem
             // 
@@ -305,12 +311,14 @@ namespace DIP_START
             this.HorizontalLine_true.Name = "HorizontalLine_true";
             this.HorizontalLine_true.Size = new System.Drawing.Size(152, 22);
             this.HorizontalLine_true.Text = "Horizontal";
+            this.HorizontalLine_true.Click += new System.EventHandler(this.MenuItemClicked);
             // 
             // VerticalLine_true
             // 
             this.VerticalLine_true.Name = "VerticalLine_true";
             this.VerticalLine_true.Size = new System.Drawing.Size(152, 22);
             this.VerticalLine_true.Text = "Vertical";
+            this.VerticalLine_true.Click += new System.EventHandler(this.MenuItemClicked);
             // 
             // inclinedToolStripMenuItem
             // 
@@ -326,12 +334,14 @@ namespace DIP_START
             this.Pos45DegreeLine_true.Name = "Pos45DegreeLine_true";
             this.Pos45DegreeLine_true.Size = new System.Drawing.Size(152, 22);
             this.Pos45DegreeLine_true.Text = "+ 45";
+            this.Pos45DegreeLine_true.Click += new System.EventHandler(this.MenuItemClicked);
             // 
             // Negative45DegreeLine_true
             // 
             this.Negative45DegreeLine_true.Name = "Negative45DegreeLine_true";
             this.Negative45DegreeLine_true.Size = new System.Drawing.Size(152, 22);
             this.Negative45DegreeLine_true.Text = "- 45";
+            this.Negative45DegreeLine_true.Click += new System.EventHandler(this.MenuItemClicked);
             // 
             // histogramToolStripMenuItem
             // 
@@ -340,6 +350,12 @@ namespace DIP_START
             this.histogramToolStripMenuItem.Name = "histogramToolStripMenuItem";
             this.histogramToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
             this.histogramToolStripMenuItem.Text = "Histogram";
+            // 
+            // HistogramEqualisation_false
+            // 
+            this.HistogramEqualisation_false.Name = "HistogramEqualisation_false";
+            this.HistogramEqualisation_false.Size = new System.Drawing.Size(197, 22);
+            this.HistogramEqualisation_false.Text = "Histogram Equalisation";
             // 
             // pBox_Original
             // 
@@ -360,7 +376,7 @@ namespace DIP_START
             // thresholdPanel
             // 
             this.thresholdPanel.Controls.Add(this.groupBox1);
-            this.thresholdPanel.Location = new System.Drawing.Point(530, 579);
+            this.thresholdPanel.Location = new System.Drawing.Point(355, 596);
             this.thresholdPanel.Name = "thresholdPanel";
             this.thresholdPanel.Size = new System.Drawing.Size(352, 118);
             this.thresholdPanel.TabIndex = 3;
@@ -400,7 +416,7 @@ namespace DIP_START
             // 
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button1);
-            this.panel1.Location = new System.Drawing.Point(894, 579);
+            this.panel1.Location = new System.Drawing.Point(1100, 613);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(148, 116);
             this.panel1.TabIndex = 4;
@@ -442,17 +458,29 @@ namespace DIP_START
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "History";
             // 
-            // HistogramEqualisation_false
+            // panelHistogramOriginal
             // 
-            this.HistogramEqualisation_false.Name = "HistogramEqualisation_false";
-            this.HistogramEqualisation_false.Size = new System.Drawing.Size(197, 22);
-            this.HistogramEqualisation_false.Text = "Histogram Equalisation";
+            this.panelHistogramOriginal.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.panelHistogramOriginal.Location = new System.Drawing.Point(13, 596);
+            this.panelHistogramOriginal.Name = "panelHistogramOriginal";
+            this.panelHistogramOriginal.Size = new System.Drawing.Size(255, 120);
+            this.panelHistogramOriginal.TabIndex = 7;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel2.Location = new System.Drawing.Point(787, 596);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(255, 121);
+            this.panel2.TabIndex = 8;
             // 
             // MainInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1260, 709);
+            this.ClientSize = new System.Drawing.Size(1260, 739);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panelHistogramOriginal);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.thresholdPanel);
@@ -526,6 +554,8 @@ namespace DIP_START
         private System.Windows.Forms.ListBox listboxHistory;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ToolStripMenuItem HistogramEqualisation_false;
+        private System.Windows.Forms.Panel panelHistogramOriginal;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 
