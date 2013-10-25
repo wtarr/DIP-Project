@@ -37,48 +37,49 @@ namespace DIP_START
             this.Darken_false = new System.Windows.Forms.ToolStripMenuItem();
             this.Inverse_false = new System.Windows.Forms.ToolStripMenuItem();
             this.Binarize_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.filtersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.smoothingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.neighbourhoodAveragingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.NeighbourhoodAveraging_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.NeighbourhoodAveraging_false = new System.Windows.Forms.ToolStripMenuItem();
+            this.Median_false = new System.Windows.Forms.ToolStripMenuItem();
+            this.sharpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.robertsGradientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RobertsGradientWithPseudoColor_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.RobertsGradientDirect_false = new System.Windows.Forms.ToolStripMenuItem();
+            this.RobertsGradientWithThresholding_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.sharpenFiltersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SobelGx_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.SobelGy_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.SobelGxGy_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.Laplacian_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.PointDetection_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.lineDetectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HorizontalLine_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.VerticalLine_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.inclinedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Pos45DegreeLine_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.Negative45DegreeLine_true = new System.Windows.Forms.ToolStripMenuItem();
+            this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pBox_Original = new System.Windows.Forms.PictureBox();
             this.pBox_ProcImg = new System.Windows.Forms.PictureBox();
             this.thresholdPanel = new System.Windows.Forms.Panel();
-            this.main_Trackbar = new System.Windows.Forms.TrackBar();
-            this.filtersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.smoothingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sharpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neighbourhoodAveragingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Median_false = new System.Windows.Forms.ToolStripMenuItem();
-            this.NeighbourhoodAveraging_true = new System.Windows.Forms.ToolStripMenuItem();
-            this.NeighbourhoodAveraging_false = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblThresholdValue = new System.Windows.Forms.Label();
-            this.robertsGradientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sharpenFiltersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.laplacianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pointDetectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lineDetectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pseudoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.directToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.withThresholdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gxGyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.horizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.verticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.inclinedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.main_Trackbar = new System.Windows.Forms.TrackBar();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.listboxHistory = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.HistogramEqualisation_false = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_Original)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_ProcImg)).BeginInit();
             this.thresholdPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.main_Trackbar)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.main_Trackbar)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -158,40 +159,6 @@ namespace DIP_START
             this.Binarize_true.Text = "Binarize";
             this.Binarize_true.Click += new System.EventHandler(this.MenuItemClicked);
             // 
-            // pBox_Original
-            // 
-            this.pBox_Original.Location = new System.Drawing.Point(12, 27);
-            this.pBox_Original.Name = "pBox_Original";
-            this.pBox_Original.Size = new System.Drawing.Size(512, 512);
-            this.pBox_Original.TabIndex = 1;
-            this.pBox_Original.TabStop = false;
-            // 
-            // pBox_ProcImg
-            // 
-            this.pBox_ProcImg.Location = new System.Drawing.Point(530, 27);
-            this.pBox_ProcImg.Name = "pBox_ProcImg";
-            this.pBox_ProcImg.Size = new System.Drawing.Size(512, 512);
-            this.pBox_ProcImg.TabIndex = 2;
-            this.pBox_ProcImg.TabStop = false;
-            // 
-            // thresholdPanel
-            // 
-            this.thresholdPanel.Controls.Add(this.groupBox1);
-            this.thresholdPanel.Location = new System.Drawing.Point(530, 546);
-            this.thresholdPanel.Name = "thresholdPanel";
-            this.thresholdPanel.Size = new System.Drawing.Size(352, 118);
-            this.thresholdPanel.TabIndex = 3;
-            // 
-            // main_Trackbar
-            // 
-            this.main_Trackbar.Location = new System.Drawing.Point(6, 29);
-            this.main_Trackbar.Maximum = 255;
-            this.main_Trackbar.Name = "main_Trackbar";
-            this.main_Trackbar.Size = new System.Drawing.Size(263, 45);
-            this.main_Trackbar.TabIndex = 0;
-            this.main_Trackbar.Value = 127;
-            this.main_Trackbar.Scroll += new System.EventHandler(this.main_Trackbar_Scroll);
-            // 
             // filtersToolStripMenuItem
             // 
             this.filtersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -210,18 +177,6 @@ namespace DIP_START
             this.smoothingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.smoothingToolStripMenuItem.Text = "Smoothing";
             // 
-            // sharpenToolStripMenuItem
-            // 
-            this.sharpenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.robertsGradientToolStripMenuItem,
-            this.sharpenFiltersToolStripMenuItem,
-            this.laplacianToolStripMenuItem,
-            this.pointDetectionToolStripMenuItem,
-            this.lineDetectionToolStripMenuItem});
-            this.sharpenToolStripMenuItem.Name = "sharpenToolStripMenuItem";
-            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.sharpenToolStripMenuItem.Text = "Sharpen";
-            // 
             // neighbourhoodAveragingToolStripMenuItem
             // 
             this.neighbourhoodAveragingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -230,13 +185,6 @@ namespace DIP_START
             this.neighbourhoodAveragingToolStripMenuItem.Name = "neighbourhoodAveragingToolStripMenuItem";
             this.neighbourhoodAveragingToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.neighbourhoodAveragingToolStripMenuItem.Text = "Neighbourhood Averaging";
-            // 
-            // Median_false
-            // 
-            this.Median_false.Name = "Median_false";
-            this.Median_false.Size = new System.Drawing.Size(216, 22);
-            this.Median_false.Text = "Median";
-            this.Median_false.Click += new System.EventHandler(this.MenuItemClicked);
             // 
             // NeighbourhoodAveraging_true
             // 
@@ -251,6 +199,171 @@ namespace DIP_START
             this.NeighbourhoodAveraging_false.Size = new System.Drawing.Size(190, 22);
             this.NeighbourhoodAveraging_false.Text = "Without Thresholding";
             this.NeighbourhoodAveraging_false.Click += new System.EventHandler(this.MenuItemClicked);
+            // 
+            // Median_false
+            // 
+            this.Median_false.Name = "Median_false";
+            this.Median_false.Size = new System.Drawing.Size(216, 22);
+            this.Median_false.Text = "Median";
+            this.Median_false.Click += new System.EventHandler(this.MenuItemClicked);
+            // 
+            // sharpenToolStripMenuItem
+            // 
+            this.sharpenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.robertsGradientToolStripMenuItem,
+            this.sharpenFiltersToolStripMenuItem,
+            this.Laplacian_true,
+            this.PointDetection_true,
+            this.lineDetectionToolStripMenuItem});
+            this.sharpenToolStripMenuItem.Name = "sharpenToolStripMenuItem";
+            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sharpenToolStripMenuItem.Text = "Sharpen";
+            // 
+            // robertsGradientToolStripMenuItem
+            // 
+            this.robertsGradientToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RobertsGradientWithPseudoColor_true,
+            this.RobertsGradientDirect_false,
+            this.RobertsGradientWithThresholding_true});
+            this.robertsGradientToolStripMenuItem.Name = "robertsGradientToolStripMenuItem";
+            this.robertsGradientToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.robertsGradientToolStripMenuItem.Text = "Roberts Gradient";
+            // 
+            // RobertsGradientWithPseudoColor_true
+            // 
+            this.RobertsGradientWithPseudoColor_true.Name = "RobertsGradientWithPseudoColor_true";
+            this.RobertsGradientWithPseudoColor_true.Size = new System.Drawing.Size(155, 22);
+            this.RobertsGradientWithPseudoColor_true.Text = "Pseudo";
+            this.RobertsGradientWithPseudoColor_true.Click += new System.EventHandler(this.MenuItemClicked);
+            // 
+            // RobertsGradientDirect_false
+            // 
+            this.RobertsGradientDirect_false.Name = "RobertsGradientDirect_false";
+            this.RobertsGradientDirect_false.Size = new System.Drawing.Size(155, 22);
+            this.RobertsGradientDirect_false.Text = "Direct";
+            this.RobertsGradientDirect_false.Click += new System.EventHandler(this.MenuItemClicked);
+            // 
+            // RobertsGradientWithThresholding_true
+            // 
+            this.RobertsGradientWithThresholding_true.Name = "RobertsGradientWithThresholding_true";
+            this.RobertsGradientWithThresholding_true.Size = new System.Drawing.Size(155, 22);
+            this.RobertsGradientWithThresholding_true.Text = "With Threshold";
+            this.RobertsGradientWithThresholding_true.Click += new System.EventHandler(this.MenuItemClicked);
+            // 
+            // sharpenFiltersToolStripMenuItem
+            // 
+            this.sharpenFiltersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SobelGx_true,
+            this.SobelGy_true,
+            this.SobelGxGy_true});
+            this.sharpenFiltersToolStripMenuItem.Name = "sharpenFiltersToolStripMenuItem";
+            this.sharpenFiltersToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.sharpenFiltersToolStripMenuItem.Text = "Sobel Filters";
+            // 
+            // SobelGx_true
+            // 
+            this.SobelGx_true.Name = "SobelGx_true";
+            this.SobelGx_true.Size = new System.Drawing.Size(152, 22);
+            this.SobelGx_true.Text = "Gx";
+            // 
+            // SobelGy_true
+            // 
+            this.SobelGy_true.Name = "SobelGy_true";
+            this.SobelGy_true.Size = new System.Drawing.Size(152, 22);
+            this.SobelGy_true.Text = "Gy";
+            // 
+            // SobelGxGy_true
+            // 
+            this.SobelGxGy_true.Name = "SobelGxGy_true";
+            this.SobelGxGy_true.Size = new System.Drawing.Size(152, 22);
+            this.SobelGxGy_true.Text = "Gx + Gy";
+            // 
+            // Laplacian_true
+            // 
+            this.Laplacian_true.Name = "Laplacian_true";
+            this.Laplacian_true.Size = new System.Drawing.Size(162, 22);
+            this.Laplacian_true.Text = "Laplacian";
+            // 
+            // PointDetection_true
+            // 
+            this.PointDetection_true.Name = "PointDetection_true";
+            this.PointDetection_true.Size = new System.Drawing.Size(162, 22);
+            this.PointDetection_true.Text = "Point Detection";
+            // 
+            // lineDetectionToolStripMenuItem
+            // 
+            this.lineDetectionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.HorizontalLine_true,
+            this.VerticalLine_true,
+            this.inclinedToolStripMenuItem});
+            this.lineDetectionToolStripMenuItem.Name = "lineDetectionToolStripMenuItem";
+            this.lineDetectionToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.lineDetectionToolStripMenuItem.Text = "Line Detection";
+            // 
+            // HorizontalLine_true
+            // 
+            this.HorizontalLine_true.Name = "HorizontalLine_true";
+            this.HorizontalLine_true.Size = new System.Drawing.Size(152, 22);
+            this.HorizontalLine_true.Text = "Horizontal";
+            // 
+            // VerticalLine_true
+            // 
+            this.VerticalLine_true.Name = "VerticalLine_true";
+            this.VerticalLine_true.Size = new System.Drawing.Size(152, 22);
+            this.VerticalLine_true.Text = "Vertical";
+            // 
+            // inclinedToolStripMenuItem
+            // 
+            this.inclinedToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Pos45DegreeLine_true,
+            this.Negative45DegreeLine_true});
+            this.inclinedToolStripMenuItem.Name = "inclinedToolStripMenuItem";
+            this.inclinedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.inclinedToolStripMenuItem.Text = "Inclined";
+            // 
+            // Pos45DegreeLine_true
+            // 
+            this.Pos45DegreeLine_true.Name = "Pos45DegreeLine_true";
+            this.Pos45DegreeLine_true.Size = new System.Drawing.Size(152, 22);
+            this.Pos45DegreeLine_true.Text = "+ 45";
+            // 
+            // Negative45DegreeLine_true
+            // 
+            this.Negative45DegreeLine_true.Name = "Negative45DegreeLine_true";
+            this.Negative45DegreeLine_true.Size = new System.Drawing.Size(152, 22);
+            this.Negative45DegreeLine_true.Text = "- 45";
+            // 
+            // histogramToolStripMenuItem
+            // 
+            this.histogramToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.HistogramEqualisation_false});
+            this.histogramToolStripMenuItem.Name = "histogramToolStripMenuItem";
+            this.histogramToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
+            this.histogramToolStripMenuItem.Text = "Histogram";
+            // 
+            // pBox_Original
+            // 
+            this.pBox_Original.Location = new System.Drawing.Point(12, 61);
+            this.pBox_Original.Name = "pBox_Original";
+            this.pBox_Original.Size = new System.Drawing.Size(512, 512);
+            this.pBox_Original.TabIndex = 1;
+            this.pBox_Original.TabStop = false;
+            // 
+            // pBox_ProcImg
+            // 
+            this.pBox_ProcImg.Location = new System.Drawing.Point(530, 61);
+            this.pBox_ProcImg.Name = "pBox_ProcImg";
+            this.pBox_ProcImg.Size = new System.Drawing.Size(512, 512);
+            this.pBox_ProcImg.TabIndex = 2;
+            this.pBox_ProcImg.TabStop = false;
+            // 
+            // thresholdPanel
+            // 
+            this.thresholdPanel.Controls.Add(this.groupBox1);
+            this.thresholdPanel.Location = new System.Drawing.Point(530, 579);
+            this.thresholdPanel.Name = "thresholdPanel";
+            this.thresholdPanel.Size = new System.Drawing.Size(352, 118);
+            this.thresholdPanel.TabIndex = 3;
             // 
             // groupBox1
             // 
@@ -272,140 +385,25 @@ namespace DIP_START
             this.lblThresholdValue.TabIndex = 1;
             this.lblThresholdValue.Text = "127";
             // 
-            // robertsGradientToolStripMenuItem
+            // main_Trackbar
             // 
-            this.robertsGradientToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pseudoToolStripMenuItem,
-            this.directToolStripMenuItem,
-            this.withThresholdToolStripMenuItem});
-            this.robertsGradientToolStripMenuItem.Name = "robertsGradientToolStripMenuItem";
-            this.robertsGradientToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.robertsGradientToolStripMenuItem.Text = "Roberts Gradient";
-            // 
-            // sharpenFiltersToolStripMenuItem
-            // 
-            this.sharpenFiltersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gxToolStripMenuItem,
-            this.gyToolStripMenuItem,
-            this.gxGyToolStripMenuItem});
-            this.sharpenFiltersToolStripMenuItem.Name = "sharpenFiltersToolStripMenuItem";
-            this.sharpenFiltersToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.sharpenFiltersToolStripMenuItem.Text = "Sobel Filters";
-            // 
-            // laplacianToolStripMenuItem
-            // 
-            this.laplacianToolStripMenuItem.Name = "laplacianToolStripMenuItem";
-            this.laplacianToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.laplacianToolStripMenuItem.Text = "Laplacian";
-            // 
-            // pointDetectionToolStripMenuItem
-            // 
-            this.pointDetectionToolStripMenuItem.Name = "pointDetectionToolStripMenuItem";
-            this.pointDetectionToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.pointDetectionToolStripMenuItem.Text = "Point Detection";
-            // 
-            // lineDetectionToolStripMenuItem
-            // 
-            this.lineDetectionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.horizontalToolStripMenuItem,
-            this.verticalToolStripMenuItem,
-            this.inclinedToolStripMenuItem});
-            this.lineDetectionToolStripMenuItem.Name = "lineDetectionToolStripMenuItem";
-            this.lineDetectionToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.lineDetectionToolStripMenuItem.Text = "Line Detection";
-            // 
-            // pseudoToolStripMenuItem
-            // 
-            this.pseudoToolStripMenuItem.Name = "pseudoToolStripMenuItem";
-            this.pseudoToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.pseudoToolStripMenuItem.Text = "Pseudo";
-            // 
-            // directToolStripMenuItem
-            // 
-            this.directToolStripMenuItem.Name = "directToolStripMenuItem";
-            this.directToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.directToolStripMenuItem.Text = "Direct";
-            // 
-            // withThresholdToolStripMenuItem
-            // 
-            this.withThresholdToolStripMenuItem.Name = "withThresholdToolStripMenuItem";
-            this.withThresholdToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.withThresholdToolStripMenuItem.Text = "With Threshold";
-            // 
-            // gxToolStripMenuItem
-            // 
-            this.gxToolStripMenuItem.Name = "gxToolStripMenuItem";
-            this.gxToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.gxToolStripMenuItem.Text = "Gx";
-            // 
-            // gyToolStripMenuItem
-            // 
-            this.gyToolStripMenuItem.Name = "gyToolStripMenuItem";
-            this.gyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.gyToolStripMenuItem.Text = "Gy";
-            // 
-            // gxGyToolStripMenuItem
-            // 
-            this.gxGyToolStripMenuItem.Name = "gxGyToolStripMenuItem";
-            this.gxGyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.gxGyToolStripMenuItem.Text = "Gx + Gy";
-            // 
-            // horizontalToolStripMenuItem
-            // 
-            this.horizontalToolStripMenuItem.Name = "horizontalToolStripMenuItem";
-            this.horizontalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.horizontalToolStripMenuItem.Text = "Horizontal";
-            // 
-            // verticalToolStripMenuItem
-            // 
-            this.verticalToolStripMenuItem.Name = "verticalToolStripMenuItem";
-            this.verticalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.verticalToolStripMenuItem.Text = "Vertical";
-            // 
-            // inclinedToolStripMenuItem
-            // 
-            this.inclinedToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem3});
-            this.inclinedToolStripMenuItem.Name = "inclinedToolStripMenuItem";
-            this.inclinedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.inclinedToolStripMenuItem.Text = "Inclined";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem2.Text = "+ 45";
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem3.Text = "- 45";
-            // 
-            // histogramToolStripMenuItem
-            // 
-            this.histogramToolStripMenuItem.Name = "histogramToolStripMenuItem";
-            this.histogramToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
-            this.histogramToolStripMenuItem.Text = "Histogram";
+            this.main_Trackbar.Location = new System.Drawing.Point(6, 29);
+            this.main_Trackbar.Maximum = 255;
+            this.main_Trackbar.Name = "main_Trackbar";
+            this.main_Trackbar.Size = new System.Drawing.Size(263, 45);
+            this.main_Trackbar.TabIndex = 0;
+            this.main_Trackbar.Value = 127;
+            this.main_Trackbar.Scroll += new System.EventHandler(this.main_Trackbar_Scroll);
+            this.main_Trackbar.ValueChanged += new System.EventHandler(this.main_Trackbar_ValueChanged);
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button1);
-            this.panel1.Location = new System.Drawing.Point(893, 547);
+            this.panel1.Location = new System.Drawing.Point(894, 579);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(148, 116);
             this.panel1.TabIndex = 4;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(34, 16);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Accept";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -416,24 +414,39 @@ namespace DIP_START
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // listBox1
+            // button1
             // 
-            this.listBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(6, 19);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(176, 485);
-            this.listBox1.TabIndex = 5;
+            this.button1.Location = new System.Drawing.Point(34, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Accept";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // listboxHistory
+            // 
+            this.listboxHistory.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.listboxHistory.FormattingEnabled = true;
+            this.listboxHistory.Location = new System.Drawing.Point(6, 19);
+            this.listboxHistory.Name = "listboxHistory";
+            this.listboxHistory.Size = new System.Drawing.Size(176, 485);
+            this.listboxHistory.TabIndex = 5;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.listBox1);
-            this.groupBox2.Location = new System.Drawing.Point(1060, 27);
+            this.groupBox2.Controls.Add(this.listboxHistory);
+            this.groupBox2.Location = new System.Drawing.Point(1060, 61);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(188, 512);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.groupBox2.Text = "History";
+            // 
+            // HistogramEqualisation_false
+            // 
+            this.HistogramEqualisation_false.Name = "HistogramEqualisation_false";
+            this.HistogramEqualisation_false.Size = new System.Drawing.Size(197, 22);
+            this.HistogramEqualisation_false.Text = "Histogram Equalisation";
             // 
             // MainInterface
             // 
@@ -455,9 +468,9 @@ namespace DIP_START
             ((System.ComponentModel.ISupportInitialize)(this.pBox_Original)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_ProcImg)).EndInit();
             this.thresholdPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.main_Trackbar)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.main_Trackbar)).EndInit();
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -491,27 +504,28 @@ namespace DIP_START
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblThresholdValue;
         private System.Windows.Forms.ToolStripMenuItem robertsGradientToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pseudoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem directToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem withThresholdToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RobertsGradientWithPseudoColor_true;
+        private System.Windows.Forms.ToolStripMenuItem RobertsGradientDirect_false;
+        private System.Windows.Forms.ToolStripMenuItem RobertsGradientWithThresholding_true;
         private System.Windows.Forms.ToolStripMenuItem sharpenFiltersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gxToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gxGyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem laplacianToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pointDetectionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SobelGx_true;
+        private System.Windows.Forms.ToolStripMenuItem SobelGy_true;
+        private System.Windows.Forms.ToolStripMenuItem SobelGxGy_true;
+        private System.Windows.Forms.ToolStripMenuItem Laplacian_true;
+        private System.Windows.Forms.ToolStripMenuItem PointDetection_true;
         private System.Windows.Forms.ToolStripMenuItem lineDetectionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem horizontalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem verticalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem HorizontalLine_true;
+        private System.Windows.Forms.ToolStripMenuItem VerticalLine_true;
         private System.Windows.Forms.ToolStripMenuItem inclinedToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem Pos45DegreeLine_true;
+        private System.Windows.Forms.ToolStripMenuItem Negative45DegreeLine_true;
         private System.Windows.Forms.ToolStripMenuItem histogramToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listboxHistory;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ToolStripMenuItem HistogramEqualisation_false;
     }
 }
 

@@ -145,6 +145,10 @@ namespace DIP_Project
             return procImage;
         }
 
+        // -----------------------------------------
+        // -------------- Binarize------------------
+        // -----------------------------------------
+
         public Bitmap Binarize(Bitmap original)
         {
             int width = original.Width;
@@ -191,8 +195,14 @@ namespace DIP_Project
             return procImage;
         }
 
+        // -----------------------------------------
+        // ------- Neighbourhood Averaging----------
+        // -----------------------------------------
+
         public Bitmap NeighbourhoodAveraging(Bitmap original)
         {
+            // One method will serve Averaging with and Without thresholding
+
             int width = original.Width - 2;
             int height = original.Height - 2;
 
@@ -253,6 +263,10 @@ namespace DIP_Project
 
             return procImage;
         }
+
+        // -----------------------------------------
+        // --------- Median Filtering---------------
+        // -----------------------------------------
 
         public Bitmap Median(Bitmap original)
         {
@@ -318,6 +332,136 @@ namespace DIP_Project
             return procImage;
         }
 
+        // -----------------------------------------
+        // --------- Roberts Gradient --------------
+        // ----------With and Without --------------
+        // ----------Thresholding-------------------
+        // -----------------------------------------
+
+        public Bitmap RobertsGradient(Bitmap original)
+        {
+            const int borderAllowance = 1;
+
+            int width = original.Width - borderAllowance;
+            int height = original.Height - borderAllowance;
+
+            Rectangle r2 = new Rectangle(0, 0, width, height);
+
+            Bitmap procImage = original.Clone(r2, PixelFormat.Format8bppIndexed);
+
+
+            BitmapData origData = original.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadOnly, PixelFormat.Format8bppIndexed);
+            BitmapData procData = procImage.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
+
+            int strideOrig = origData.Stride;
+
+            IntPtr origScan0 = origData.Scan0;
+            var procScan0 = procData.Scan0;
+
+            List<Byte> byteMe = new List<byte>();
+
+            unsafe
+            {
+                byte* o = (byte*)(void*)origScan0;
+                byte* p = (byte*)(void*)procScan0;
+
+
+                for (int y = 0; y < height; ++y)
+                {
+                    // Ensure on correct row
+                    p = (byte*)(void*)procScan0 + (y * strideOrig);
+                    o = (byte*)(void*)origScan0 + (y * strideOrig);
+
+                    for (int x = 0; x < width; ++x)
+                    {
+
+                        var a = *o;
+                        var b = *(o + 1);
+
+                        var c = *(o + strideOrig);
+                        var d = *(o + strideOrig + 1);
+
+                        var result = Math.Abs(a - b) + Math.Abs(c - d);
+
+                        if (result >= MainInterface.ThresholdValue && MainInterface.ThresholdValue != 255)
+                            *p = (byte)result;
+                        // White or Black
+                        ++p;
+                        ++o;
+
+                    }
+
+                }
+
+            }
+
+            original.UnlockBits(origData);
+            procImage.UnlockBits(procData);
+
+            return procImage;
+        }
+
+        public Bitmap RobertsGradientWithPseudo(Bitmap original)
+        {
+            const int borderAllowance = 1;
+            int width = original.Width - borderAllowance;
+            int height = original.Height - borderAllowance;
+
+            Rectangle r2 = new Rectangle(0, 0, width, height);
+
+            Bitmap procImage = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+
+            using (Graphics g = Graphics.FromImage(procImage))
+            {
+                g.PageUnit = GraphicsUnit.Pixel;
+                g.DrawImage(original, r2);
+            }
+
+            BitmapData origData = original.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadOnly, PixelFormat.Format8bppIndexed);
+
+            int strideOrig = origData.Stride;
+
+            IntPtr origScan0 = origData.Scan0;
+
+            List<Byte> byteMe = new List<byte>();
+
+            unsafe
+            {
+                byte* o = (byte*)(void*)origScan0;
+
+                for (int y = 0; y < height; ++y)
+                {
+                    o = (byte*)(void*)origScan0 + (y * strideOrig);
+
+                    for (int x = 0; x < width; ++x)
+                    {
+
+                        var a = *o;
+                        var b = *(o + 1);
+
+
+                        var c = *(o + strideOrig);
+                        var d = *(o + strideOrig + 1);
+
+                        var result = Math.Abs(a - b) + Math.Abs(c - d);
+
+                        if (result >= MainInterface.ThresholdValue && MainInterface.ThresholdValue != 255)
+                        {
+                            procImage.SetPixel(x, y, Color.Red);
+                        }
+
+                        ++o;
+                    }
+                }
+
+            }
+            original.UnlockBits(origData);
+
+            return procImage;
+        }
+
+
+
         public Bitmap Execute(Process process, Bitmap original)
         {
             switch (process)
@@ -334,6 +478,12 @@ namespace DIP_Project
                     return NeighbourhoodAveraging(original);
                 case Process.Median:
                     return Median(original);
+                case Process.RobertsGradientDirect:
+                case Process.RobertsGradientWithThresholding:
+                    return RobertsGradient(original);
+                case Process.RobertsGradientWithPseudoColor:
+                    return RobertsGradientWithPseudo(original);
+                    
                     
                 default:
                     return null;

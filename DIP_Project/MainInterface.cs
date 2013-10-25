@@ -32,7 +32,7 @@ namespace DIP_START
             ProcImage = null;
             _g = CreateGraphics();
             _imgProcessing = new ImageProcessing();
-            thresholdPanel.Visible = false;
+            thresholdPanel.Enabled = false;
 
         }
 
@@ -81,19 +81,18 @@ namespace DIP_START
         private void MenuItemClicked(object sender, EventArgs e)
         {
             ToolStripMenuItem itemClicked = sender as ToolStripMenuItem;
+            main_Trackbar.Value = thresholdDefault;
 
             if (itemClicked != null)
             {
-                ThresholdValue = thresholdDefault;
+               
 
                 String[] array = itemClicked.Name.Split('_');
                 _currentProcess = (Process)Enum.Parse(typeof (Process), array[0]);
 
-                thresholdPanel.Visible = Boolean.Parse(array[1]);
+                thresholdPanel.Enabled = Boolean.Parse(array[1]);
 
                 ProcImage = _imgProcessing.Execute((Process) _currentProcess, OriginalImage);
-                var r = new Rectangle(535, 50, ProcImage.Width, ProcImage.Height);
-                //_g.DrawImage(proc_image, r);
                 pBox_ProcImg.Image = ProcImage;
             }
         }
@@ -105,6 +104,12 @@ namespace DIP_START
             lblThresholdValue.Text = ThresholdValue.ToString();
             ProcImage = _imgProcessing.Execute(_currentProcess, OriginalImage);
             pBox_ProcImg.Image = ProcImage;
+        }
+
+        private void main_Trackbar_ValueChanged(object sender, System.EventArgs e)
+        {
+            ThresholdValue = main_Trackbar.Value;
+            lblThresholdValue.Text = ThresholdValue.ToString();
         }
 
 
