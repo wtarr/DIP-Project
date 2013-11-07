@@ -75,7 +75,7 @@ namespace DIP_START
             this.listboxHistory = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panelHistogramOriginal = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelHistogramEqualised = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_Original)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_ProcImg)).BeginInit();
@@ -309,14 +309,14 @@ namespace DIP_START
             // HorizontalLine_true
             // 
             this.HorizontalLine_true.Name = "HorizontalLine_true";
-            this.HorizontalLine_true.Size = new System.Drawing.Size(152, 22);
+            this.HorizontalLine_true.Size = new System.Drawing.Size(129, 22);
             this.HorizontalLine_true.Text = "Horizontal";
             this.HorizontalLine_true.Click += new System.EventHandler(this.MenuItemClicked);
             // 
             // VerticalLine_true
             // 
             this.VerticalLine_true.Name = "VerticalLine_true";
-            this.VerticalLine_true.Size = new System.Drawing.Size(152, 22);
+            this.VerticalLine_true.Size = new System.Drawing.Size(129, 22);
             this.VerticalLine_true.Text = "Vertical";
             this.VerticalLine_true.Click += new System.EventHandler(this.MenuItemClicked);
             // 
@@ -326,20 +326,20 @@ namespace DIP_START
             this.Pos45DegreeLine_true,
             this.Negative45DegreeLine_true});
             this.inclinedToolStripMenuItem.Name = "inclinedToolStripMenuItem";
-            this.inclinedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.inclinedToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.inclinedToolStripMenuItem.Text = "Inclined";
             // 
             // Pos45DegreeLine_true
             // 
             this.Pos45DegreeLine_true.Name = "Pos45DegreeLine_true";
-            this.Pos45DegreeLine_true.Size = new System.Drawing.Size(152, 22);
+            this.Pos45DegreeLine_true.Size = new System.Drawing.Size(97, 22);
             this.Pos45DegreeLine_true.Text = "+ 45";
             this.Pos45DegreeLine_true.Click += new System.EventHandler(this.MenuItemClicked);
             // 
             // Negative45DegreeLine_true
             // 
             this.Negative45DegreeLine_true.Name = "Negative45DegreeLine_true";
-            this.Negative45DegreeLine_true.Size = new System.Drawing.Size(152, 22);
+            this.Negative45DegreeLine_true.Size = new System.Drawing.Size(97, 22);
             this.Negative45DegreeLine_true.Text = "- 45";
             this.Negative45DegreeLine_true.Click += new System.EventHandler(this.MenuItemClicked);
             // 
@@ -356,6 +356,7 @@ namespace DIP_START
             this.HistogramEqualisation_false.Name = "HistogramEqualisation_false";
             this.HistogramEqualisation_false.Size = new System.Drawing.Size(197, 22);
             this.HistogramEqualisation_false.Text = "Histogram Equalisation";
+            this.HistogramEqualisation_false.Click += new System.EventHandler(this.MenuItemClicked);
             // 
             // pBox_Original
             // 
@@ -466,20 +467,20 @@ namespace DIP_START
             this.panelHistogramOriginal.Size = new System.Drawing.Size(255, 120);
             this.panelHistogramOriginal.TabIndex = 7;
             // 
-            // panel2
+            // panelHistogramEqualised
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel2.Location = new System.Drawing.Point(787, 596);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(255, 121);
-            this.panel2.TabIndex = 8;
+            this.panelHistogramEqualised.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelHistogramEqualised.Location = new System.Drawing.Point(787, 596);
+            this.panelHistogramEqualised.Name = "panelHistogramEqualised";
+            this.panelHistogramEqualised.Size = new System.Drawing.Size(255, 121);
+            this.panelHistogramEqualised.TabIndex = 8;
             // 
             // MainInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1260, 739);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panelHistogramEqualised);
             this.Controls.Add(this.panelHistogramOriginal);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel1);
@@ -555,7 +556,7 @@ namespace DIP_START
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ToolStripMenuItem HistogramEqualisation_false;
         private System.Windows.Forms.Panel panelHistogramOriginal;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panelHistogramEqualised;
     }
 }
 

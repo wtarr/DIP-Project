@@ -105,6 +105,8 @@ namespace DIP_START
 
                 ProcImage = _imgProcessing.Execute((Process) _currentProcess, OriginalImage, main_Trackbar.Value);
                 pBox_ProcImg.Image = ProcImage;
+                DrawHistogram(ProcImage, panelHistogramEqualised);
+                
             }
         }
        
