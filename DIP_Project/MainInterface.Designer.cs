@@ -76,6 +76,7 @@ namespace DIP_START
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panelHistogramOriginal = new System.Windows.Forms.Panel();
             this.panelHistogramEqualised = new System.Windows.Forms.Panel();
+            this.ContrastStretchDialog = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_Original)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_ProcImg)).BeginInit();
@@ -94,7 +95,8 @@ namespace DIP_START
             this.Inverse_false,
             this.Binarize_true,
             this.filtersToolStripMenuItem,
-            this.histogramToolStripMenuItem});
+            this.histogramToolStripMenuItem,
+            this.ContrastStretchDialog});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1260, 24);
@@ -176,7 +178,7 @@ namespace DIP_START
             this.neighbourhoodAveragingToolStripMenuItem,
             this.Median_false});
             this.smoothingToolStripMenuItem.Name = "smoothingToolStripMenuItem";
-            this.smoothingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.smoothingToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.smoothingToolStripMenuItem.Text = "Smoothing";
             // 
             // neighbourhoodAveragingToolStripMenuItem
@@ -218,7 +220,7 @@ namespace DIP_START
             this.PointDetection_true,
             this.lineDetectionToolStripMenuItem});
             this.sharpenToolStripMenuItem.Name = "sharpenToolStripMenuItem";
-            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.sharpenToolStripMenuItem.Text = "Sharpen";
             // 
             // robertsGradientToolStripMenuItem
@@ -475,6 +477,13 @@ namespace DIP_START
             this.panelHistogramEqualised.Size = new System.Drawing.Size(255, 121);
             this.panelHistogramEqualised.TabIndex = 8;
             // 
+            // ContrastStretchDialog
+            // 
+            this.ContrastStretchDialog.Name = "ContrastStretchDialog";
+            this.ContrastStretchDialog.Size = new System.Drawing.Size(104, 20);
+            this.ContrastStretchDialog.Text = "Contrast Stretch";
+            this.ContrastStretchDialog.Click += new System.EventHandler(this.ContrastStretchDialog_Click);
+            // 
             // MainInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -557,6 +566,7 @@ namespace DIP_START
         private System.Windows.Forms.ToolStripMenuItem HistogramEqualisation_false;
         private System.Windows.Forms.Panel panelHistogramOriginal;
         private System.Windows.Forms.Panel panelHistogramEqualised;
+        private System.Windows.Forms.ToolStripMenuItem ContrastStretchDialog;
     }
 }
 

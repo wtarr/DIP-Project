@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContrastStretch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContrastStretch.Designer.cs">
+      <DependentUpon>ContrastStretch.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainInterface.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,6 +64,9 @@
     <Compile Include="Process.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ContrastStretch.resx">
+      <DependentUpon>ContrastStretch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainInterface.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainInterface.cs</DependentUpon>

@@ -147,6 +147,12 @@ namespace DIP_START
             gf.Dispose();
 
         }
+
+        private void ContrastStretchDialog_Click(object sender, System.EventArgs e)
+        {
+            ContrastStretch cs = new ContrastStretch();
+            cs.ShowDialog();
+        }
         
     }
 
