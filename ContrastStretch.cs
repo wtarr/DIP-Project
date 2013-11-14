@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -19,8 +20,10 @@ namespace DIP_Project
         
         private Point _rect1, _rect2, _oldPoint1, _oldPoint2, _scaledRect1, _scaledRect2;
         private int rectWH = 20;
-        
-        public ContrastStretch()
+        private Bitmap _orig, _proc;
+
+
+        public ContrastStretch(Bitmap orig)
         {
             InitializeComponent();
             //InitializeContrastGraph();
@@ -30,10 +33,13 @@ namespace DIP_Project
             _oldPoint2 = new Point(_rect2.X, _rect2.Y);
             _scaledRect1 = new Point(0, 0);
             _scaledRect2 = new Point(0, 0);
+            _orig = orig;
 
             ReDraw();
             UpdateScaledPoints();
-            
+
+            pictureBox1.Image = orig;
+
         }
 
 
@@ -147,12 +153,84 @@ namespace DIP_Project
                     _oldPoint2.X = _rect2.X;
                     _oldPoint2.Y = _rect2.Y;
                     
+                    
                 }
 
                 UpdateScaledPoints();
+                Remap();
             }
 
             
+        }
+
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Remap()
+        {
+            int width = _orig.Width;
+            int height = _orig.Height;
+
+            _proc = (Bitmap)_orig.Clone();
+
+            BitmapData bmData = _proc.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite,
+                PixelFormat.Format8bppIndexed);
+
+            System.IntPtr Scan0 = bmData.Scan0;
+
+            unsafe
+            {
+                byte* p = (byte*)(void*)Scan0;
+
+                for (var y = 0; y < height; y++)
+                {
+                    for (var x = 0; x < width; x++)
+                    {
+                        var convert = Convert(*p);
+                        *p = convert;
+                        p++;
+                    }
+
+                }
+            }
+
+            _proc.UnlockBits(bmData);
+
+            pictureBox1.Image = _proc;
+            
+        }
+
+        private byte Convert(byte p)
+        {
+            byte newP = 0;
+
+            if (p > 0 && p <= _scaledRect1.X)
+            {
+                var h = _scaledRect1.Y;
+                var l = _scaledRect1.X;
+                newP = (byte)(p*((float)l/h));
+            }
+            else if (p > _scaledRect1.X && p <= _scaledRect2.X)
+            {
+
+                var h = _scaledRect2.Y - _scaledRect1.Y;
+                var l = _scaledRect2.X - _scaledRect1.X;
+
+
+                newP = (byte)(((p -_scaledRect1.X) * ((float)l / h)) + _scaledRect1.Y);
+            }
+            else
+            {
+                var h = 255 - _scaledRect2.Y;
+                var l = 255 - _scaledRect2.X;
+
+                newP = (byte)((((p - _scaledRect2.X)) * ((float)l / h)) + _scaledRect2.Y);
+            }
+
+            return newP;
+
         }
     }
 }
