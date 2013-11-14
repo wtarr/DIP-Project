@@ -208,25 +208,38 @@ namespace DIP_Project
 
             if (p > 0 && p <= _scaledRect1.X)
             {
+                
+                
                 var h = _scaledRect1.Y;
                 var l = _scaledRect1.X;
-                newP = (byte)(p*((float)l/h));
+
+                var q = Math.Atan(h/(float)l);
+
+                newP = (byte)(p / Math.Tan(q));
             }
             else if (p > _scaledRect1.X && p <= _scaledRect2.X)
             {
+                p = (byte)(p - _scaledRect1.X);
 
                 var h = _scaledRect2.Y - _scaledRect1.Y;
                 var l = _scaledRect2.X - _scaledRect1.X;
 
+                var q = Math.Atan(h / (float)l);
 
-                newP = (byte)(((p -_scaledRect1.X) * ((float)l / h)) + _scaledRect1.Y);
+                newP = (byte)((p / Math.Tan(q)) + _scaledRect1.Y);
+                
             }
             else
             {
+                p = (byte)(p - _scaledRect2.X);
+
                 var h = 255 - _scaledRect2.Y;
                 var l = 255 - _scaledRect2.X;
 
-                newP = (byte)((((p - _scaledRect2.X)) * ((float)l / h)) + _scaledRect2.Y);
+                var q = Math.Atan(h / (float)l);
+
+                newP = (byte)((p / Math.Tan(q)) + _scaledRect2.Y);
+                
             }
 
             return newP;
