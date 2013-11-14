@@ -204,7 +204,13 @@ namespace DIP_Project
 
         private byte Convert(byte p)
         {
+            byte[] mapped = new byte[256];
+            
             byte newP = 0;
+
+            var m1 = _scaledRect1.Y / (float)_scaledRect1.X;
+            var m2 = _scaledRect2.Y - _scaledRect1.Y / (float)(_scaledRect2.X - _scaledRect1.X);
+            var m3 = 255 - _scaledRect2.Y / (float)(255 - _scaledRect2.X);
 
             if (p > 0 && p <= _scaledRect1.X)
             {
@@ -216,30 +222,37 @@ namespace DIP_Project
                 var q = Math.Atan(h/(float)l);
 
                 newP = (byte)(p / Math.Tan(q));
+
+                var test = m1 * p;
             }
             else if (p > _scaledRect1.X && p <= _scaledRect2.X)
             {
-                p = (byte)(p - _scaledRect1.X);
+                //p = (byte)(p - _scaledRect1.X);
 
                 var h = _scaledRect2.Y - _scaledRect1.Y;
                 var l = _scaledRect2.X - _scaledRect1.X;
 
                 var q = Math.Atan(h / (float)l);
 
-                newP = (byte)((p / Math.Tan(q)) + _scaledRect1.Y);
+                //newP = (byte)((p / Math.Tan(q)) + _scaledRect1.Y);
+
+                // m = y2 - y1 / x2 - x1
+                // y - y1 = m (x - x1)
+                newP = (byte)( m1 * (p - _scaledRect1.X) + _scaledRect1.Y );
                 
             }
             else
             {
-                p = (byte)(p - _scaledRect2.X);
+                //p = (byte)(p - _scaledRect2.X);
 
                 var h = 255 - _scaledRect2.Y;
                 var l = 255 - _scaledRect2.X;
 
                 var q = Math.Atan(h / (float)l);
 
-                newP = (byte)((p / Math.Tan(q)) + _scaledRect2.Y);
-                
+                //newP = (byte)((p / Math.Tan(q)) + _scaledRect2.Y);
+
+                newP = (byte)(m1 * (p - _scaledRect2.X) + _scaledRect1.Y);
             }
 
             return newP;
