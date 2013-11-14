@@ -8,16 +8,34 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Input;
+using MouseEventArgs = System.Windows.Forms.MouseEventArgs;
+
 
 namespace DIP_Project
 {
     public partial class ContrastStretch : Form
     {
+        
+        private Point _rect1, _rect2, _oldPoint1, _oldPoint2, _scaledRect1, _scaledRect2;
+        private int rectWH = 20;
+        
         public ContrastStretch()
         {
             InitializeComponent();
             //InitializeContrastGraph();
+            _rect1 = new Point(pBox.Width / 4, pBox.Height/4);
+            _rect2 = new Point(3 * (pBox.Width / 4), 3 * (pBox.Height / 4));
+            _oldPoint1 = new Point(_rect1.X, _rect1.Y);
+            _oldPoint2 = new Point(_rect2.X, _rect2.Y);
+            _scaledRect1 = new Point(0, 0);
+            _scaledRect2 = new Point(0, 0);
+
+            ReDraw();
+            UpdateScaledPoints();
+            
         }
+
 
             
 
@@ -28,25 +46,113 @@ namespace DIP_Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-            contrastStretchPanel.Refresh();
-            var w = contrastStretchPanel.Width;
-            var h = contrastStretchPanel.Height;
-                
-            Matrix m = new Matrix();
-                        
-            m.RotateAt(180, new PointF(w / 2f, h / 2f));            
+            
+            
+            
+        }
+
+
+        private void ReDraw()
+        {
+            pBox.Refresh();
+            var w = pBox.Width;
+            var h = pBox.Height;
+
+            //Matrix m = new Matrix();
+
+            //m.RotateAt(180, new PointF(w / 2f, h / 2f));            
 
             Pen mPen = new Pen(Color.Red);
-            var gf = contrastStretchPanel.CreateGraphics();
-            gf.Transform = m;
+
+            var img = new Bitmap(pBox.Width, pBox.Height);
+
+            var gf = Graphics.FromImage(img);
+
+            //gf.Transform = m;
 
 
             // mPen.Color = Color.Blue;
 
-            gf.DrawLine(mPen, 0, 0, 100, 100);
+            gf.DrawLine(mPen, 0, 0, _rect1.X, _rect1.Y);
+            gf.DrawLine(mPen, _rect1.X, _rect1.Y, _rect2.X, _rect2.Y);
+            gf.DrawLine(mPen, _rect2.X, _rect2.Y, img.Width, img.Height);
+
+            mPen.Color = Color.Blue;
+            gf.DrawRectangle(mPen, new Rectangle(_rect1.X - rectWH / 2, _rect1.Y - rectWH / 2, rectWH, rectWH));
+            gf.DrawRectangle(mPen, new Rectangle(_rect2.X - rectWH/2, _rect2.Y - rectWH/2, rectWH, rectWH));
 
             mPen.Dispose();
             gf.Dispose();
+
+            img.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            pBox.Image = img;
+            
+        }
+
+        private void UpdateScaledPoints()
+        {
+            
+            _scaledRect1.X = (int)(((float)_rect1.X / pBox.Width) * 255);
+            _scaledRect1.Y = (int)(((float)_rect1.Y / pBox.Height) * 255);
+            _scaledRect2.X = (int)(((float)_rect2.X / pBox.Width) * 255);
+            _scaledRect2.Y = (int)(((float)_rect2.Y / pBox.Height) * 255);
+
+            txtX1.Text = _scaledRect1.X.ToString();
+            txtY1.Text = _scaledRect1.Y.ToString();
+            txtX2.Text = _scaledRect2.X.ToString();
+            txtY2.Text = _scaledRect2.Y.ToString();
+        }
+
+       
+        private void pBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            //if (e.Button.Equals(MouseButtons.Left))
+            //{
+
+            if (e.Button.Equals(MouseButtons.Left))
+            {
+                
+
+                var yCoord = pBox.Height - e.Y; // because we flipped the image along horiontal
+
+                if (e.X > _rect1.X - rectWH / 2 && e.X < _rect1.X + rectWH / 2 &&
+                    yCoord > _rect1.Y - rectWH / 2 && yCoord < _rect1.Y + rectWH / 2)
+                {
+
+                    // Calculate delta
+                    
+                        _rect1.X += e.X - _oldPoint1.X;
+                        _rect1.Y += yCoord - _oldPoint1.Y;
+
+                        ReDraw();
+
+                        _oldPoint1.X = _rect1.X;
+                        _oldPoint1.Y = _rect1.Y;
+
+                        
+                    
+                }
+
+                if (e.X > _rect2.X - rectWH / 2 && e.X < _rect2.X + rectWH / 2 &&
+                    yCoord > _rect2.Y - rectWH / 2 && yCoord < _rect2.Y + rectWH / 2)
+                {
+
+                    // Calculate delta
+
+                    _rect2.X += e.X - _oldPoint2.X;
+                    _rect2.Y += yCoord - _oldPoint2.Y;
+
+                    ReDraw();
+
+                    _oldPoint2.X = _rect2.X;
+                    _oldPoint2.Y = _rect2.Y;
+                    
+                }
+
+                UpdateScaledPoints();
+            }
+
+            
         }
     }
 }

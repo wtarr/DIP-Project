@@ -62,6 +62,7 @@ namespace DIP_START
             this.Negative45DegreeLine_true = new System.Windows.Forms.ToolStripMenuItem();
             this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HistogramEqualisation_false = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContrastStretchDialog = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pBox_Original = new System.Windows.Forms.PictureBox();
             this.pBox_ProcImg = new System.Windows.Forms.PictureBox();
@@ -74,9 +75,8 @@ namespace DIP_START
             this.button1 = new System.Windows.Forms.Button();
             this.listboxHistory = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panelHistogramOriginal = new System.Windows.Forms.Panel();
-            this.panelHistogramEqualised = new System.Windows.Forms.Panel();
-            this.ContrastStretchDialog = new System.Windows.Forms.ToolStripMenuItem();
+            this.pBoxHistOrig = new System.Windows.Forms.PictureBox();
+            this.pBoxHistProc = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_Original)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_ProcImg)).BeginInit();
@@ -85,6 +85,8 @@ namespace DIP_START
             ((System.ComponentModel.ISupportInitialize)(this.main_Trackbar)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxHistOrig)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxHistProc)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -360,6 +362,13 @@ namespace DIP_START
             this.HistogramEqualisation_false.Text = "Histogram Equalisation";
             this.HistogramEqualisation_false.Click += new System.EventHandler(this.MenuItemClicked);
             // 
+            // ContrastStretchDialog
+            // 
+            this.ContrastStretchDialog.Name = "ContrastStretchDialog";
+            this.ContrastStretchDialog.Size = new System.Drawing.Size(104, 20);
+            this.ContrastStretchDialog.Text = "Contrast Stretch";
+            this.ContrastStretchDialog.Click += new System.EventHandler(this.ContrastStretchDialog_Click);
+            // 
             // pBox_Original
             // 
             this.pBox_Original.Location = new System.Drawing.Point(12, 61);
@@ -461,36 +470,33 @@ namespace DIP_START
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "History";
             // 
-            // panelHistogramOriginal
+            // pBoxHistOrig
             // 
-            this.panelHistogramOriginal.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.panelHistogramOriginal.Location = new System.Drawing.Point(13, 596);
-            this.panelHistogramOriginal.Name = "panelHistogramOriginal";
-            this.panelHistogramOriginal.Size = new System.Drawing.Size(255, 120);
-            this.panelHistogramOriginal.TabIndex = 7;
+            this.pBoxHistOrig.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.pBoxHistOrig.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pBoxHistOrig.Location = new System.Drawing.Point(12, 590);
+            this.pBoxHistOrig.Name = "pBoxHistOrig";
+            this.pBoxHistOrig.Size = new System.Drawing.Size(260, 120);
+            this.pBoxHistOrig.TabIndex = 9;
+            this.pBoxHistOrig.TabStop = false;
             // 
-            // panelHistogramEqualised
+            // pBoxHistProc
             // 
-            this.panelHistogramEqualised.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panelHistogramEqualised.Location = new System.Drawing.Point(787, 596);
-            this.panelHistogramEqualised.Name = "panelHistogramEqualised";
-            this.panelHistogramEqualised.Size = new System.Drawing.Size(255, 121);
-            this.panelHistogramEqualised.TabIndex = 8;
-            // 
-            // ContrastStretchDialog
-            // 
-            this.ContrastStretchDialog.Name = "ContrastStretchDialog";
-            this.ContrastStretchDialog.Size = new System.Drawing.Size(104, 20);
-            this.ContrastStretchDialog.Text = "Contrast Stretch";
-            this.ContrastStretchDialog.Click += new System.EventHandler(this.ContrastStretchDialog_Click);
+            this.pBoxHistProc.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.pBoxHistProc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pBoxHistProc.Location = new System.Drawing.Point(782, 590);
+            this.pBoxHistProc.Name = "pBoxHistProc";
+            this.pBoxHistProc.Size = new System.Drawing.Size(260, 120);
+            this.pBoxHistProc.TabIndex = 10;
+            this.pBoxHistProc.TabStop = false;
             // 
             // MainInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1260, 739);
-            this.Controls.Add(this.panelHistogramEqualised);
-            this.Controls.Add(this.panelHistogramOriginal);
+            this.Controls.Add(this.pBoxHistProc);
+            this.Controls.Add(this.pBoxHistOrig);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.thresholdPanel);
@@ -511,6 +517,8 @@ namespace DIP_START
             ((System.ComponentModel.ISupportInitialize)(this.main_Trackbar)).EndInit();
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxHistOrig)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxHistProc)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -564,9 +572,9 @@ namespace DIP_START
         private System.Windows.Forms.ListBox listboxHistory;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ToolStripMenuItem HistogramEqualisation_false;
-        private System.Windows.Forms.Panel panelHistogramOriginal;
-        private System.Windows.Forms.Panel panelHistogramEqualised;
         private System.Windows.Forms.ToolStripMenuItem ContrastStretchDialog;
+        private System.Windows.Forms.PictureBox pBoxHistOrig;
+        private System.Windows.Forms.PictureBox pBoxHistProc;
     }
 }
 

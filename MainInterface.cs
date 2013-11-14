@@ -76,7 +76,7 @@ namespace DIP_START
             pBox_Original.Image = OriginalImage;
             //Rectangle r = new Rectangle(10, 50, original_image.Width, original_image.Height);
             //g.DrawImage(original_image, r);
-            DrawHistogram(OriginalImage, panelHistogramOriginal);
+            DrawHistogram(OriginalImage, pBoxHistOrig);
         }
 
         //-------------------------------------------------------
@@ -105,7 +105,7 @@ namespace DIP_START
 
                 ProcImage = _imgProcessing.Execute((Process) _currentProcess, OriginalImage, main_Trackbar.Value);
                 pBox_ProcImg.Image = ProcImage;
-                DrawHistogram(ProcImage, panelHistogramEqualised);
+                DrawHistogram(ProcImage, pBoxHistProc);
                 
             }
         }
@@ -126,18 +126,23 @@ namespace DIP_START
         }
 
 
-        private void DrawHistogram(Bitmap img, Panel p)
+        private void DrawHistogram(Bitmap img, PictureBox p)
         {
             p.Refresh();
+
+            var hist = new Bitmap(p.Width, p.Height);
+
+
             int[] res = _imgProcessing.CalculateHistogramBins(img);
             float l = res.Max();
-            Array.Reverse(res);
+            //Array.Reverse(res);
             float scaleFactor = (p.Height - 10) / l;
             Pen mPen = new Pen(Color.Gray);
-            var gf = p.CreateGraphics();
-            Matrix m = new Matrix();
-            m.RotateAt(180, new PointF(p.Width / 2f, p.Height / 2f));
-            gf.Transform = m;
+            //var gf = p.CreateGraphics();
+            var gf = Graphics.FromImage(hist);
+            //Matrix m = new Matrix();
+            //m.RotateAt(180, new PointF(p.Width / 2f, p.Height / 2f));
+            //gf.Transform = m;
             mPen.Color = Color.Blue;
             for (int i = 0; i < res.Length; i++)
             {
@@ -145,6 +150,9 @@ namespace DIP_START
             }
             mPen.Dispose();
             gf.Dispose();
+
+            hist.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            p.Image = hist;
 
         }
 
