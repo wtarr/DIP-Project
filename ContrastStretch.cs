@@ -17,7 +17,7 @@ namespace DIP_Project
 {
     public partial class ContrastStretch : Form
     {
-        
+
         private Point _rect1, _rect2, _oldPoint1, _oldPoint2, _scaledRect1, _scaledRect2;
         private int rectWH = 20;
         private Bitmap _orig, _proc;
@@ -27,7 +27,7 @@ namespace DIP_Project
         {
             InitializeComponent();
             //InitializeContrastGraph();
-            _rect1 = new Point(pBox.Width / 4, pBox.Height/4);
+            _rect1 = new Point(pBox.Width / 4, pBox.Height / 4);
             _rect2 = new Point(3 * (pBox.Width / 4), 3 * (pBox.Height / 4));
             _oldPoint1 = new Point(_rect1.X, _rect1.Y);
             _oldPoint2 = new Point(_rect2.X, _rect2.Y);
@@ -43,18 +43,18 @@ namespace DIP_Project
         }
 
 
-            
+
 
         private void ContrastStretch_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            
-            
+
+
+
         }
 
 
@@ -62,22 +62,13 @@ namespace DIP_Project
         {
             pBox.Refresh();
             var w = pBox.Width;
-            var h = pBox.Height;
-
-            //Matrix m = new Matrix();
-
-            //m.RotateAt(180, new PointF(w / 2f, h / 2f));            
+            var h = pBox.Height;               
 
             Pen mPen = new Pen(Color.Red);
 
             var img = new Bitmap(pBox.Width, pBox.Height);
 
-            var gf = Graphics.FromImage(img);
-
-            //gf.Transform = m;
-
-
-            // mPen.Color = Color.Blue;
+            var gf = Graphics.FromImage(img);           
 
             gf.DrawLine(mPen, 0, 0, _rect1.X, _rect1.Y);
             gf.DrawLine(mPen, _rect1.X, _rect1.Y, _rect2.X, _rect2.Y);
@@ -85,19 +76,19 @@ namespace DIP_Project
 
             mPen.Color = Color.Blue;
             gf.DrawRectangle(mPen, new Rectangle(_rect1.X - rectWH / 2, _rect1.Y - rectWH / 2, rectWH, rectWH));
-            gf.DrawRectangle(mPen, new Rectangle(_rect2.X - rectWH/2, _rect2.Y - rectWH/2, rectWH, rectWH));
+            gf.DrawRectangle(mPen, new Rectangle(_rect2.X - rectWH / 2, _rect2.Y - rectWH / 2, rectWH, rectWH));
 
             mPen.Dispose();
             gf.Dispose();
 
             img.RotateFlip(RotateFlipType.RotateNoneFlipY);
             pBox.Image = img;
-            
+
         }
 
         private void UpdateScaledPoints()
         {
-            
+
             _scaledRect1.X = (int)(((float)_rect1.X / pBox.Width) * 255);
             _scaledRect1.Y = (int)(((float)_rect1.Y / pBox.Height) * 255);
             _scaledRect2.X = (int)(((float)_rect2.X / pBox.Width) * 255);
@@ -109,15 +100,13 @@ namespace DIP_Project
             txtY2.Text = _scaledRect2.Y.ToString();
         }
 
-       
+
         private void pBox_MouseMove(object sender, MouseEventArgs e)
-        {
-            //if (e.Button.Equals(MouseButtons.Left))
-            //{
+        {          
 
             if (e.Button.Equals(MouseButtons.Left))
             {
-                
+
 
                 var yCoord = pBox.Height - e.Y; // because we flipped the image along horiontal
 
@@ -126,17 +115,14 @@ namespace DIP_Project
                 {
 
                     // Calculate delta
-                    
-                        _rect1.X += e.X - _oldPoint1.X;
-                        _rect1.Y += yCoord - _oldPoint1.Y;
 
-                        ReDraw();
+                    _rect1.X += e.X - _oldPoint1.X;
+                    _rect1.Y += yCoord - _oldPoint1.Y;
 
-                        _oldPoint1.X = _rect1.X;
-                        _oldPoint1.Y = _rect1.Y;
+                    ReDraw();
 
-                        
-                    
+                    _oldPoint1.X = _rect1.X;
+                    _oldPoint1.Y = _rect1.Y;
                 }
 
                 if (e.X > _rect2.X - rectWH / 2 && e.X < _rect2.X + rectWH / 2 &&
@@ -152,15 +138,16 @@ namespace DIP_Project
 
                     _oldPoint2.X = _rect2.X;
                     _oldPoint2.Y = _rect2.Y;
-                    
-                    
+
+
                 }
 
                 UpdateScaledPoints();
-                Remap();
+                var newMap = BuildMap();
+                Remap(newMap);
             }
 
-            
+
         }
 
         private void btnApply_Click(object sender, EventArgs e)
@@ -168,7 +155,7 @@ namespace DIP_Project
 
         }
 
-        private void Remap()
+        private void Remap(byte[] map)
         {
             int width = _orig.Width;
             int height = _orig.Height;
@@ -188,8 +175,9 @@ namespace DIP_Project
                 {
                     for (var x = 0; x < width; x++)
                     {
-                        var convert = Convert(*p);
-                        *p = convert;
+                        //var convert = BuildMap(*p);
+                        var newpix = map[*p];
+                        *p = newpix;
                         p++;
                     }
 
@@ -199,64 +187,35 @@ namespace DIP_Project
             _proc.UnlockBits(bmData);
 
             pictureBox1.Image = _proc;
-            
+
         }
 
-        private byte Convert(byte p)
+        private byte[] BuildMap()
         {
             byte[] mapped = new byte[256];
-            
-            byte newP = 0;
 
             var m1 = _scaledRect1.Y / (float)_scaledRect1.X;
-            var m2 = _scaledRect2.Y - _scaledRect1.Y / (float)(_scaledRect2.X - _scaledRect1.X);
-            var m3 = 255 - _scaledRect2.Y / (float)(255 - _scaledRect2.X);
+            var m2 = (_scaledRect2.Y - _scaledRect1.Y) / ((float)(_scaledRect2.X - _scaledRect1.X));
+            var m3 = (255 - _scaledRect2.Y) / ((float)(255 - _scaledRect2.X));
 
-            if (p > 0 && p <= _scaledRect1.X)
+            for (int p = 0; p < 256; p++)
             {
-                
-                
-                var h = _scaledRect1.Y;
-                var l = _scaledRect1.X;
 
-                var q = Math.Atan(h/(float)l);
-
-                newP = (byte)(p / Math.Tan(q));
-
-                var test = m1 * p;
-            }
-            else if (p > _scaledRect1.X && p <= _scaledRect2.X)
-            {
-                //p = (byte)(p - _scaledRect1.X);
-
-                var h = _scaledRect2.Y - _scaledRect1.Y;
-                var l = _scaledRect2.X - _scaledRect1.X;
-
-                var q = Math.Atan(h / (float)l);
-
-                //newP = (byte)((p / Math.Tan(q)) + _scaledRect1.Y);
-
-                // m = y2 - y1 / x2 - x1
-                // y - y1 = m (x - x1)
-                newP = (byte)( m1 * (p - _scaledRect1.X) + _scaledRect1.Y );
-                
-            }
-            else
-            {
-                //p = (byte)(p - _scaledRect2.X);
-
-                var h = 255 - _scaledRect2.Y;
-                var l = 255 - _scaledRect2.X;
-
-                var q = Math.Atan(h / (float)l);
-
-                //newP = (byte)((p / Math.Tan(q)) + _scaledRect2.Y);
-
-                newP = (byte)(m1 * (p - _scaledRect2.X) + _scaledRect1.Y);
+                if (p >= 0 && p <= _scaledRect1.X)
+                {
+                    mapped[p] = (byte)(m1 * p);
+                }
+                else if (p > _scaledRect1.X && p <= _scaledRect2.X)
+                {                                   
+                    mapped[p] = (byte)((m2 * p) - (m2 * _scaledRect1.X) + _scaledRect1.Y);
+                }
+                else
+                {
+                    mapped[p] = (byte)((m3 * p) - (m3 * _scaledRect2.X) + _scaledRect2.Y); 
+                }
             }
 
-            return newP;
-
+            return mapped;
         }
     }
 }
