@@ -24,6 +24,7 @@ namespace DIP_START
         private readonly ImageProcessing _imgProcessing;
         private Process _currentProcess;
         public Bitmap OriginalImage, ProcImage;
+        private int rotation;
         
 
         public MainInterface()
@@ -236,6 +237,41 @@ namespace DIP_START
             pBox_ProcImg.Image = OriginalImage;
 
         }
+
+        private void btnIncreaseRotation_Click(object sender, System.EventArgs e)
+        {
+            RotateImage(1);            
+        }
+
+        private void btnDecreaseRotation_Click(object sender, System.EventArgs e)
+        {
+            RotateImage(-1);
+        }
+
+        private void RotateImage(Int32 increment)
+        {
+            rotation = Int32.Parse(txtRotation.Text);
+            rotation += increment;
+            if (rotation >= 360)
+                rotation = 0;
+            if (rotation < 0)
+                rotation = 359;
+            txtRotation.Text = rotation.ToString();
+            
+            // http://www.codeproject.com/Articles/58815/C-Image-PictureBox-Rotations
+            //Bitmap rot = new Bitmap(OriginalImage.Width, OriginalImage.Height);
+
+           // Graphics g = Graphics.FromImage(rot);
+
+            //g.TranslateTransform(OriginalImage.Width / 2f, OriginalImage.Height / 2f);
+
+            //g.RotateTransform(rotation);
+
+           // pBox_ProcImg.Image = g.DrawImage(
+
+        }
+
+        
     }
 
 }

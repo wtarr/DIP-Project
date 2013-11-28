@@ -64,6 +64,7 @@ namespace DIP_START
             this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HistogramEqualisation_false = new System.Windows.Forms.ToolStripMenuItem();
             this.ContrastStretchDialog = new System.Windows.Forms.ToolStripMenuItem();
+            this.transformToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pBox_Original = new System.Windows.Forms.PictureBox();
             this.pBox_ProcImg = new System.Windows.Forms.PictureBox();
@@ -79,13 +80,13 @@ namespace DIP_START
             this.pBoxHistOrig = new System.Windows.Forms.PictureBox();
             this.pBoxHistProc = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.zoomTrackbar = new System.Windows.Forms.TrackBar();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.transformToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnIncreaseRotation = new System.Windows.Forms.Button();
+            this.txtRotation = new System.Windows.Forms.TextBox();
+            this.btnDecreaseRotation = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_Original)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_ProcImg)).BeginInit();
@@ -97,9 +98,10 @@ namespace DIP_START
             ((System.ComponentModel.ISupportInitialize)(this.pBoxHistOrig)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxHistProc)).BeginInit();
             this.panel2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zoomTrackbar)).BeginInit();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -383,9 +385,16 @@ namespace DIP_START
             this.ContrastStretchDialog.Text = "Contrast Stretch";
             this.ContrastStretchDialog.Click += new System.EventHandler(this.ContrastStretchDialog_Click);
             // 
+            // transformToolStripMenuItem
+            // 
+            this.transformToolStripMenuItem.Name = "transformToolStripMenuItem";
+            this.transformToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
+            this.transformToolStripMenuItem.Text = "Transform";
+            this.transformToolStripMenuItem.Click += new System.EventHandler(this.transformToolStripMenuItem_Click);
+            // 
             // pBox_Original
             // 
-            this.pBox_Original.Location = new System.Drawing.Point(12, 61);
+            this.pBox_Original.Location = new System.Drawing.Point(12, 63);
             this.pBox_Original.Name = "pBox_Original";
             this.pBox_Original.Size = new System.Drawing.Size(512, 512);
             this.pBox_Original.TabIndex = 1;
@@ -393,7 +402,7 @@ namespace DIP_START
             // 
             // pBox_ProcImg
             // 
-            this.pBox_ProcImg.Location = new System.Drawing.Point(530, 61);
+            this.pBox_ProcImg.Location = new System.Drawing.Point(3, 3);
             this.pBox_ProcImg.Name = "pBox_ProcImg";
             this.pBox_ProcImg.Size = new System.Drawing.Size(512, 512);
             this.pBox_ProcImg.TabIndex = 2;
@@ -402,7 +411,7 @@ namespace DIP_START
             // thresholdPanel
             // 
             this.thresholdPanel.Controls.Add(this.groupBox1);
-            this.thresholdPanel.Location = new System.Drawing.Point(355, 596);
+            this.thresholdPanel.Location = new System.Drawing.Point(355, 611);
             this.thresholdPanel.Name = "thresholdPanel";
             this.thresholdPanel.Size = new System.Drawing.Size(352, 118);
             this.thresholdPanel.TabIndex = 3;
@@ -474,15 +483,15 @@ namespace DIP_START
             this.listboxHistory.FormattingEnabled = true;
             this.listboxHistory.Location = new System.Drawing.Point(12, 21);
             this.listboxHistory.Name = "listboxHistory";
-            this.listboxHistory.Size = new System.Drawing.Size(170, 481);
+            this.listboxHistory.Size = new System.Drawing.Size(133, 481);
             this.listboxHistory.TabIndex = 5;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.listboxHistory);
-            this.groupBox2.Location = new System.Drawing.Point(1172, 61);
+            this.groupBox2.Location = new System.Drawing.Point(1209, 61);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(188, 512);
+            this.groupBox2.Size = new System.Drawing.Size(151, 512);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "History";
@@ -491,7 +500,7 @@ namespace DIP_START
             // 
             this.pBoxHistOrig.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.pBoxHistOrig.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pBoxHistOrig.Location = new System.Drawing.Point(12, 590);
+            this.pBoxHistOrig.Location = new System.Drawing.Point(12, 609);
             this.pBoxHistOrig.Name = "pBoxHistOrig";
             this.pBoxHistOrig.Size = new System.Drawing.Size(260, 120);
             this.pBoxHistOrig.TabIndex = 9;
@@ -501,7 +510,7 @@ namespace DIP_START
             // 
             this.pBoxHistProc.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.pBoxHistProc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pBoxHistProc.Location = new System.Drawing.Point(782, 590);
+            this.pBoxHistProc.Location = new System.Drawing.Point(782, 609);
             this.pBoxHistProc.Name = "pBoxHistProc";
             this.pBoxHistProc.Size = new System.Drawing.Size(260, 120);
             this.pBoxHistProc.TabIndex = 10;
@@ -511,36 +520,20 @@ namespace DIP_START
             // 
             this.panel2.Controls.Add(this.groupBox4);
             this.panel2.Controls.Add(this.groupBox3);
-            this.panel2.Location = new System.Drawing.Point(1049, 61);
+            this.panel2.Location = new System.Drawing.Point(1086, 55);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(117, 512);
+            this.panel2.Size = new System.Drawing.Size(117, 552);
             this.panel2.TabIndex = 11;
             // 
-            // button1
+            // groupBox4
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(30, 14);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(40, 50);
-            this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(30, 70);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(40, 20);
-            this.textBox1.TabIndex = 1;
-            // 
-            // button2
-            // 
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(30, 96);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(40, 54);
-            this.button2.TabIndex = 2;
-            this.button2.UseVisualStyleBackColor = true;
+            this.groupBox4.Controls.Add(this.zoomTrackbar);
+            this.groupBox4.Location = new System.Drawing.Point(3, 6);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(111, 320);
+            this.groupBox4.TabIndex = 6;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Zoom";
             // 
             // zoomTrackbar
             // 
@@ -556,45 +549,66 @@ namespace DIP_START
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button1);
-            this.groupBox3.Controls.Add(this.textBox1);
-            this.groupBox3.Controls.Add(this.button2);
-            this.groupBox3.Location = new System.Drawing.Point(3, 329);
+            this.groupBox3.Controls.Add(this.btnIncreaseRotation);
+            this.groupBox3.Controls.Add(this.txtRotation);
+            this.groupBox3.Controls.Add(this.btnDecreaseRotation);
+            this.groupBox3.Location = new System.Drawing.Point(3, 356);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(111, 162);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Rotate";
             // 
-            // groupBox4
+            // btnIncreaseRotation
             // 
-            this.groupBox4.Controls.Add(this.zoomTrackbar);
-            this.groupBox4.Location = new System.Drawing.Point(3, 3);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(111, 320);
-            this.groupBox4.TabIndex = 6;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Zoom";
+            this.btnIncreaseRotation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIncreaseRotation.Image = ((System.Drawing.Image)(resources.GetObject("btnIncreaseRotation.Image")));
+            this.btnIncreaseRotation.Location = new System.Drawing.Point(30, 14);
+            this.btnIncreaseRotation.Name = "btnIncreaseRotation";
+            this.btnIncreaseRotation.Size = new System.Drawing.Size(40, 50);
+            this.btnIncreaseRotation.TabIndex = 0;
+            this.btnIncreaseRotation.UseVisualStyleBackColor = true;
+            this.btnIncreaseRotation.Click += new System.EventHandler(this.btnIncreaseRotation_Click);
             // 
-            // transformToolStripMenuItem
+            // txtRotation
             // 
-            this.transformToolStripMenuItem.Name = "transformToolStripMenuItem";
-            this.transformToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
-            this.transformToolStripMenuItem.Text = "Transform";
-            this.transformToolStripMenuItem.Click += new System.EventHandler(this.transformToolStripMenuItem_Click);
+            this.txtRotation.Location = new System.Drawing.Point(30, 70);
+            this.txtRotation.Name = "txtRotation";
+            this.txtRotation.Size = new System.Drawing.Size(40, 20);
+            this.txtRotation.TabIndex = 1;
+            this.txtRotation.Text = "0";
+            // 
+            // btnDecreaseRotation
+            // 
+            this.btnDecreaseRotation.Image = ((System.Drawing.Image)(resources.GetObject("btnDecreaseRotation.Image")));
+            this.btnDecreaseRotation.Location = new System.Drawing.Point(30, 96);
+            this.btnDecreaseRotation.Name = "btnDecreaseRotation";
+            this.btnDecreaseRotation.Size = new System.Drawing.Size(40, 54);
+            this.btnDecreaseRotation.TabIndex = 2;
+            this.btnDecreaseRotation.UseVisualStyleBackColor = true;
+            this.btnDecreaseRotation.Click += new System.EventHandler(this.btnDecreaseRotation_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Controls.Add(this.pBox_ProcImg);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(533, 61);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(550, 546);
+            this.flowLayoutPanel1.TabIndex = 12;
             // 
             // MainInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1372, 739);
+            this.ClientSize = new System.Drawing.Size(1372, 752);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pBoxHistProc);
             this.Controls.Add(this.pBoxHistOrig);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.thresholdPanel);
-            this.Controls.Add(this.pBox_ProcImg);
             this.Controls.Add(this.pBox_Original);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -615,11 +629,12 @@ namespace DIP_START
             ((System.ComponentModel.ISupportInitialize)(this.pBoxHistOrig)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxHistProc)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zoomTrackbar)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -680,10 +695,11 @@ namespace DIP_START
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TrackBar zoomTrackbar;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnIncreaseRotation;
+        private System.Windows.Forms.TextBox txtRotation;
+        private System.Windows.Forms.Button btnDecreaseRotation;
         private System.Windows.Forms.ToolStripMenuItem transformToolStripMenuItem;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
 
