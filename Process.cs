@@ -21,6 +21,7 @@ namespace DIP_START
         VerticalLine,
         Negative45DegreeLine,
         Pos45DegreeLine,
-        HistogramEqualisation
+        HistogramEqualisation,
+        ContrastStretch
     }
 }

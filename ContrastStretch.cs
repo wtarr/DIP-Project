@@ -20,7 +20,8 @@ namespace DIP_Project
 
         private Point _rect1, _rect2, _oldPoint1, _oldPoint2, _scaledRect1, _scaledRect2;
         private int rectWH = 20;
-        private Bitmap _orig, _proc;
+        private Bitmap _orig;
+        public Bitmap Proc { get; private set; }
 
 
         public ContrastStretch(Bitmap orig)
@@ -42,7 +43,7 @@ namespace DIP_Project
 
         }
 
-
+        
 
 
         private void ContrastStretch_Load(object sender, EventArgs e)
@@ -152,7 +153,7 @@ namespace DIP_Project
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-
+            this.DialogResult = DialogResult.OK;
         }
 
         private void Remap(byte[] map)
@@ -160,9 +161,9 @@ namespace DIP_Project
             int width = _orig.Width;
             int height = _orig.Height;
 
-            _proc = (Bitmap)_orig.Clone();
+            Proc = (Bitmap)_orig.Clone();
 
-            BitmapData bmData = _proc.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite,
+            BitmapData bmData = Proc.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite,
                 PixelFormat.Format8bppIndexed);
 
             System.IntPtr Scan0 = bmData.Scan0;
@@ -184,9 +185,9 @@ namespace DIP_Project
                 }
             }
 
-            _proc.UnlockBits(bmData);
+            Proc.UnlockBits(bmData);
 
-            pictureBox1.Image = _proc;
+            pictureBox1.Image = Proc;
 
         }
 

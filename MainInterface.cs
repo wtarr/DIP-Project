@@ -19,7 +19,7 @@ namespace DIP_START
     public partial class MainInterface : Form
     {
         //public static int ThresholdValue;
-        private const int ThresholdDefault = 127;
+        private const int ThresholdDefault = 127, ThresholdDefaultMaximum = 255;
         private Graphics _g;
         private readonly ImageProcessing _imgProcessing;
         private Process _currentProcess;
@@ -67,6 +67,11 @@ namespace DIP_START
 
         private void openToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
+            LoadBitmapFromFile();
+        }
+
+        private void LoadBitmapFromFile()
+        {
             // show the openFile dialog box            
             Graphics g = this.CreateGraphics();
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -76,7 +81,8 @@ namespace DIP_START
             pBox_Original.Image = OriginalImage;
             //Rectangle r = new Rectangle(10, 50, original_image.Width, original_image.Height);
             //g.DrawImage(original_image, r);
-            DrawHistogram(OriginalImage, pBoxHistOrig);
+            if (OriginalImage != null)
+                DrawHistogram(OriginalImage, pBoxHistOrig);
         }
 
         //-------------------------------------------------------
@@ -94,7 +100,7 @@ namespace DIP_START
             ToolStripMenuItem itemClicked = sender as ToolStripMenuItem;
             main_Trackbar.Value = ThresholdDefault;
 
-            if (itemClicked != null)
+            if (OriginalImage != null)
             {
                
 
@@ -105,8 +111,13 @@ namespace DIP_START
 
                 ProcImage = _imgProcessing.Execute((Process) _currentProcess, OriginalImage, main_Trackbar.Value);
                 pBox_ProcImg.Image = ProcImage;
-                DrawHistogram(ProcImage, pBoxHistProc);
+                if (ProcImage != null)
+                    DrawHistogram(ProcImage, pBoxHistProc);
                 
+            }
+            else
+            {
+                MessageBox.Show("No image loaded");
             }
         }
        
@@ -159,9 +170,72 @@ namespace DIP_START
         private void ContrastStretchDialog_Click(object sender, System.EventArgs e)
         {
             ContrastStretch cs = new ContrastStretch(OriginalImage);
-            cs.ShowDialog();
+            _currentProcess = Process.ContrastStretch;
+            //cs.ShowDialog();
+
+            if (cs.ShowDialog() == DialogResult.OK && cs.Proc != null)
+            {
+                ProcImage = cs.Proc;
+                pBox_ProcImg.Image = ProcImage;
+                if (ProcImage != null)
+                    DrawHistogram(ProcImage, pBoxHistProc);
+                cs.Close();
+            }
         }
-        
+
+        private void btnAccept_Click(object sender, System.EventArgs e)
+        {
+            if (ProcImage != null)
+            {
+                OriginalImage = ProcImage;
+                pBox_Original.Image = OriginalImage;
+                pBox_ProcImg.Image = new Bitmap(pBox_ProcImg.Width, pBox_ProcImg.Height);
+                ProcImage = null;
+                pBoxHistProc.Image = new Bitmap(pBoxHistProc.Width, pBoxHistProc.Height);
+                DrawHistogram(OriginalImage, pBoxHistOrig);
+                listboxHistory.Items.Add(_currentProcess.ToString());
+                ResetThresholdPanel();
+            }
+
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            if (ProcImage != null)
+            {
+                pBox_ProcImg.Image = new Bitmap(pBox_ProcImg.Width, pBox_ProcImg.Height);
+                ProcImage = null;
+                pBoxHistProc.Image = new Bitmap(pBoxHistProc.Width, pBoxHistProc.Height);
+                ResetThresholdPanel();
+            }
+        }
+
+        private void ResetThresholdPanel()
+        {
+            thresholdPanel.Enabled = false;
+            main_Trackbar.Value = ThresholdDefault;
+            main_Trackbar.Maximum = ThresholdDefaultMaximum;
+        }
+
+        private void transformToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void zoomTrackbar_Scroll(object sender, System.EventArgs e)
+        {
+            pBox_ProcImg.SizeMode = PictureBoxSizeMode.Zoom;
+            
+            float zoomFact = zoomTrackbar.Value/4f;
+            var w = OriginalImage.Width;
+            var h = OriginalImage.Height;
+
+            pBox_ProcImg.Width = Convert.ToInt32(w*zoomFact);
+            pBox_ProcImg.Height = Convert.ToInt32(h*zoomFact);
+
+            pBox_ProcImg.Image = OriginalImage;
+
+        }
     }
 
 }
