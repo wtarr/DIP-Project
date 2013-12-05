@@ -56,9 +56,9 @@
             // pBox
             // 
             this.pBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pBox.Location = new System.Drawing.Point(13, 13);
+            this.pBox.Location = new System.Drawing.Point(57, 39);
             this.pBox.Name = "pBox";
-            this.pBox.Size = new System.Drawing.Size(394, 340);
+            this.pBox.Size = new System.Drawing.Size(329, 314);
             this.pBox.TabIndex = 2;
             this.pBox.TabStop = false;
             this.pBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pBox_MouseMove);
@@ -122,6 +122,8 @@
             // 
             // txtY1
             // 
+            this.txtY1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtY1.Enabled = false;
             this.txtY1.Location = new System.Drawing.Point(704, 359);
             this.txtY1.Name = "txtY1";
             this.txtY1.Size = new System.Drawing.Size(49, 20);
@@ -129,9 +131,9 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(413, 13);
+            this.pictureBox1.Location = new System.Drawing.Point(392, 39);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(340, 340);
+            this.pictureBox1.Size = new System.Drawing.Size(324, 314);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;

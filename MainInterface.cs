@@ -228,28 +228,44 @@ namespace DIP_START
             pBox_ProcImg.SizeMode = PictureBoxSizeMode.Zoom;
             
             float zoomFact = zoomTrackbar.Value/4f;
-            var w = OriginalImage.Width;
-            var h = OriginalImage.Height;
+            var w = pBox_ProcImg.Image.Width;
+            var h = pBox_ProcImg.Image.Height;
 
             pBox_ProcImg.Width = Convert.ToInt32(w*zoomFact);
             pBox_ProcImg.Height = Convert.ToInt32(h*zoomFact);
 
-            pBox_ProcImg.Image = OriginalImage;
+            pBox_ProcImg.Image = ProcImage;
 
         }
 
         private void btnIncreaseRotation_Click(object sender, System.EventArgs e)
         {
-            RotateImage(1);            
+            var r = RotateImage(1);
+            if (r != null)
+                pBox_ProcImg.Image = r;
         }
 
         private void btnDecreaseRotation_Click(object sender, System.EventArgs e)
         {
-            RotateImage(-1);
+            var r = RotateImage(-1);
+            if (r != null)
+                pBox_ProcImg.Image = r;
         }
 
-        private void RotateImage(Int32 increment)
+        private Bitmap RotateImage(Int32 increment) 
         {
+            if (OriginalImage == null)
+            {
+                MessageBox.Show("No image in memory");
+
+                return null;
+            }
+
+            if (ProcImage == null)
+                ProcImage = OriginalImage;
+
+            Image img = ProcImage;
+            
             rotation = Int32.Parse(txtRotation.Text);
             rotation += increment;
             if (rotation >= 360)
@@ -259,16 +275,67 @@ namespace DIP_START
             txtRotation.Text = rotation.ToString();
             
             // http://www.codeproject.com/Articles/58815/C-Image-PictureBox-Rotations
-            //Bitmap rot = new Bitmap(OriginalImage.Width, OriginalImage.Height);
+            Bitmap rot = new Bitmap(ProcImage.Width, ProcImage.Height);
+            rot.SetResolution(ProcImage.HorizontalResolution, ProcImage.VerticalResolution);
+            
+            Graphics g = Graphics.FromImage(rot);
 
-           // Graphics g = Graphics.FromImage(rot);
+            g.TranslateTransform(ProcImage.Width / 2f, ProcImage.Height / 2f);
 
-            //g.TranslateTransform(OriginalImage.Width / 2f, OriginalImage.Height / 2f);
+            g.RotateTransform(rotation);
 
-            //g.RotateTransform(rotation);
+            var scaleFactor = (float)CalculateConstraintScale(rotation, ProcImage.Width, ProcImage.Height);
 
-           // pBox_ProcImg.Image = g.DrawImage(
+            g.ScaleTransform(scaleFactor, scaleFactor);
 
+            g.TranslateTransform(-1 * (ProcImage.Width / 2f), -1 * (ProcImage.Height / 2f));
+
+            g.DrawImage(img, new Point(0, 0));
+
+            return rot;
+        }
+
+
+        /************************************ 
+         * Scale to fit
+         * http://stackoverflow.com/a/6802332 
+         ************************************/
+        private double CalculateConstraintScale(double rotation, int pixelWidth, int pixelHeight)
+        {
+            // Convert angle to radians for the math lib
+            double rotationRadians = rotation * (Math.PI/180);
+
+            // Centre is half the width and height
+            double width = pixelWidth / 2.0;
+            double height = pixelHeight / 2.0;
+            double radius = Math.Sqrt(width * width + height * height);
+
+            // Convert BR corner into polar coordinates
+            double angle = Math.Atan(height / width);
+
+            // Now create the matching BL corner in polar coordinates
+            double angle2 = Math.Atan(height / -width);
+
+            // Apply the rotation to the points
+            angle += rotationRadians;
+            angle2 += rotationRadians;
+
+            // Convert back to rectangular coordinate
+            double x = Math.Abs(radius * Math.Cos(angle));
+            double y = Math.Abs(radius * Math.Sin(angle));
+            double x2 = Math.Abs(radius * Math.Cos(angle2));
+            double y2 = Math.Abs(radius * Math.Sin(angle2));
+
+            // Find the largest extents in X & Y
+            x = Math.Max(x, x2);
+            y = Math.Max(y, y2);
+
+            // Find the largest change (pixel, not ratio)
+            double deltaX = x - width;
+            double deltaY = y - height;
+
+            // Return the ratio that will bring the largest change into the region
+            return (deltaX > deltaY) ? width / x : height / y;
         }
 
         
