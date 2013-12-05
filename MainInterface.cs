@@ -225,16 +225,19 @@ namespace DIP_START
 
         private void zoomTrackbar_Scroll(object sender, System.EventArgs e)
         {
-            pBox_ProcImg.SizeMode = PictureBoxSizeMode.Zoom;
-            
-            float zoomFact = zoomTrackbar.Value/4f;
-            var w = pBox_ProcImg.Image.Width;
-            var h = pBox_ProcImg.Image.Height;
+            if (ProcImage != null)
+            {
+                pBox_ProcImg.SizeMode = PictureBoxSizeMode.Zoom;
 
-            pBox_ProcImg.Width = Convert.ToInt32(w*zoomFact);
-            pBox_ProcImg.Height = Convert.ToInt32(h*zoomFact);
+                float zoomFact = zoomTrackbar.Value/4f;
+                var w = pBox_ProcImg.Image.Width;
+                var h = pBox_ProcImg.Image.Height;
 
-            pBox_ProcImg.Image = ProcImage;
+                pBox_ProcImg.Width = Convert.ToInt32(w*zoomFact);
+                pBox_ProcImg.Height = Convert.ToInt32(h*zoomFact);
+
+                pBox_ProcImg.Image = ProcImage;
+            }
 
         }
 
