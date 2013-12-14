@@ -28,11 +28,13 @@ namespace DIP_START
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainInterface));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.levelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Brighten_false = new System.Windows.Forms.ToolStripMenuItem();
             this.Darken_false = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,7 +66,6 @@ namespace DIP_START
             this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HistogramEqualisation_false = new System.Windows.Forms.ToolStripMenuItem();
             this.ContrastStretchDialog = new System.Windows.Forms.ToolStripMenuItem();
-            this.transformToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pBox_Original = new System.Windows.Forms.PictureBox();
             this.pBox_ProcImg = new System.Windows.Forms.PictureBox();
@@ -81,12 +82,23 @@ namespace DIP_START
             this.pBoxHistProc = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lblZoomFactor = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.zoomTrackbar = new System.Windows.Forms.TrackBar();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnIncreaseRotation = new System.Windows.Forms.Button();
+            this.rb270 = new System.Windows.Forms.RadioButton();
+            this.rb180 = new System.Windows.Forms.RadioButton();
+            this.rb90 = new System.Windows.Forms.RadioButton();
+            this.btnClockwiseRotation = new System.Windows.Forms.Button();
             this.txtRotation = new System.Windows.Forms.TextBox();
-            this.btnDecreaseRotation = new System.Windows.Forms.Button();
+            this.btnAntiClockwiseRotation = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.rotationTimer = new System.Windows.Forms.Timer(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_Original)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_ProcImg)).BeginInit();
@@ -113,11 +125,10 @@ namespace DIP_START
             this.Binarize_true,
             this.filtersToolStripMenuItem,
             this.histogramToolStripMenuItem,
-            this.ContrastStretchDialog,
-            this.transformToolStripMenuItem});
+            this.ContrastStretchDialog});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1372, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1362, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -125,7 +136,8 @@ namespace DIP_START
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
-            this.exitToolStripMenuItem});
+            this.exitToolStripMenuItem,
+            this.saveToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -143,6 +155,12 @@ namespace DIP_START
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click_1);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Text = "Save";
             // 
             // levelsToolStripMenuItem
             // 
@@ -308,6 +326,7 @@ namespace DIP_START
             this.Laplacian_true.Name = "Laplacian_true";
             this.Laplacian_true.Size = new System.Drawing.Size(162, 22);
             this.Laplacian_true.Text = "Laplacian";
+            this.Laplacian_true.Click += new System.EventHandler(this.MenuItemClicked);
             // 
             // PointDetection_true
             // 
@@ -384,13 +403,6 @@ namespace DIP_START
             this.ContrastStretchDialog.Size = new System.Drawing.Size(104, 20);
             this.ContrastStretchDialog.Text = "Contrast Stretch";
             this.ContrastStretchDialog.Click += new System.EventHandler(this.ContrastStretchDialog_Click);
-            // 
-            // transformToolStripMenuItem
-            // 
-            this.transformToolStripMenuItem.Name = "transformToolStripMenuItem";
-            this.transformToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
-            this.transformToolStripMenuItem.Text = "Transform";
-            this.transformToolStripMenuItem.Click += new System.EventHandler(this.transformToolStripMenuItem_Click);
             // 
             // pBox_Original
             // 
@@ -518,6 +530,7 @@ namespace DIP_START
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.groupBox4);
             this.panel2.Controls.Add(this.groupBox3);
             this.panel2.Location = new System.Drawing.Point(1086, 55);
@@ -527,13 +540,33 @@ namespace DIP_START
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.lblZoomFactor);
+            this.groupBox4.Controls.Add(this.label3);
             this.groupBox4.Controls.Add(this.zoomTrackbar);
             this.groupBox4.Location = new System.Drawing.Point(3, 6);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(111, 320);
             this.groupBox4.TabIndex = 6;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Zoom";
+            this.groupBox4.Text = "Zoom (Original)";
+            // 
+            // lblZoomFactor
+            // 
+            this.lblZoomFactor.AutoSize = true;
+            this.lblZoomFactor.Location = new System.Drawing.Point(68, 21);
+            this.lblZoomFactor.Name = "lblZoomFactor";
+            this.lblZoomFactor.Size = new System.Drawing.Size(13, 13);
+            this.lblZoomFactor.TabIndex = 6;
+            this.lblZoomFactor.Text = "1";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(0, 21);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Zoom factor:";
             // 
             // zoomTrackbar
             // 
@@ -549,44 +582,85 @@ namespace DIP_START
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.btnIncreaseRotation);
+            this.groupBox3.Controls.Add(this.rb270);
+            this.groupBox3.Controls.Add(this.rb180);
+            this.groupBox3.Controls.Add(this.rb90);
+            this.groupBox3.Controls.Add(this.btnClockwiseRotation);
             this.groupBox3.Controls.Add(this.txtRotation);
-            this.groupBox3.Controls.Add(this.btnDecreaseRotation);
+            this.groupBox3.Controls.Add(this.btnAntiClockwiseRotation);
             this.groupBox3.Location = new System.Drawing.Point(3, 356);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(111, 162);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Rotate";
+            this.groupBox3.Text = "Rotate (Original)";
             // 
-            // btnIncreaseRotation
+            // rb270
             // 
-            this.btnIncreaseRotation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIncreaseRotation.Image = ((System.Drawing.Image)(resources.GetObject("btnIncreaseRotation.Image")));
-            this.btnIncreaseRotation.Location = new System.Drawing.Point(30, 14);
-            this.btnIncreaseRotation.Name = "btnIncreaseRotation";
-            this.btnIncreaseRotation.Size = new System.Drawing.Size(40, 50);
-            this.btnIncreaseRotation.TabIndex = 0;
-            this.btnIncreaseRotation.UseVisualStyleBackColor = true;
-            this.btnIncreaseRotation.Click += new System.EventHandler(this.btnIncreaseRotation_Click);
+            this.rb270.AutoSize = true;
+            this.rb270.Location = new System.Drawing.Point(68, 98);
+            this.rb270.Name = "rb270";
+            this.rb270.Size = new System.Drawing.Size(43, 17);
+            this.rb270.TabIndex = 5;
+            this.rb270.TabStop = true;
+            this.rb270.Text = "270";
+            this.rb270.UseVisualStyleBackColor = true;
+            // 
+            // rb180
+            // 
+            this.rb180.AutoSize = true;
+            this.rb180.Location = new System.Drawing.Point(68, 75);
+            this.rb180.Name = "rb180";
+            this.rb180.Size = new System.Drawing.Size(43, 17);
+            this.rb180.TabIndex = 4;
+            this.rb180.TabStop = true;
+            this.rb180.Text = "180";
+            this.rb180.UseVisualStyleBackColor = true;
+            // 
+            // rb90
+            // 
+            this.rb90.AutoSize = true;
+            this.rb90.Location = new System.Drawing.Point(68, 52);
+            this.rb90.Name = "rb90";
+            this.rb90.Size = new System.Drawing.Size(37, 17);
+            this.rb90.TabIndex = 3;
+            this.rb90.TabStop = true;
+            this.rb90.Text = "90";
+            this.rb90.UseVisualStyleBackColor = true;
+            // 
+            // btnClockwiseRotation
+            // 
+            this.btnClockwiseRotation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClockwiseRotation.Image = ((System.Drawing.Image)(resources.GetObject("btnClockwiseRotation.Image")));
+            this.btnClockwiseRotation.Location = new System.Drawing.Point(11, 19);
+            this.btnClockwiseRotation.Name = "btnClockwiseRotation";
+            this.btnClockwiseRotation.Size = new System.Drawing.Size(40, 50);
+            this.btnClockwiseRotation.TabIndex = 0;
+            this.btnClockwiseRotation.UseVisualStyleBackColor = true;
+            this.btnClockwiseRotation.Click += new System.EventHandler(this.btnClockwiseRotation_Click);
+            this.btnClockwiseRotation.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnIncreaseRotation_MouseDown);
+            this.btnClockwiseRotation.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnClockwiseRotation_MouseUp);
             // 
             // txtRotation
             // 
-            this.txtRotation.Location = new System.Drawing.Point(30, 70);
+            this.txtRotation.Enabled = false;
+            this.txtRotation.Location = new System.Drawing.Point(11, 75);
             this.txtRotation.Name = "txtRotation";
             this.txtRotation.Size = new System.Drawing.Size(40, 20);
             this.txtRotation.TabIndex = 1;
             this.txtRotation.Text = "0";
             // 
-            // btnDecreaseRotation
+            // btnAntiClockwiseRotation
             // 
-            this.btnDecreaseRotation.Image = ((System.Drawing.Image)(resources.GetObject("btnDecreaseRotation.Image")));
-            this.btnDecreaseRotation.Location = new System.Drawing.Point(30, 96);
-            this.btnDecreaseRotation.Name = "btnDecreaseRotation";
-            this.btnDecreaseRotation.Size = new System.Drawing.Size(40, 54);
-            this.btnDecreaseRotation.TabIndex = 2;
-            this.btnDecreaseRotation.UseVisualStyleBackColor = true;
-            this.btnDecreaseRotation.Click += new System.EventHandler(this.btnDecreaseRotation_Click);
+            this.btnAntiClockwiseRotation.Image = ((System.Drawing.Image)(resources.GetObject("btnAntiClockwiseRotation.Image")));
+            this.btnAntiClockwiseRotation.Location = new System.Drawing.Point(11, 101);
+            this.btnAntiClockwiseRotation.Name = "btnAntiClockwiseRotation";
+            this.btnAntiClockwiseRotation.Size = new System.Drawing.Size(40, 54);
+            this.btnAntiClockwiseRotation.TabIndex = 2;
+            this.btnAntiClockwiseRotation.UseVisualStyleBackColor = true;
+            this.btnAntiClockwiseRotation.Click += new System.EventHandler(this.btnDecreaseRotation_Click);
+            this.btnAntiClockwiseRotation.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnAntiClockwiseRotation_MouseDown);
+            this.btnAntiClockwiseRotation.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnAntiClockwiseRotation_MouseUp);
             // 
             // flowLayoutPanel1
             // 
@@ -597,11 +671,76 @@ namespace DIP_START
             this.flowLayoutPanel1.Size = new System.Drawing.Size(550, 546);
             this.flowLayoutPanel1.TabIndex = 12;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label1.Location = new System.Drawing.Point(786, 613);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 16);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Histogram";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label2.Location = new System.Drawing.Point(14, 613);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 16);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Histogram";
+            // 
+            // rotationTimer
+            // 
+            this.rotationTimer.Tick += new System.EventHandler(this.rotationTimer_Tick);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(17, 44);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(50, 13);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Original";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(533, 44);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 13);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "Processed";
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Enabled = false;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(14, 517);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(94, 31);
+            this.textBox1.TabIndex = 7;
+            this.textBox1.Text = "Auto scale works only for Zoom Factor 1";
+            // 
             // MainInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1372, 752);
+            this.ClientSize = new System.Drawing.Size(1362, 741);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pBoxHistProc);
@@ -629,6 +768,7 @@ namespace DIP_START
             ((System.ComponentModel.ISupportInitialize)(this.pBoxHistOrig)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxHistProc)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zoomTrackbar)).EndInit();
@@ -695,11 +835,22 @@ namespace DIP_START
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TrackBar zoomTrackbar;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button btnIncreaseRotation;
+        private System.Windows.Forms.Button btnClockwiseRotation;
         private System.Windows.Forms.TextBox txtRotation;
-        private System.Windows.Forms.Button btnDecreaseRotation;
-        private System.Windows.Forms.ToolStripMenuItem transformToolStripMenuItem;
+        private System.Windows.Forms.Button btnAntiClockwiseRotation;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.RadioButton rb270;
+        private System.Windows.Forms.RadioButton rb180;
+        private System.Windows.Forms.RadioButton rb90;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblZoomFactor;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Timer rotationTimer;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

@@ -23,9 +23,11 @@ namespace DIP_START
         private Graphics _g;
         private readonly ImageProcessing _imgProcessing;
         private Process _currentProcess;
-        public Bitmap OriginalImage, ProcImage;
+        public Bitmap OriginalImage, ProcImage, ProcRotated;
         private int rotation;
-        
+        private Boolean clkWise = true;
+        private float _zoomFact = 1;
+
 
         public MainInterface()
         {
@@ -103,7 +105,7 @@ namespace DIP_START
 
             if (OriginalImage != null)
             {
-               
+                ResetRotationAndZoomControl();
 
                 String[] array = itemClicked.Name.Split('_');
                 _currentProcess = (Process)Enum.Parse(typeof (Process), array[0]);
@@ -141,20 +143,12 @@ namespace DIP_START
         private void DrawHistogram(Bitmap img, PictureBox p)
         {
             p.Refresh();
-
             var hist = new Bitmap(p.Width, p.Height);
-
-
             int[] res = _imgProcessing.CalculateHistogramBins(img);
             float l = res.Max();
-            //Array.Reverse(res);
             float scaleFactor = (p.Height - 10) / l;
             Pen mPen = new Pen(Color.Gray);
-            //var gf = p.CreateGraphics();
             var gf = Graphics.FromImage(hist);
-            //Matrix m = new Matrix();
-            //m.RotateAt(180, new PointF(p.Width / 2f, p.Height / 2f));
-            //gf.Transform = m;
             mPen.Color = Color.Blue;
             for (int i = 0; i < res.Length; i++)
             {
@@ -162,7 +156,6 @@ namespace DIP_START
             }
             mPen.Dispose();
             gf.Dispose();
-
             hist.RotateFlip(RotateFlipType.RotateNoneFlipY);
             p.Image = hist;
 
@@ -170,12 +163,19 @@ namespace DIP_START
 
         private void ContrastStretchDialog_Click(object sender, System.EventArgs e)
         {
-            ContrastStretch cs = new ContrastStretch(OriginalImage);
-            _currentProcess = Process.ContrastStretch;
-            //cs.ShowDialog();
-
-            if (cs.ShowDialog() == DialogResult.OK && cs.Proc != null)
+            if (OriginalImage == null)
             {
+                MessageBox.Show("No Image in memory");
+                return;
+            }
+
+            ContrastStretch cs;
+
+            _currentProcess = Process.ContrastStretch;
+
+            using (cs = new ContrastStretch(OriginalImage))
+            {
+                if (cs.ShowDialog() != DialogResult.OK || cs.Proc == null) return;
                 ProcImage = cs.Proc;
                 pBox_ProcImg.Image = ProcImage;
                 if (ProcImage != null)
@@ -186,7 +186,7 @@ namespace DIP_START
 
         private void btnAccept_Click(object sender, System.EventArgs e)
         {
-            if (ProcImage != null)
+            if (ProcImage != null && _currentProcess != Process.Zoom && _currentProcess != Process.Rotate)
             {
                 OriginalImage = ProcImage;
                 pBox_Original.Image = OriginalImage;
@@ -196,12 +196,19 @@ namespace DIP_START
                 DrawHistogram(OriginalImage, pBoxHistOrig);
                 listboxHistory.Items.Add(_currentProcess.ToString());
                 ResetThresholdPanel();
+                ResetRotationAndZoomControl();
+            }
+            else
+            {
+                MessageBox.Show("This process cannot be applied, Sorry");
+
             }
 
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            ResetRotationAndZoomControl();
             if (ProcImage != null)
             {
                 pBox_ProcImg.Image = new Bitmap(pBox_ProcImg.Width, pBox_ProcImg.Height);
@@ -218,41 +225,65 @@ namespace DIP_START
             main_Trackbar.Maximum = ThresholdDefaultMaximum;
         }
 
-        private void transformToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-
-        }
-
         private void zoomTrackbar_Scroll(object sender, System.EventArgs e)
         {
-            if (ProcImage != null)
+            if (OriginalImage != null)
             {
+                if (ProcImage == null)
+                {
+                    ProcImage = OriginalImage;
+                    pBox_ProcImg.Image = ProcImage;
+                }
+                _currentProcess = Process.Zoom;
                 pBox_ProcImg.SizeMode = PictureBoxSizeMode.Zoom;
 
-                float zoomFact = zoomTrackbar.Value/4f;
+                _zoomFact = zoomTrackbar.Value/4f;
+                lblZoomFactor.Text = _zoomFact.ToString();
                 var w = pBox_ProcImg.Image.Width;
                 var h = pBox_ProcImg.Image.Height;
 
-                pBox_ProcImg.Width = Convert.ToInt32(w*zoomFact);
-                pBox_ProcImg.Height = Convert.ToInt32(h*zoomFact);
+                pBox_ProcImg.Width = Convert.ToInt32(w*_zoomFact);
+                pBox_ProcImg.Height = Convert.ToInt32(h*_zoomFact);
 
                 pBox_ProcImg.Image = ProcImage;
+            }
+            else
+            {
+                MessageBox.Show("No image in memory");
+                zoomTrackbar.Value = 4;
             }
 
         }
 
-        private void btnIncreaseRotation_Click(object sender, System.EventArgs e)
+        private void RotateClockwise()
         {
             var r = RotateImage(1);
             if (r != null)
-                pBox_ProcImg.Image = r;
+            {
+                ProcImage = r;
+                pBox_ProcImg.Image = ProcImage;
+            }
         }
 
-        private void btnDecreaseRotation_Click(object sender, System.EventArgs e)
+        private void RotateAntiClockwise()
         {
             var r = RotateImage(-1);
             if (r != null)
-                pBox_ProcImg.Image = r;
+            {
+                ProcImage = r;
+                pBox_ProcImg.Image = ProcImage;
+            }
+        }
+
+        
+
+        private void ResetRotationAndZoomControl()
+        {
+            zoomTrackbar.Value = 4;
+            _zoomFact = 1;
+            lblZoomFactor.Text = "1";
+            rotation = 0;
+            txtRotation.Text = "0";
         }
 
         private Bitmap RotateImage(Int32 increment) 
@@ -264,10 +295,12 @@ namespace DIP_START
                 return null;
             }
 
-            if (ProcImage == null)
-                ProcImage = OriginalImage;
+            _currentProcess = Process.Rotate;
 
-            Image img = ProcImage;
+            //if (ProcImage == null)
+            //    ProcImage = OriginalImage;
+
+            Image img = OriginalImage;
             
             rotation = Int32.Parse(txtRotation.Text);
             rotation += increment;
@@ -278,20 +311,20 @@ namespace DIP_START
             txtRotation.Text = rotation.ToString();
             
             // http://www.codeproject.com/Articles/58815/C-Image-PictureBox-Rotations
-            Bitmap rot = new Bitmap(ProcImage.Width, ProcImage.Height);
-            rot.SetResolution(ProcImage.HorizontalResolution, ProcImage.VerticalResolution);
+            Bitmap rot = new Bitmap(OriginalImage.Width, OriginalImage.Height);
+            rot.SetResolution(OriginalImage.HorizontalResolution, OriginalImage.VerticalResolution);
             
             Graphics g = Graphics.FromImage(rot);
 
-            g.TranslateTransform(ProcImage.Width / 2f, ProcImage.Height / 2f);
+            g.TranslateTransform(OriginalImage.Width / 2f, OriginalImage.Height / 2f);
 
             g.RotateTransform(rotation);
 
-            var scaleFactor = (float)CalculateConstraintScale(rotation, ProcImage.Width, ProcImage.Height);
+            float scaleFactor = (_zoomFact == 1) ? (float)CalculateConstraintScale(rotation, OriginalImage.Width, OriginalImage.Height) : 1;
 
             g.ScaleTransform(scaleFactor, scaleFactor);
 
-            g.TranslateTransform(-1 * (ProcImage.Width / 2f), -1 * (ProcImage.Height / 2f));
+            g.TranslateTransform(-1 * (OriginalImage.Width / 2f), -1 * (OriginalImage.Height / 2f));
 
             g.DrawImage(img, new Point(0, 0));
 
@@ -300,7 +333,7 @@ namespace DIP_START
 
 
         /************************************ 
-         * Scale to fit
+         * Scale to fit 
          * http://stackoverflow.com/a/6802332 
          ************************************/
         private double CalculateConstraintScale(double rotation, int pixelWidth, int pixelHeight)
@@ -340,6 +373,65 @@ namespace DIP_START
             // Return the ratio that will bring the largest change into the region
             return (deltaX > deltaY) ? width / x : height / y;
         }
+
+        private void btnIncreaseRotation_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (OriginalImage != null)
+            {
+                rotationTimer.Enabled = true;
+                clkWise = true;
+                rotationTimer.Start();
+            }
+            else
+            {
+                MessageBox.Show("No image in memory");
+            }
+        }
+
+        private void btnClockwiseRotation_MouseUp(object sender, MouseEventArgs e)
+        {
+            rotationTimer.Stop();
+        }
+
+        private void rotationTimer_Tick(object sender, System.EventArgs e)
+        {
+            if (clkWise)
+                RotateClockwise();
+            else
+                RotateAntiClockwise();
+        }
+
+        private void btnClockwiseRotation_Click(object sender, System.EventArgs e)
+        {
+            RotateClockwise();
+        }
+
+        private void btnDecreaseRotation_Click(object sender, System.EventArgs e)
+        {
+            RotateAntiClockwise();
+        }
+
+        private void btnAntiClockwiseRotation_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (OriginalImage != null)
+            {
+                rotationTimer.Enabled = true;
+                clkWise = false;
+                rotationTimer.Start();
+            }
+            else
+            {
+                MessageBox.Show("No image in memory");
+            }
+            
+        }
+
+        private void btnAntiClockwiseRotation_MouseUp(object sender, MouseEventArgs e)
+        {
+            rotationTimer.Stop();
+        }
+
+        
 
         
     }
