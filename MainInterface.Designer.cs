@@ -562,7 +562,7 @@ namespace DIP_START
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 21);
+            this.label3.Location = new System.Drawing.Point(2, 21);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 13);
             this.label3.TabIndex = 5;
