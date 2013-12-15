@@ -81,14 +81,16 @@ namespace DIP_START
             this.pBoxHistOrig = new System.Windows.Forms.PictureBox();
             this.pBoxHistProc = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.lblZoomFactor = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.zoomTrackbar = new System.Windows.Forms.TrackBar();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.rb270 = new System.Windows.Forms.RadioButton();
-            this.rb180 = new System.Windows.Forms.RadioButton();
             this.rb90 = new System.Windows.Forms.RadioButton();
+            this.rb180 = new System.Windows.Forms.RadioButton();
             this.btnClockwiseRotation = new System.Windows.Forms.Button();
             this.txtRotation = new System.Windows.Forms.TextBox();
             this.btnAntiClockwiseRotation = new System.Windows.Forms.Button();
@@ -98,7 +100,7 @@ namespace DIP_START
             this.rotationTimer = new System.Windows.Forms.Timer(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.rb0 = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_Original)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_ProcImg)).BeginInit();
@@ -113,6 +115,7 @@ namespace DIP_START
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zoomTrackbar)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -538,6 +541,19 @@ namespace DIP_START
             this.panel2.Size = new System.Drawing.Size(117, 552);
             this.panel2.TabIndex = 11;
             // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Enabled = false;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(6, 514);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(106, 24);
+            this.textBox1.TabIndex = 7;
+            this.textBox1.Text = "Auto scale works only for Zoom Factor 1 and less";
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.lblZoomFactor);
@@ -582,9 +598,7 @@ namespace DIP_START
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.rb270);
-            this.groupBox3.Controls.Add(this.rb180);
-            this.groupBox3.Controls.Add(this.rb90);
+            this.groupBox3.Controls.Add(this.panel3);
             this.groupBox3.Controls.Add(this.btnClockwiseRotation);
             this.groupBox3.Controls.Add(this.txtRotation);
             this.groupBox3.Controls.Add(this.btnAntiClockwiseRotation);
@@ -595,38 +609,49 @@ namespace DIP_START
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Rotate (Original)";
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.rb0);
+            this.panel3.Controls.Add(this.rb270);
+            this.panel3.Controls.Add(this.rb90);
+            this.panel3.Controls.Add(this.rb180);
+            this.panel3.Location = new System.Drawing.Point(53, 19);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(54, 89);
+            this.panel3.TabIndex = 6;
+            // 
             // rb270
             // 
             this.rb270.AutoSize = true;
-            this.rb270.Location = new System.Drawing.Point(68, 98);
+            this.rb270.Location = new System.Drawing.Point(4, 67);
             this.rb270.Name = "rb270";
             this.rb270.Size = new System.Drawing.Size(43, 17);
             this.rb270.TabIndex = 5;
-            this.rb270.TabStop = true;
             this.rb270.Text = "270";
             this.rb270.UseVisualStyleBackColor = true;
-            // 
-            // rb180
-            // 
-            this.rb180.AutoSize = true;
-            this.rb180.Location = new System.Drawing.Point(68, 75);
-            this.rb180.Name = "rb180";
-            this.rb180.Size = new System.Drawing.Size(43, 17);
-            this.rb180.TabIndex = 4;
-            this.rb180.TabStop = true;
-            this.rb180.Text = "180";
-            this.rb180.UseVisualStyleBackColor = true;
+            this.rb270.CheckedChanged += new System.EventHandler(this.RotationCheckedChanged);
             // 
             // rb90
             // 
             this.rb90.AutoSize = true;
-            this.rb90.Location = new System.Drawing.Point(68, 52);
+            this.rb90.Location = new System.Drawing.Point(4, 27);
             this.rb90.Name = "rb90";
             this.rb90.Size = new System.Drawing.Size(37, 17);
             this.rb90.TabIndex = 3;
-            this.rb90.TabStop = true;
             this.rb90.Text = "90";
             this.rb90.UseVisualStyleBackColor = true;
+            this.rb90.CheckedChanged += new System.EventHandler(this.RotationCheckedChanged);
+            // 
+            // rb180
+            // 
+            this.rb180.AutoSize = true;
+            this.rb180.Location = new System.Drawing.Point(4, 47);
+            this.rb180.Name = "rb180";
+            this.rb180.Size = new System.Drawing.Size(43, 17);
+            this.rb180.TabIndex = 4;
+            this.rb180.Text = "180";
+            this.rb180.UseVisualStyleBackColor = true;
+            this.rb180.CheckedChanged += new System.EventHandler(this.RotationCheckedChanged);
             // 
             // btnClockwiseRotation
             // 
@@ -719,18 +744,18 @@ namespace DIP_START
             this.label5.TabIndex = 16;
             this.label5.Text = "Processed";
             // 
-            // textBox1
+            // rb0
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Enabled = false;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(14, 517);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(94, 31);
-            this.textBox1.TabIndex = 7;
-            this.textBox1.Text = "Auto scale works only for Zoom Factor 1";
+            this.rb0.AutoSize = true;
+            this.rb0.Checked = true;
+            this.rb0.Location = new System.Drawing.Point(4, 8);
+            this.rb0.Name = "rb0";
+            this.rb0.Size = new System.Drawing.Size(31, 17);
+            this.rb0.TabIndex = 6;
+            this.rb0.TabStop = true;
+            this.rb0.Text = "0";
+            this.rb0.UseVisualStyleBackColor = true;
+            this.rb0.CheckedChanged += new System.EventHandler(this.RotationCheckedChanged);
             // 
             // MainInterface
             // 
@@ -774,6 +799,8 @@ namespace DIP_START
             ((System.ComponentModel.ISupportInitialize)(this.zoomTrackbar)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -851,6 +878,8 @@ namespace DIP_START
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.RadioButton rb0;
     }
 }
 

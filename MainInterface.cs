@@ -24,8 +24,8 @@ namespace DIP_START
         private readonly ImageProcessing _imgProcessing;
         private Process _currentProcess;
         public Bitmap OriginalImage, ProcImage, ProcRotated;
-        private int rotation;
-        private Boolean clkWise = true;
+        private int _rotation;
+        private Boolean _clkWise = true;
         private float _zoomFact = 1;
 
 
@@ -39,7 +39,7 @@ namespace DIP_START
             _imgProcessing = new ImageProcessing();
             _imgProcessing.MaxValueChanged += new EventHandler(thesholdMax_Change);
             thresholdPanel.Enabled = false;
-           
+
 
         }
 
@@ -108,22 +108,22 @@ namespace DIP_START
                 ResetRotationAndZoomControl();
 
                 String[] array = itemClicked.Name.Split('_');
-                _currentProcess = (Process)Enum.Parse(typeof (Process), array[0]);
+                _currentProcess = (Process)Enum.Parse(typeof(Process), array[0]);
 
                 thresholdPanel.Enabled = Boolean.Parse(array[1]);
 
-                ProcImage = _imgProcessing.Execute((Process) _currentProcess, OriginalImage, main_Trackbar.Value);
+                ProcImage = _imgProcessing.Execute((Process)_currentProcess, OriginalImage, main_Trackbar.Value);
                 pBox_ProcImg.Image = ProcImage;
                 if (ProcImage != null)
                     DrawHistogram(ProcImage, pBoxHistProc);
-                
+
             }
             else
             {
                 MessageBox.Show("No image loaded");
             }
         }
-       
+
 
         private void main_Trackbar_Scroll(object sender, System.EventArgs e)
         {
@@ -237,13 +237,13 @@ namespace DIP_START
                 _currentProcess = Process.Zoom;
                 pBox_ProcImg.SizeMode = PictureBoxSizeMode.Zoom;
 
-                _zoomFact = zoomTrackbar.Value/4f;
+                _zoomFact = zoomTrackbar.Value / 4f;
                 lblZoomFactor.Text = _zoomFact.ToString();
                 var w = pBox_ProcImg.Image.Width;
                 var h = pBox_ProcImg.Image.Height;
 
-                pBox_ProcImg.Width = Convert.ToInt32(w*_zoomFact);
-                pBox_ProcImg.Height = Convert.ToInt32(h*_zoomFact);
+                pBox_ProcImg.Width = Convert.ToInt32(w * _zoomFact);
+                pBox_ProcImg.Height = Convert.ToInt32(h * _zoomFact);
 
                 pBox_ProcImg.Image = ProcImage;
             }
@@ -257,7 +257,8 @@ namespace DIP_START
 
         private void RotateClockwise()
         {
-            var r = RotateImage(1);
+            ManageRotation(1);
+            var r = RotateImage();
             if (r != null)
             {
                 ProcImage = r;
@@ -267,7 +268,8 @@ namespace DIP_START
 
         private void RotateAntiClockwise()
         {
-            var r = RotateImage(-1);
+            ManageRotation(-1);
+            var r = RotateImage();
             if (r != null)
             {
                 ProcImage = r;
@@ -275,18 +277,18 @@ namespace DIP_START
             }
         }
 
-        
+
 
         private void ResetRotationAndZoomControl()
         {
             zoomTrackbar.Value = 4;
             _zoomFact = 1;
             lblZoomFactor.Text = "1";
-            rotation = 0;
+            _rotation = 0;
             txtRotation.Text = "0";
         }
 
-        private Bitmap RotateImage(Int32 increment) 
+        private Bitmap RotateImage()
         {
             if (OriginalImage == null)
             {
@@ -301,26 +303,20 @@ namespace DIP_START
             //    ProcImage = OriginalImage;
 
             Image img = OriginalImage;
-            
-            rotation = Int32.Parse(txtRotation.Text);
-            rotation += increment;
-            if (rotation >= 360)
-                rotation = 0;
-            if (rotation < 0)
-                rotation = 359;
-            txtRotation.Text = rotation.ToString();
-            
+
             // http://www.codeproject.com/Articles/58815/C-Image-PictureBox-Rotations
             Bitmap rot = new Bitmap(OriginalImage.Width, OriginalImage.Height);
             rot.SetResolution(OriginalImage.HorizontalResolution, OriginalImage.VerticalResolution);
-            
+
             Graphics g = Graphics.FromImage(rot);
 
             g.TranslateTransform(OriginalImage.Width / 2f, OriginalImage.Height / 2f);
 
-            g.RotateTransform(rotation);
+            g.RotateTransform(_rotation);
 
-            float scaleFactor = (_zoomFact == 1) ? (float)CalculateConstraintScale(rotation, OriginalImage.Width, OriginalImage.Height) : 1;
+            float scaleFactor = (_zoomFact <= 1)
+                ? (float)CalculateConstraintScale(_rotation, OriginalImage.Width, OriginalImage.Height)
+                : 1;
 
             g.ScaleTransform(scaleFactor, scaleFactor);
 
@@ -336,10 +332,11 @@ namespace DIP_START
          * Scale to fit 
          * http://stackoverflow.com/a/6802332 
          ************************************/
+
         private double CalculateConstraintScale(double rotation, int pixelWidth, int pixelHeight)
         {
             // Convert angle to radians for the math lib
-            double rotationRadians = rotation * (Math.PI/180);
+            double rotationRadians = rotation * (Math.PI / 180);
 
             // Centre is half the width and height
             double width = pixelWidth / 2.0;
@@ -374,12 +371,23 @@ namespace DIP_START
             return (deltaX > deltaY) ? width / x : height / y;
         }
 
+        private void ManageRotation(int increment)
+        {
+            _rotation = Int32.Parse(txtRotation.Text);
+            _rotation += increment;
+            if (_rotation >= 360)
+                _rotation = 0;
+            if (_rotation < 0)
+                _rotation = 359;
+            txtRotation.Text = _rotation.ToString();
+        }
+
         private void btnIncreaseRotation_MouseDown(object sender, MouseEventArgs e)
         {
             if (OriginalImage != null)
             {
                 rotationTimer.Enabled = true;
-                clkWise = true;
+                _clkWise = true;
                 rotationTimer.Start();
             }
             else
@@ -395,7 +403,7 @@ namespace DIP_START
 
         private void rotationTimer_Tick(object sender, System.EventArgs e)
         {
-            if (clkWise)
+            if (_clkWise)
                 RotateClockwise();
             else
                 RotateAntiClockwise();
@@ -416,14 +424,14 @@ namespace DIP_START
             if (OriginalImage != null)
             {
                 rotationTimer.Enabled = true;
-                clkWise = false;
+                _clkWise = false;
                 rotationTimer.Start();
             }
             else
             {
                 MessageBox.Show("No image in memory");
             }
-            
+
         }
 
         private void btnAntiClockwiseRotation_MouseUp(object sender, MouseEventArgs e)
@@ -431,9 +439,21 @@ namespace DIP_START
             rotationTimer.Stop();
         }
 
-        
+        private void RotationCheckedChanged(object sender, System.EventArgs e)
+        {
+            RadioButton radioButton = sender as RadioButton;
 
-        
+            if (radioButton != null && radioButton.Checked)
+            {
+                var txt = radioButton.Text;
+                _rotation = int.Parse(txt);
+                ProcImage = RotateImage();
+                pBox_ProcImg.Image = ProcImage;
+                txtRotation.Text = _rotation.ToString();
+            }
+        }
+
+
     }
 
 }
