@@ -88,6 +88,7 @@ namespace DIP_START
             this.zoomTrackbar = new System.Windows.Forms.TrackBar();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.rb0 = new System.Windows.Forms.RadioButton();
             this.rb270 = new System.Windows.Forms.RadioButton();
             this.rb90 = new System.Windows.Forms.RadioButton();
             this.rb180 = new System.Windows.Forms.RadioButton();
@@ -100,7 +101,7 @@ namespace DIP_START
             this.rotationTimer = new System.Windows.Forms.Timer(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.rb0 = new System.Windows.Forms.RadioButton();
+            this.GrayPalette_False = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_Original)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_ProcImg)).BeginInit();
@@ -128,7 +129,8 @@ namespace DIP_START
             this.Binarize_true,
             this.filtersToolStripMenuItem,
             this.histogramToolStripMenuItem,
-            this.ContrastStretchDialog});
+            this.ContrastStretchDialog,
+            this.GrayPalette_False});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1362, 24);
@@ -148,21 +150,21 @@ namespace DIP_START
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click_1);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click_1);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // levelsToolStripMenuItem
@@ -217,7 +219,7 @@ namespace DIP_START
             this.neighbourhoodAveragingToolStripMenuItem,
             this.Median_false});
             this.smoothingToolStripMenuItem.Name = "smoothingToolStripMenuItem";
-            this.smoothingToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.smoothingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.smoothingToolStripMenuItem.Text = "Smoothing";
             // 
             // neighbourhoodAveragingToolStripMenuItem
@@ -259,7 +261,7 @@ namespace DIP_START
             this.PointDetection_true,
             this.lineDetectionToolStripMenuItem});
             this.sharpenToolStripMenuItem.Name = "sharpenToolStripMenuItem";
-            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sharpenToolStripMenuItem.Text = "Sharpen";
             // 
             // robertsGradientToolStripMenuItem
@@ -409,6 +411,7 @@ namespace DIP_START
             // 
             // pBox_Original
             // 
+            this.pBox_Original.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pBox_Original.Location = new System.Drawing.Point(12, 63);
             this.pBox_Original.Name = "pBox_Original";
             this.pBox_Original.Size = new System.Drawing.Size(512, 512);
@@ -417,9 +420,11 @@ namespace DIP_START
             // 
             // pBox_ProcImg
             // 
+            this.pBox_ProcImg.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pBox_ProcImg.Location = new System.Drawing.Point(3, 3);
             this.pBox_ProcImg.Name = "pBox_ProcImg";
             this.pBox_ProcImg.Size = new System.Drawing.Size(512, 512);
+            this.pBox_ProcImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pBox_ProcImg.TabIndex = 2;
             this.pBox_ProcImg.TabStop = false;
             // 
@@ -620,6 +625,19 @@ namespace DIP_START
             this.panel3.Size = new System.Drawing.Size(54, 89);
             this.panel3.TabIndex = 6;
             // 
+            // rb0
+            // 
+            this.rb0.AutoSize = true;
+            this.rb0.Checked = true;
+            this.rb0.Location = new System.Drawing.Point(4, 8);
+            this.rb0.Name = "rb0";
+            this.rb0.Size = new System.Drawing.Size(31, 17);
+            this.rb0.TabIndex = 6;
+            this.rb0.TabStop = true;
+            this.rb0.Text = "0";
+            this.rb0.UseVisualStyleBackColor = true;
+            this.rb0.CheckedChanged += new System.EventHandler(this.RotationCheckedChanged);
+            // 
             // rb270
             // 
             this.rb270.AutoSize = true;
@@ -744,18 +762,12 @@ namespace DIP_START
             this.label5.TabIndex = 16;
             this.label5.Text = "Processed";
             // 
-            // rb0
+            // GrayPalette_False
             // 
-            this.rb0.AutoSize = true;
-            this.rb0.Checked = true;
-            this.rb0.Location = new System.Drawing.Point(4, 8);
-            this.rb0.Name = "rb0";
-            this.rb0.Size = new System.Drawing.Size(31, 17);
-            this.rb0.TabIndex = 6;
-            this.rb0.TabStop = true;
-            this.rb0.Text = "0";
-            this.rb0.UseVisualStyleBackColor = true;
-            this.rb0.CheckedChanged += new System.EventHandler(this.RotationCheckedChanged);
+            this.GrayPalette_False.Name = "GrayPalette_False";
+            this.GrayPalette_False.Size = new System.Drawing.Size(82, 20);
+            this.GrayPalette_False.Text = "Gray Palette";
+            this.GrayPalette_False.Click += new System.EventHandler(this.MenuItemClicked);
             // 
             // MainInterface
             // 
@@ -880,6 +892,7 @@ namespace DIP_START
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.RadioButton rb0;
+        private System.Windows.Forms.ToolStripMenuItem GrayPalette_False;
     }
 }
 

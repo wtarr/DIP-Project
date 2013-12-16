@@ -103,8 +103,8 @@ namespace DIP_START
             ToolStripMenuItem itemClicked = sender as ToolStripMenuItem;
             main_Trackbar.Value = ThresholdDefault;
 
-            if (OriginalImage != null)
-            {
+            //if (OriginalImage != null)
+            //{
                 ResetRotationAndZoomControl();
 
                 String[] array = itemClicked.Name.Split('_');
@@ -117,11 +117,11 @@ namespace DIP_START
                 if (ProcImage != null)
                     DrawHistogram(ProcImage, pBoxHistProc);
 
-            }
-            else
-            {
-                MessageBox.Show("No image loaded");
-            }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("No image loaded");
+            //}
         }
 
 

@@ -34,14 +34,14 @@ namespace DIP_Project
         private int _maxValue = 255; // going to be 255 at very least
 
         //public Bitmap original_image, proc_image;
-        private readonly int[] _sobelGx = new[] { -1, -2, -1, 0, 0, 0, 1, 2, 1 };
-        private readonly int[] _sobelGy = new[] { -1, 0, 1, -2, 0, 2, -1, 0, 1 };
-        private readonly int[] _laplacian = new[] { 0, 1, 0, 1, -4, 1, 0, 1, 0 };
-        private readonly int[] _pointDet = new[] { -1, -1, -1, -1, 8, -1, -1, -1, -1 };
-        private readonly int[] _horizontal = new[] { -1, -1, -1, 2, 2, 2, -1, -1, -1 };
-        private readonly int[] _vertical = new[] { -1, 2, -1, -1, 2, -1, -1, 2, -1 };
-        private readonly int[] _pos45 = new[] { -1, -1, 2, -1, 2, -1, 2, -1, -1 };
-        private readonly int[] _neg45 = new[] { 2, -1, -1, -1, 2, -1, -1, -1, 2 };
+        private readonly int[] _sobelGx = { -1, -2, -1, 0, 0, 0, 1, 2, 1 };
+        private readonly int[] _sobelGy = { -1, 0, 1, -2, 0, 2, -1, 0, 1 };
+        private readonly int[] _laplacian = { 0, 1, 0, 1, -4, 1, 0, 1, 0 }; //  lect 3 slide 17
+        private readonly int[] _pointDet = { -1, -1, -1, -1, 8, -1, -1, -1, -1 };
+        private readonly int[] _horizontal = { -1, -1, -1, 2, 2, 2, -1, -1, -1 };
+        private readonly int[] _vertical = { -1, 2, -1, -1, 2, -1, -1, 2, -1 };
+        private readonly int[] _pos45 = { -1, -1, 2, -1, 2, -1, 2, -1, -1 };
+        private readonly int[] _neg45 = { 2, -1, -1, -1, 2, -1, -1, -1, 2 };
 
 
         public ImageProcessing()
@@ -410,29 +410,22 @@ namespace DIP_Project
                 byte* p = (byte*)(void*)procScan0;
 
 
-                for (int y = 0; y < height; ++y)
+                for (int y = 0; y < height; y++)
                 {
-                    // Ensure on correct row
-                    p = (byte*)(void*)procScan0 + (y * strideOrig);
-                    o = (byte*)(void*)origScan0 + (y * strideOrig);
-
-                    for (int x = 0; x < width; ++x)
+                    for (int x = 0; x < width; x++)
                     {
 
-                        var a = *o;
-                        var b = *(o + 1);
-
-                        var c = *(o + strideOrig);
-                        var d = *(o + strideOrig + 1);
+                        var a = o[y * strideOrig + x];
+                        var b = o[(y + 1) * strideOrig + x + 1];
+                        var c = o[(y + 1) * strideOrig + x];
+                        var d = o[y * strideOrig + x + 1];
 
                         var result = Math.Abs(a - b) + Math.Abs(c - d);
 
                         if (result >= threshold && threshold != 255)
-                            *p = (byte)result;
-                        // White or Black
-                        ++p;
-                        ++o;
-
+                            p[y * strideOrig + x] = 0;
+                        else
+                            p[y * strideOrig + x] = 255;
                     }
 
                 }
@@ -479,19 +472,15 @@ namespace DIP_Project
             {
                 byte* o = (byte*)(void*)origScan0;
 
-                for (int y = 0; y < height; ++y)
+                for (int y = 0; y < height; y++)
                 {
-                    o = (byte*)(void*)origScan0 + (y * strideOrig);
-
-                    for (int x = 0; x < width; ++x)
+                    for (int x = 0; x < width; x++)
                     {
 
-                        var a = *o;
-                        var b = *(o + 1);
-
-
-                        var c = *(o + strideOrig);
-                        var d = *(o + strideOrig + 1);
+                        var a = o[y * strideOrig + x];
+                        var b = o[(y + 1) * strideOrig + x + 1];
+                        var c = o[(y + 1) * strideOrig + x];
+                        var d = o[y * strideOrig + x + 1];
 
                         var result = Math.Abs(a - b) + Math.Abs(c - d);
 
@@ -499,8 +488,6 @@ namespace DIP_Project
                         {
                             procImage.SetPixel(x, y, Color.Red);
                         }
-
-                        ++o;
                     }
                 }
 
@@ -683,7 +670,7 @@ namespace DIP_Project
         public int[] CalculateHistogramBins(Bitmap _orig)
         {
             int[] Bins = new int[256];
-            
+
             int width = _orig.Width;
             int height = _orig.Height;
 
@@ -829,11 +816,69 @@ namespace DIP_Project
                     return Execute_Filter(original, _neg45, threshold);
                 case Process.HistogramEqualisation:
                     return HistogramEqualisation(original);
+                case Process.GrayPalette:
+                    return GrayPalette();
                 default:
                     return null;
             }
 
         }
 
+        private Bitmap GrayPalette()
+        {
+
+            int grey = 0;
+
+
+            var width = 512;
+            var height = 512;
+
+
+
+            Rectangle r2 = new Rectangle(0, 0, width, height);
+
+            Bitmap procImage = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+
+            using (Graphics g = Graphics.FromImage(procImage))
+            {
+                g.PageUnit = GraphicsUnit.Pixel;
+                g.DrawImage(procImage, r2);
+            }
+            
+            int x = 0;
+            int col_block = 32;
+            int row_block = 32;
+            int count = 0;
+            int nextrow = 0;
+
+            for (int i = 0; i < 16; i++)
+            {
+                for (int y = nextrow; y < row_block; y++)
+                {
+                    while (col_block < width+1)
+                    {
+
+                        while (x < col_block)
+                        {
+                            procImage.SetPixel(x, y, Color.FromArgb(grey, grey, grey));
+                            x++;
+                            
+                        }
+                        
+                        col_block += 32;
+                    }
+                    count++;
+                    grey = count/2;
+                    col_block = 32;
+                    x = 0;
+                }
+                
+                nextrow += 32;
+                row_block += 32; 
+            }
+            Console.WriteLine(count);
+
+            return procImage;
+        }
     }
 }

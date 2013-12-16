@@ -24,6 +24,7 @@ namespace DIP_START
         HistogramEqualisation,
         ContrastStretch,
         Rotate,
-        Zoom
+        Zoom,
+        GrayPalette
     }
 }
