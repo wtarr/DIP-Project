@@ -66,6 +66,7 @@ namespace DIP_START
             this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HistogramEqualisation_false = new System.Windows.Forms.ToolStripMenuItem();
             this.ContrastStretchDialog = new System.Windows.Forms.ToolStripMenuItem();
+            this.GrayPalette_False = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pBox_Original = new System.Windows.Forms.PictureBox();
             this.pBox_ProcImg = new System.Windows.Forms.PictureBox();
@@ -101,7 +102,7 @@ namespace DIP_START
             this.rotationTimer = new System.Windows.Forms.Timer(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.GrayPalette_False = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_Original)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_ProcImg)).BeginInit();
@@ -141,8 +142,9 @@ namespace DIP_START
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
-            this.exitToolStripMenuItem,
-            this.saveToolStripMenuItem});
+            this.saveToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -166,6 +168,7 @@ namespace DIP_START
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // levelsToolStripMenuItem
             // 
@@ -219,7 +222,7 @@ namespace DIP_START
             this.neighbourhoodAveragingToolStripMenuItem,
             this.Median_false});
             this.smoothingToolStripMenuItem.Name = "smoothingToolStripMenuItem";
-            this.smoothingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.smoothingToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.smoothingToolStripMenuItem.Text = "Smoothing";
             // 
             // neighbourhoodAveragingToolStripMenuItem
@@ -261,7 +264,7 @@ namespace DIP_START
             this.PointDetection_true,
             this.lineDetectionToolStripMenuItem});
             this.sharpenToolStripMenuItem.Name = "sharpenToolStripMenuItem";
-            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.sharpenToolStripMenuItem.Text = "Sharpen";
             // 
             // robertsGradientToolStripMenuItem
@@ -408,6 +411,13 @@ namespace DIP_START
             this.ContrastStretchDialog.Size = new System.Drawing.Size(104, 20);
             this.ContrastStretchDialog.Text = "Contrast Stretch";
             this.ContrastStretchDialog.Click += new System.EventHandler(this.ContrastStretchDialog_Click);
+            // 
+            // GrayPalette_False
+            // 
+            this.GrayPalette_False.Name = "GrayPalette_False";
+            this.GrayPalette_False.Size = new System.Drawing.Size(82, 20);
+            this.GrayPalette_False.Text = "Gray Palette";
+            this.GrayPalette_False.Click += new System.EventHandler(this.MenuItemClicked);
             // 
             // pBox_Original
             // 
@@ -762,12 +772,10 @@ namespace DIP_START
             this.label5.TabIndex = 16;
             this.label5.Text = "Processed";
             // 
-            // GrayPalette_False
+            // toolStripSeparator1
             // 
-            this.GrayPalette_False.Name = "GrayPalette_False";
-            this.GrayPalette_False.Size = new System.Drawing.Size(82, 20);
-            this.GrayPalette_False.Text = "Gray Palette";
-            this.GrayPalette_False.Click += new System.EventHandler(this.MenuItemClicked);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // MainInterface
             // 
@@ -893,6 +901,7 @@ namespace DIP_START
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.RadioButton rb0;
         private System.Windows.Forms.ToolStripMenuItem GrayPalette_False;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

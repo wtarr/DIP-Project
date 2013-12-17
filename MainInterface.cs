@@ -453,6 +453,26 @@ namespace DIP_START
             }
         }
 
+        private void saveToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            if (OriginalImage != null)
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "bmp (*.bmp)|*.bmp";
+                if (sfd.ShowDialog().Equals(DialogResult.OK))
+                {
+                    Image img = OriginalImage;
+                    OriginalImage.Save(sfd.FileName, ImageFormat.Bmp);
+                    MessageBox.Show("Saved");
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("No image in memory");
+            }
+        }
+
 
     }
 
